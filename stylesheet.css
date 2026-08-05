@@ -1,5 +1,5 @@
 /*
- * Styles Corresponding to the Layout of the website
+ * Tags
 */
 body {
     /* A list of fonts and fallback fonts */
@@ -45,7 +45,7 @@ a:focus {
 
 
 /*
- * Divs
+ * Classes
 */
 
 .intro {
