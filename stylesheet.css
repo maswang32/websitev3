@@ -77,3 +77,14 @@ a:focus {
 .paper img {
     width: 25%
 }
+
+/*
+ * Spans
+*/
+
+.oral {
+    /* a little bit of space between the conference and designation */
+    margin-left: 4px;
+    color: #E600ff;
+    font-weight: bold;
+}
