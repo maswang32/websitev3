@@ -22,7 +22,7 @@ main {
     Specifying two values here means vertical, then horizontal.*/
     margin: 0 auto;
     /* padding inside the main box, vertical and horizontal*/
-    padding: 40px 70px;
+    padding: 20px 70px;
     background-color: #fff;
 }
 
@@ -30,6 +30,8 @@ main {
 h1 {
     font-size: 32px;
     text-align: center;
+    /* Add a little space above title */
+    margin-top: 40px;
 }
 
 h2 {
