@@ -74,8 +74,35 @@ a:focus {
     padding: 20px 0;
 }
 
-.paper img {
-    width: 25%
+
+.thumb {
+    /* Anything with position: absolute inside this will be relative to the thumb position. */
+    position: relative;
+}
+
+.thumb img,
+.thumb video {
+    /* Position the video at the same place as where the image is, which is in the "thumb" class */
+    width: 100%;
+    /* Instead of inline, like text, it is a block - no space under the image */
+    display: block;
+}
+
+/* Settings that only apply to the video */
+.thumb video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.thumb:hover video {
+    opacity: 1;
+}
+
+.paper>.thumb {
+    width: 25%;
 }
 
 /*
