@@ -64,7 +64,14 @@ a:focus {
     align-items: center;
     /* Cell padding - space between children */
     gap: 30px;
+}
+
+.intro {
     /* Padding at the top of the image, so that it doesn't touch the very top of the website */
+    padding: 40px 0;
+}
+
+.paper {
     padding: 20px 0;
 }
 
