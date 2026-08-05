@@ -48,13 +48,14 @@ a:focus {
  * Classes (defined by website coder)
 */
 
-.intro {
+.intro,
+.paper {
     /* Does the wrapping, lays the children of a box in a row instead of stacking them vertically.*/
     display: flex;
     /* Centers the children of the box vertically */
     align-items: center;
     /* Cell padding - space between children */
-    gap: 40px;
+    gap: 30px;
     /* Padding at the top of the image, so that it doesn't touch the very top of the website */
     padding: 20px 0;
 }
@@ -67,22 +68,16 @@ a:focus {
     border-radius: 50%;
 }
 
-.paper {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 0;
-}
 
 
 .thumb {
     /* Anything with position: absolute inside this will be relative to the thumb position. */
     position: relative;
+    width: 25%;
 }
 
 .thumb img,
 .thumb video {
-    /* Position the video at the same place as where the image is, which is in the "thumb" class */
     width: 100%;
     /* Instead of inline, like text, it is a block - no space under the image */
     display: block;
@@ -90,6 +85,7 @@ a:focus {
 
 /* Settings that only apply to the video */
 .thumb video {
+    /* Position the video at the same place as where the image is, which is in the "thumb" class */
     position: absolute;
     top: 0;
     left: 0;
@@ -99,10 +95,6 @@ a:focus {
 
 .thumb:hover video {
     opacity: 1;
-}
-
-.paper>.thumb {
-    width: 25%;
 }
 
 /*
