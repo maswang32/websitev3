@@ -1,5 +1,5 @@
 /*
- * Tags
+ * Tags (defined by the browser)
 */
 body {
     /* A list of fonts and fallback fonts */
@@ -45,7 +45,7 @@ a:focus {
 
 
 /*
- * Classes
+ * Classes (defined by website coder)
 */
 
 .intro {
