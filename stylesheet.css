@@ -17,6 +17,20 @@ main {
     background-color: #fff;
 }
 
+.intro {
+    /* Does the wrapping, lays the children of a box in a row instead of stacking them vertically.*/
+    display: flex;
+    /* Centers the children of the box vertically */
+    align-items: center;
+}
+
+.intro img {
+    /* Set width to 35% of the parent box */
+    width: 35%;
+    /* Rounds the rectangle so much it becomes a circle */
+    border-radius: 50%;
+}
+
 h1 {
     font-size: 32px;
     text-align: center;
