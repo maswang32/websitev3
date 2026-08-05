@@ -25,6 +25,10 @@ main {
     display: flex;
     /* Centers the children of the box vertically */
     align-items: center;
+    /* Cell padding - space between children */
+    gap: 40px;
+    /* Padding at the top of the image, so that it doesn't touch the very top of the website */
+    padding: 20px 0;
 }
 
 /* Descendant Selector */
