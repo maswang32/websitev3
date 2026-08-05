@@ -74,6 +74,8 @@ a:focus {
     /* Anything with position: absolute inside this will be relative to the thumb position. */
     position: relative;
     width: 25%;
+    /* Do not shrink items if there is not enough space - keep thumbnails at 25% width */
+    flex-shrink: 0;
 }
 
 .thumb img,
