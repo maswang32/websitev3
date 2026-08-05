@@ -1,4 +1,18 @@
 body {
-    font-family: Lato, sans-serif;
+    /* A list of fonts and fallback fonts */
+    font-family: Lato, Verdana, Helvetica, sans-serif;
     font-size: 14px;
+}
+
+
+a {
+    color: #3600E3;
+    /* Removes the default underline */
+    text-decoration: none;
+}
+
+/* Light up links when hovering or tabbing through them (focus) */
+a:hover,
+a:focus {
+    color: #f09228
 }
