@@ -2,6 +2,8 @@ body {
     /* A list of fonts and fallback fonts */
     font-family: Lato, Verdana, Helvetica, sans-serif;
     font-size: 14px;
+    /* Website has a black background (but main has white one) */
+    background-color: #000;
 }
 
 
@@ -14,15 +16,16 @@ a {
 /* Light up links when hovering or tabbing through them (focus) */
 a:hover,
 a:focus {
-    color: #f09228
+    color: #f09228;
 }
 
 main {
     /* never exceed this width*/
     max-width: 840px;
-    /* 0 margin top and bottom, allow broswer to compute horizontal margins.
+    /* 0 margin top and bottom, allow browser to compute horizontal margins.
     Specifying two values here means vertical, then horizontal.*/
     margin: 0 auto;
     /* padding inside the main box */
     padding: 20px;
+    background-color: #fff;
 }
