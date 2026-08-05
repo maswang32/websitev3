@@ -27,12 +27,7 @@ main {
     align-items: center;
 }
 
-h1 {
-    font-size: 32px;
-    text-align: center;
-}
-
-
+/* Descendant Selector */
 .intro img {
     /* Set width to 35% of the parent box */
     width: 35%;
@@ -44,6 +39,11 @@ h1 {
 /*
  * Generic Styles
 */
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+}
 
 a {
     color: #3600E3;
