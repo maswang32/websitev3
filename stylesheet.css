@@ -1,6 +1,12 @@
 /*
  * Tags (defined by the browser)
 */
+
+/* width and max-width measure the padding and border, not just content*/
+* {
+    box-sizing: border-box
+}
+
 body {
     /* A list of fonts and fallback fonts */
     font-family: Lato, Verdana, Helvetica, sans-serif;
@@ -11,12 +17,12 @@ body {
 
 main {
     /* never exceed this width*/
-    max-width: 840px;
+    max-width: 900px;
     /* 0 margin top and bottom, allow browser to compute horizontal margins.
     Specifying two values here means vertical, then horizontal.*/
     margin: 0 auto;
     /* padding inside the main box, vertical and horizontal*/
-    padding: 20px 40px;
+    padding: 40px 70px;
     background-color: #fff;
 }
 
