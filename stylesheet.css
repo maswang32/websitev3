@@ -124,3 +124,8 @@ a:focus {
     color: #E600ff;
     font-weight: bold;
 }
+
+.highlight {
+    color: #FF004F;
+    font-weight: bold;
+}
