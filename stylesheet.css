@@ -96,8 +96,16 @@ a:focus {
 .thumb img,
 .thumb video {
     width: 100%;
+    height: 175px;
     /* Instead of inline, like text, it is a block - no space under the image */
     display: block;
+    /* scale the image into the box is full, crop the excess" */
+    object-fit: cover;
+}
+
+.thumb.contain img {
+    /* scale the image until the whole image fits inside the box, but no larger, leaving empty space */
+    object-fit: contain;
 }
 
 /* Settings that only apply to the video */
@@ -126,6 +134,7 @@ a:focus {
 }
 
 .highlight {
+    margin-left: 4px;
     color: #FF004F;
     font-weight: bold;
 }
