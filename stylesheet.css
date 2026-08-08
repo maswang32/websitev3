@@ -145,6 +145,8 @@ a:focus {
 */
 
 .job {
+    /* align items at the top */
+    align-items: flex-start;
     padding: 20px 0;
 }
 
@@ -152,9 +154,11 @@ a:focus {
     width: 25%;
 }
 
-/* Make text box take up the rest of the space */
 .job>div {
+    /* Make text box take up the rest of the horizontal space */
     flex: 1;
+    /* add a bit of padding before the top */
+    padding-top: 8px;
 }
 
 .sameline {
