@@ -227,15 +227,11 @@ a:focus {
         align-items: flex-start;
     }
 
-    .intro img {
-        /* intro image is 60% wide on small screens, not 35% */
-        width: 60%;
-    }
-
     .thumb,
+    .intro img,
     .job img {
         /* besides that, media elements take up full width of the parent */
-        width: 100%;
+        width: 40%;
     }
 
     main {
