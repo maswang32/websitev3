@@ -197,5 +197,10 @@ a:focus {
 }
 
 .uchicago {
-    color: #800000
+    color: #800000;
+}
+
+.credits {
+    text-align: center;
+    font-size: small;
 }
