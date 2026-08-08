@@ -57,7 +57,8 @@ a:focus {
 */
 
 .intro,
-.paper {
+.paper,
+.job {
     /* Does the wrapping, lays the children of a box in a row instead of stacking them vertically.*/
     display: flex;
     /* Centers the children of the box vertically */
@@ -123,7 +124,7 @@ a:focus {
 }
 
 /*
- * Spans
+ * Spans - papers
 */
 
 .oral {
@@ -137,4 +138,29 @@ a:focus {
     margin-left: 4px;
     color: #FF004F;
     font-weight: bold;
+}
+
+/*
+ * Spans - jobs
+*/
+
+.job {
+    padding: 20px 0;
+}
+
+.job img {
+    width: 25%;
+}
+
+.sameline {
+    display: flex;
+    /* control horizontal placement */
+    /* (goes in tandem with flex since flex puts things on a horizontal axis by default, unless flex-direction is column */
+    /* leftover space between the content items */
+    justify-content: space-between
+}
+
+.schooname {
+    font-size: 16px;
+    font-weight: 700;
 }
