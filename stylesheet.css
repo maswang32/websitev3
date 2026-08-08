@@ -203,4 +203,5 @@ a:focus {
 .credits {
     text-align: center;
     font-size: small;
+    padding-top: 20px;
 }
