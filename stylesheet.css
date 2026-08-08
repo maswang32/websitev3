@@ -187,3 +187,15 @@ a:focus {
     font-size: 16px;
     font-weight: 700;
 }
+
+.mit {
+    color: #750014;
+}
+
+.stanford {
+    color: #8c1515;
+}
+
+.uchicago {
+    color: #800000
+}
