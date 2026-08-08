@@ -212,3 +212,30 @@ a:focus {
     font-size: small;
     padding-top: 20px;
 }
+
+
+/* Mobile Stuff */
+/* if viewport is at most 700 px */
+@media (max-width: 700px) {
+
+    .intro,
+    .paper,
+    .job {
+        /* Flex puts things vertically instead of side by side */
+        flex-direction: column;
+        /* align items in the flex to the left */
+        align-items: flex-start;
+    }
+
+    .thumb,
+    .intro img,
+    .job img {
+        /* media elements take up full width of the parent */
+        width: 100%;
+    }
+
+    main {
+        /* Lower padding on each side */
+        padding: 20px;
+    }
+}
