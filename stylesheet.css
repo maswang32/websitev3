@@ -159,7 +159,7 @@ a:focus {
     /* Make text box take up the rest of the horizontal space */
     flex: 1;
     /* add a bit of padding before the top */
-    padding-top: 8px;
+    padding-top: 12px;
 }
 
 /* Larger spaces between job description points */
