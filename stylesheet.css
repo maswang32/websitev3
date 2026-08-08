@@ -152,15 +152,23 @@ a:focus {
     width: 25%;
 }
 
+/* Make text box take up the rest of the space */
+.job>div {
+    flex: 1;
+}
+
 .sameline {
     display: flex;
     /* control horizontal placement */
     /* (goes in tandem with flex since flex puts things on a horizontal axis by default, unless flex-direction is column */
     /* leftover space between the content items */
-    justify-content: space-between
+    justify-content: space-between;
+    /* Draw a 1 px border below */
+    border-bottom: 1px solid;
+    padding-bottom: 5px;
 }
 
-.schooname {
+.organizationname {
     font-size: 16px;
     font-weight: 700;
 }
