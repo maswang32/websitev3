@@ -13,6 +13,13 @@ body {
     font-size: 14px;
     /* Website has a black background (but main has white one) */
     background-color: #000;
+    background-image: url("images/background/COSMOSDark.png"), url("images/background/COSMOS2Dark.png"), url("images/background/COSMOS5Dark.jpg"), url("images/background/COSMOS6Dark.jpg");
+    /* Each image is 33% of the body width */
+    background-size: 33%;
+    /* Position of each entry, horizontal then vertical */
+    background-position: 0% 75%, 100% 75%, bottom left, bottom right;
+    /* Don't tile */
+    background-repeat: no-repeat
 }
 
 main {
