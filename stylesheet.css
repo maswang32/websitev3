@@ -154,11 +154,17 @@ a:focus {
     width: 25%;
 }
 
+/* > applies to only direct children, while space is any depth */
 .job>div {
     /* Make text box take up the rest of the horizontal space */
     flex: 1;
     /* add a bit of padding before the top */
     padding-top: 8px;
+}
+
+/* Larger spaces between job description points */
+.job>div>div {
+    margin-bottom: 8px;
 }
 
 .sameline {
@@ -170,6 +176,11 @@ a:focus {
     /* Draw a 1 px border below */
     border-bottom: 1px solid;
     padding-bottom: 5px;
+}
+
+/* For the dates*/
+.sameline span {
+    font-weight: 700;
 }
 
 .organizationname {
