@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--initial-scale=1.0 means don't zoom on load-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Your Seasons</title>
+    <!-- inline css instead of a separate file -->
+    <style>
+        html,
+        body {
+            /* fill the viewport with no margin */
+            margin: 0;
+            /* no scrollbars */
+            overflow: hidden;
+            /* before the video loads, background should be black */
+            background-color: black;
+        }
+
+        iframe {
+            /* Position to the nearest positioned ancestor 
+            (something positioned using something other than the default "static" positioning),
+            which is the viewport */
+            position: absolute;
+            /* top left corner of the viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* no 2px border */
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- don't show controls -->
+    <!--loops when ends-->
+    <!-- specify loop requires specifying a playlist -->
+    <iframe src="https://www.youtube.com/embed/joKoZV6AK3g?controls=0&loop=1&playlist=joKoZV6AK3g"
+        allowfullscreen></iframe>
+</body>
+
+</html>
