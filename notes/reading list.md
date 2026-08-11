@@ -40,6 +40,19 @@
 - [ ] What is an hMLP?
 - [ ] What audio tokenizer does TML use?
 - [ ] LLM Tokenization: what is bits per byte?
+- [ ] when you have like dx = dy, what lets you integrate both sides? If you integrate the RHS from 0 to T, what are the limits of the integral on the RHS?
+- [ ] Why does PSD imply convex?
+- [ ] What is the meaning of log probability in machine learning? Is there something about 'encoding the information in a distribution'?
+- [ ] Not sure about 'independent errors' assumption for modeling multidimensional distributions.
+- [ ] Information theory - why do we care about encoding sequences of events?
+- [x] Why is it bad that the normalizing constant is not tractable?
+  - [ ] Answer: because you can increase the probability of your data distribution arbitrarily
+- [x] Under the KL divergence interpretation of NLL, what about the input variable?
+  - [ ] Answer: It's the KL divergence for a fixed input. As in, in a regression problem, imagine that for one input we observe multiple outputs. Then it's the KL divergence for those outputs vs. the model's predicted distribution for that input. Or, P(y|x) compared to the distribution over y|x.
+- [ ] For diffusion ELBO, what does it mean when we say: changing its parameters so that the static encoder does approximate the posterior
+
+
+
 
 
 # General Reading List
