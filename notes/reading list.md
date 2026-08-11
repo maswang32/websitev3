@@ -36,6 +36,54 @@
 - [ ] CS 336
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Questions
 - [ ] What is an hMLP?
 - [ ] What audio tokenizer does TML use?
