@@ -10,7 +10,7 @@
 2. Similar to LayerNorm, but no demeaning, and no shift parameter.
 3. Like projecting all N vectors on to a D-dimensional hypersphere (then scaling)
 
-# Batchnorm
+# BatchNorm
 
 ## Basic
 1. Input and output: Batch x model_dim (N,D).
