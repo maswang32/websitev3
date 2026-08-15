@@ -33,7 +33,6 @@
 3. G = 1 is layernorm (normalize over C,H,W)
 4. G = C is instancenorm (normalize over H,W)
 5. View the input as (N, G, C/G, H, W), and normalize over the last three axes
-
-
+6. Gamma and Beta are still (C,)
 
 Last Reviewed: 8/14/2026

@@ -161,7 +161,8 @@ This was an issue for me while doing softmax.
 
 
 
-## 3. Consider the interaction between terms. For instance, if this is the forward pass:
+## 3. Consider the interaction between terms.
+For instance, if this is the forward pass:
 ```python
 x_demeaned = x - np.mean(x, axis=-1, keepdims=True)
 ```
@@ -176,11 +177,11 @@ The correct backward pass is:
 dL_dx = dL_dx_demeaned - np.mean(dL_dx_demeaned, axis=-1, keepdims=True)
 ```
 
+## 4. Make sure you accumulate gradients for inputs that contribute to multiple outputs.
 
 # Hints/Things to remember
-
-## Softmax
-1. You only need to cache the output prob
+1. For softmax, you only need to cache the output prob
+2. For layernorm, there are 7 lines of code in the forward pass
 
 
 
