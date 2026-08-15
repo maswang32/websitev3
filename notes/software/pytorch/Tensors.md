@@ -32,7 +32,7 @@ x.device
 ```
 
 
-# Tensor Operations (incomplete)
+# Some Tensor Operations
 - torch.stack - stacks tensors along a new axis
 - torch.cat - concatenates tensors along an existing axis
 - x.item() - converts a one element tensor to a scalar.

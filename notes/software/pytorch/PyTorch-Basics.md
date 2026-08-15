@@ -39,7 +39,7 @@ Note that there are **5** essential operations inside the loop. Remember "FLZBO"
 5. optimizer/weight update
 
 
-There are **5** outside the loop. Remember MOLDT:
+There are **5** outside the loop. Remember "MOLDT":
 1. Defining the model (M)
 2. Setting up the optimizer (O)
 3. Defining the loss (L)

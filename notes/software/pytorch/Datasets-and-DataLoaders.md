@@ -1,5 +1,5 @@
 # Datasets
-- Need to implement two functions:
+- To make a torch Dataset, need to implement two functions:
     - __len__
     - __getitem__
 
