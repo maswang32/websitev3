@@ -179,6 +179,32 @@ dL_dx = dL_dx_demeaned - np.mean(dL_dx_demeaned, axis=-1, keepdims=True)
 
 ## 4. Make sure you accumulate gradients for inputs that contribute to multiple outputs.
 
+# Conventions
+It will be helpful to use a single-letter convention for different dimensions, to make einsums more readable.
+
+## Attention/Transformers
+We can use these single-letter labels for dimensions:
+1. n = batch dimension
+2. t = query time dimension
+3. s = key time dimension
+4. d = model dimension
+5. k = query/key dimension
+6. v = value dimension
+
+
+This will mean
+1. input is `ntd`
+2. query projection is `dk`
+3. key projection is `dk`
+4. value projection is `dv`
+5. query matrix is `ntk`
+3. key matrix is `nsk`
+4. value matrix is `nsv`
+6. Attention, dot product, and scaled dot product matrices are `nts`
+7. output matrix is `ntv`
+
+
+
 # Hints/Things to remember
 1. For softmax, you only need to cache the output prob
 2. For layernorm, there are 7 lines of code in the forward pass
