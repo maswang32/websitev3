@@ -42,6 +42,30 @@ class Linear(torch.autograd.Function):
 ```
 
 
+# Using grad_check
+You can check your backward implementation using torch autograd.
+
+1. import torch.autograd.gradcheck
+2. pass grad_check these:
+    1. the inputs to your function
+        1. requires_grad=True for anything we want to compute gradient on
+        2. dtype=torch.double
+    2. eps (finite difference)
+    3. atol (error tolerance)
+
+```
+from torch.autograd import gradcheck
+
+linear = Linear.apply
+
+x = torch.randn(10, 20, dtype=torch.double, requires_grad=True)
+w = torch.randn(20, 2, dtype=torch.double, requires_grad=True)
+b = torch.randn(2, dtype=torch.double, requires_grad=True)
+
+gradcheck(linear, (x,w,b), eps=1e-6, atol=1e-4)
+```
+
+
 # Aside on setup_context()
 Instead of passing ctx to forward, you can also have a setup_context() function that takes in ctx, inputs, and outputs, and calls save_for_backward().
  
