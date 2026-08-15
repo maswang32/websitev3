@@ -1,31 +1,31 @@
 # Defining a Network
 ```
-import torch
-import torch.nn as nn
-
-
-class MLP(nn.Module):
-    def __init__(self, in_features=10, out_features=2, hidden_dim=32, num_hidden_layers=4):
-        super().__init__()
-        self.in_features = in_features
-        self.out_features = out_features
-        self.num_hidden_layers = num_hidden_layers
-
-        if num_hidden_layers == 0:
-            self.net = nn.Linear(in_features, out_features)
-        else:
-            layers = []
-            layers.append(nn.Linear(in_features, hidden_dim))
-            layers.append(nn.ReLU())
-            
-            for i in range(num_hidden_layers - 1):
-                layers.append(nn.Linear(hidden_dim, hidden_dim))
-                layers.append(nn.ReLU())
-            layers.append(nn.Linear(hidden_dim, out_features))
-            self.net = nn.Sequential(*layers)
-
-    def forward(self, x):
-        return self.net(x)
+  import torch
+  import torch.nn as nn
+  
+  
+  class MLP(nn.Module):
+      def __init__(self, in_features=10, out_features=2, hidden_dim=32, num_hidden_layers=4):
+          super().__init__()
+          self.in_features = in_features
+          self.out_features = out_features
+          self.num_hidden_layers = num_hidden_layers
+  
+          if num_hidden_layers == 0:
+              self.net = nn.Linear(in_features, out_features)
+          else:
+              layers = []
+              layers.append(nn.Linear(in_features, hidden_dim))
+              layers.append(nn.ReLU())
+              
+              for i in range(num_hidden_layers - 1):
+                  layers.append(nn.Linear(hidden_dim, hidden_dim))
+                  layers.append(nn.ReLU())
+              layers.append(nn.Linear(hidden_dim, out_features))
+              self.net = nn.Sequential(*layers)
+  
+      def forward(self, x):
+          return self.net(x)
 ```
 
 # Defining a Training Loop
@@ -46,6 +46,9 @@ There are **5** outside the loop. Remember MOLDT:
 
 
 ```
+  # Device
+  device = "cuda"
+
   # Create data
   y = torch.ones(1024,2)
   x = torch.randn(1024, 10)
@@ -77,9 +80,9 @@ There are **5** outside the loop. Remember MOLDT:
 # Inference
 Some layers work differently in eval mode. Also disable gradient tracking, which saves memory.
 ```
-model.eval()
-with torch.inference_mode(): # Faster than torch.no_grad()
-  ...
+  model.eval()
+  with torch.inference_mode(): # Faster than torch.no_grad()
+    ...
 ```
 
 # Datasets and DataLoaders
@@ -87,21 +90,21 @@ with torch.inference_mode(): # Faster than torch.no_grad()
 Wraps an iterable around a dataset:
 
 ```
-from torch.utils.Datasets import TensorDataset, DataLoader
-
-dataset = TensorDataset(x,y)
-dataloader = DataLoader(dataset, batch_size=256, shuffle=True)
-
-for batch in dataloader:
-  batch_x,batch_y = batch
-  batch_x = batch_x.to(device)
-  batch_y = batch_y.to(device)
-  ...
+  from torch.utils.data import TensorDataset, DataLoader
+  
+  dataset = TensorDataset(x,y)
+  dataloader = DataLoader(dataset, batch_size=256, shuffle=True)
+  
+  for batch in dataloader:
+    batch_x,batch_y = batch
+    batch_x = batch_x.to(device)
+    batch_y = batch_y.to(device)
+    ...
 ```
 
 
 # Saving and loading models
 ```
-torch.save(model.state_dict(), "model.pt")
-model.load_state_dict(torch.load("model.pt")) # optionally pass weights_only=False, weights_only=True is the default.
+  torch.save(model.state_dict(), "model.pt")
+  model.load_state_dict(torch.load("model.pt")) # optionally pass weights_only=False, weights_only=True is the default.
 ```
