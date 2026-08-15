@@ -21,6 +21,19 @@
 1. Input and output: (N, C, H, W)
 2. Equivalent to batch norm, but H and W are treated as part of the batch.
 
+# InstanceNorm
+1. Input and output: (N,C,H,W)
+2. Normalize across (H,W)
+3. The same as batchnorm, but do not normalize over N.
+4. Each example is normalized separately.
+
+# GroupNorm
+1. Input and output: (N,C,H,W)
+2. Normalize every example separately.
+3. G = 1 is layernorm (normalize over C,H,W)
+4. G = C is instancenorm (normalize over H,W)
+5. View the input as (N, G, C/G, H, W), and normalize over the last three axes
+
 
 
 Last Reviewed: 8/14/2026
