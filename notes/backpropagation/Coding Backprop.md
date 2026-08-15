@@ -59,50 +59,63 @@ This technique is faster when doing live coding, and helps for stuff like batchn
 
 ## Example:
 LayerNorm forward:
-```
-  N, D = x.shape
-  x_demeaned = x - np.mean(x,axis=-1, keepdims=True) # Line 1
+```python
+N, D = x.shape
+x_demeaned = x - np.mean(x, axis=-1, keepdims=True)  # Line 1
 
-  # Compute std
-  x_sumsq = np.sum(x_demeaned**2, axis=-1, keepdims=True) # Line 2
-  x_var = x_sumsq / D # Line 3
-  x_std = np.sqrt(x_var + eps) # Line 4
-  x_std_inv = 1 / x_std # Line 5
+# Compute std
+x_sumsq = np.sum(x_demeaned**2, axis=-1, keepdims=True)  # Line 2
+x_var = x_sumsq / D  # Line 3
+x_std = np.sqrt(x_var + eps)  # Line 4
+x_std_inv = 1 / x_std  # Line 5
 
-  # Normalize
-  x_normed = x_demeaned * x_std_inv # Line 6
-  return x_normed * gamma + beta, (gamma, eps, x_normed, x_demeaned, x_std_inv, x_std, x_var, x) # Line 7
+# Normalize
+x_normed = x_demeaned * x_std_inv  # Line 6
+return x_normed * gamma + beta, (
+    gamma,
+    eps,
+    x_normed,
+    x_demeaned,
+    x_std_inv,
+    x_std,
+    x_var,
+    x,
+)  # Line 7
 ```
 LayerNorm backward:
-```
-    gamma, eps, x_normed, x_demeaned, x_std_inv, x_std, x_var, x = cache
-    N,D = x_normed.shape
+```python
+gamma, eps, x_normed, x_demeaned, x_std_inv, x_std, x_var, x = cache
+N, D = x_normed.shape
 
-    # Line 7
-    dL_dbeta = np.sum(dL_dy, axis=0) # (N,D) -> (D,)
-    dL_dgamma = np.sum(dL_dy * x_normed, axis=0) # (N,D) * (N,D) -> (D,)
-    dL_dx_normed = dL_dy * gamma # (N,D) * (D,) -> (N,D) (There is an equivalent pointwise operation)
+# Line 7
+dL_dbeta = np.sum(dL_dy, axis=0)  # (N,D) -> (D,)
+dL_dgamma = np.sum(dL_dy * x_normed, axis=0)  # (N,D) * (N,D) -> (D,)
+dL_dx_normed = (
+    dL_dy * gamma
+)  # (N,D) * (D,) -> (N,D) (There is an equivalent pointwise operation)
 
-    # Line 6
-    dL_dx_std_inv = np.sum(dL_dx_normed * x_demeaned, axis=-1, keepdims=True) # (N,D) * (N,D) -> (N,1)
-    dL_dx_demeaned = dL_dx_normed * x_std_inv # (N,D) * (N,1) -> (N,D)
+# Line 6
+dL_dx_std_inv = np.sum(
+    dL_dx_normed * x_demeaned, axis=-1, keepdims=True
+)  # (N,D) * (N,D) -> (N,1)
+dL_dx_demeaned = dL_dx_normed * x_std_inv  # (N,D) * (N,1) -> (N,D)
 
-    # Line 5
-    dL_dx_std = dL_dx_std_inv * (-1 / x_std**2) # (N,1) * (N,1) -> (N,1)
+# Line 5
+dL_dx_std = dL_dx_std_inv * (-1 / x_std**2)  # (N,1) * (N,1) -> (N,1)
 
-    # Line 4
-    dL_dx_var = dL_dx_std * (0.5 / np.sqrt(x_var + eps)) # (N,1) * (N,1) -> (N,1)
+# Line 4
+dL_dx_var = dL_dx_std * (0.5 / np.sqrt(x_var + eps))  # (N,1) * (N,1) -> (N,1)
 
-    # Line 3
-    dL_dx_sumsq = dL_dx_var / D # (N,1) -> (N,1)
+# Line 3
+dL_dx_sumsq = dL_dx_var / D  # (N,1) -> (N,1)
 
-    # Line 2
-    dL_dx_demeaned += dL_dx_sumsq * 2 * x_demeaned # (N,1) * (N,D) -> (N,D)
+# Line 2
+dL_dx_demeaned += dL_dx_sumsq * 2 * x_demeaned  # (N,1) * (N,D) -> (N,D)
 
-    # Line 1
-    dL_dx = dL_dx_demeaned - np.mean(dL_dx_demeaned, axis=-1, keepdims=True)
+# Line 1
+dL_dx = dL_dx_demeaned - np.mean(dL_dx_demeaned, axis=-1, keepdims=True)
 
-    return dL_dx, dL_dgamma, dL_dbeta
+return dL_dx, dL_dgamma, dL_dbeta
 ```
 
 # Tips
@@ -119,23 +132,25 @@ LayerNorm backward:
 # Debugging
 ## 1. Make sure you are summing over the correct axis.
 For instance, if the forward pass is this:
-```
+```python
 x_normed = x_demeaned * x_std_inv  # (N,D) * (N,1)
-return x_normed * gamma + beta # (N,D) * (D,) + (D,)
+return x_normed * gamma + beta  # (N,D) * (D,) + (D,)
 ```
 
 The backwards pass for the last line is:
-```
-dL_dbeta = np.sum(dL_dy, axis=0) # (N,D) -> (D,)
-dL_dgamma = np.sum(dL_dy * x_normed, axis=0) # (N,D) * (N,D) -> (D,)
-dL_dx_normed = dL_dy * gamma # (N,D) * (D,) -> (N,D)
+```python
+dL_dbeta = np.sum(dL_dy, axis=0)  # (N,D) -> (D,)
+dL_dgamma = np.sum(dL_dy * x_normed, axis=0)  # (N,D) * (N,D) -> (D,)
+dL_dx_normed = dL_dy * gamma  # (N,D) * (D,) -> (N,D)
 ```
 
 Note that dL_dbeta and dL_dgamma are summed over the batch dimension (axis 0), since they are broadcast across the batch dimension during the forward pass.
 
 On the other hand, the backwards pass for the second-to-last line is this:
-```
-dL_dx_std_inv = np.sum(dL_dx_normed * x_demeaned, axis=-1, keepdims=True) # (N,D) * (N,D) -> (N,1)
+```python
+dL_dx_std_inv = np.sum(
+    dL_dx_normed * x_demeaned, axis=-1, keepdims=True
+)  # (N,D) * (N,D) -> (N,1)
 ```
 We sum across the model_dim axis (D,), since during the forward pass, std_inv is broadcast to all dimensions.
 
@@ -147,17 +162,17 @@ This was an issue for me while doing softmax.
 
 
 ## 3. Consider the interaction between terms. For instance, if this is the forward pass:
-```
+```python
 x_demeaned = x - np.mean(x, axis=-1, keepdims=True)
 ```
 
 This backward pass is incorrect:
-```
-dL_dx = dL_dx_demeaned * (1 - 1/D)
+```python
+dL_dx = dL_dx_demeaned * (1 - 1 / D)
 ```
 
 The correct backward pass is:
-```
+```python
 dL_dx = dL_dx_demeaned - np.mean(dL_dx_demeaned, axis=-1, keepdims=True)
 ```
 
