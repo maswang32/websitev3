@@ -181,3 +181,8 @@ dL_dx = dL_dx_demeaned - np.mean(dL_dx_demeaned, axis=-1, keepdims=True)
 
 ## Softmax
 1. You only need to cache the output prob
+
+
+
+
+Last Reviewed: 8/14/2026

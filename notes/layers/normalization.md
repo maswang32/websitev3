@@ -20,3 +20,7 @@
 ## 2D (used in compute vision)
 1. Input and output: (N, C, H, W)
 2. Equivalent to batch norm, but H and W are treated as part of the batch.
+
+
+
+Last Reviewed: 8/14/2026

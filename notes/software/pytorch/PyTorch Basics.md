@@ -84,22 +84,6 @@ with torch.inference_mode():  # Faster than torch.no_grad()
     ...
 ```
 
-# Datasets and DataLoaders
-## DataLoaders
-Wraps an iterable around a dataset:
-
-```
-from torch.utils.data import TensorDataset, DataLoader
-
-dataset = TensorDataset(x,y)
-dataloader = DataLoader(dataset, batch_size=256, shuffle=True)
-
-for batch in dataloader:
-  batch_x,batch_y = batch
-  batch_x = batch_x.to(device)
-  batch_y = batch_y.to(device)
-  ...
-```
 
 
 # Saving and loading models
@@ -107,3 +91,6 @@ for batch in dataloader:
 torch.save(model.state_dict(), "model.pt")
 model.load_state_dict(torch.load("model.pt")) # optionally pass weights_only=False, weights_only=True is the default.
 ```
+
+
+Last Reviewed: 8/14/2026
