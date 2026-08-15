@@ -1,10 +1,14 @@
 # Interview Reading List
 
 ## Job Search Advice
-- [ ] Notes on the interview job search - Alisa Liu
-- [ ] How to get into a frontier lab, Vlad Feinberg
-- [ ] Notes on the job search: https://x.com/yong_zhengxin/status/2069985772288016836?s=46
+- [x] Notes on the interview job search - Alisa Liu
+- [x] How to get into a frontier lab, Vlad Feinberg
+- [x] Notes on the job search: https://x.com/yong_zhengxin/status/2069985772288016836?s=46
+- [x] Nathan Lambert: https://www.interconnects.ai/p/thoughts-on-the-hiring-market-in
+- [x] Ultimate Interview Guide: https://silviasapora.github.io/blog/ml-interviews.html
 
+## Review
+- [ ] Review Notes on Information Theory/Statistics/Probability
 
 
 ## Essential Papers/Posts
@@ -19,11 +23,8 @@
 - [ ] Kimi K3
 - [ ] Transfusion
   - [ ] Multimodal Pretraining: https://x.com/tongpetersb/status/2029237530160169286?s=46
+- [ ] Flow Matching
 
-
-
-## Review
-- [ ] Review Notes on Information Theory/Statistics/Probability
 
 ## Interview Questions
 - [ ] RL Interview Questions 2026:
@@ -111,6 +112,7 @@
 - Dwarkesh
   - Dario
   - Jensen Huang
+  - Rainer Pope
 - Latent Space Podcast
   - Jeff Dean
 - Last Week in AI Podcast
@@ -129,6 +131,7 @@
 ### Books
 - [ ] Understanding Deep Learning
 - [ ] Deep Learning Book
+- [ ] Scaling book: https://jax-ml.github.io/scaling-book/
 
 #### Less Important
 - [ ] Principles of Deep Learning Theory: https://x.com/k_solidified_/status/2069781542306775063?s=46
