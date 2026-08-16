@@ -3,9 +3,9 @@
 - The loss is MSE loss (which is mean negative log likelihood under a gaussian distribution)
 - You have 
     - X (N,D) data matrix
-    - w (D,) weight matrix
-    - b (1,) bias matrix
-    - y (N,) label
+    - w (D,) weight vector
+    - b bias scalar
+    - y (N,) label vector
 
 We assume that, given some input, the linear layer outputs the mean of a gaussian distribution with some fixed standard deviation.
 
@@ -32,7 +32,7 @@ $$
 
 This is also equivalent to minimizing the negative mean of the log likelihoods of the data points:
 $$
- = -\frac{1}{N}\sum_{i=1}^N \log\left(C e^{\frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}}\right)
+ = -\frac{1}{N}\sum_{i=1}^N \left[ \log\left(C e^{\frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}}\right) \right]
 $$
 $$
  = -\frac{1}{N}\sum_{i=1}^N \log\left(C\right) + \frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}
@@ -77,5 +77,7 @@ $$
 $$
 
 Then we can proceed to optimize the weights and biases.
+
+If you look at logistic regression, the gradient is the same - this has to do with generalized linear models.
 
 Last Reviewed: 8/16/2026
