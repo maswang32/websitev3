@@ -19,9 +19,13 @@ p(y_i) = C e^{\frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}}
 $$
 For some normalizing constant $C$.
 
-The likelihood of the data is the product of the likelihoods of individual datapoints, or the sum of the log likelihoods of individual data points.
+Maximizing the likelihood of the data is equivalent to maximizing the log likelihood of the data.
 
-Therefore, to maximize the likelihood of the data, it is equivalent to maximizing the sum of the log likelihoods of the data points:
+Since the likelihood of the data is the product of the likelihoods of individual datapoints, the log likelihood is the sum of the log likelihoods of individual datapoints.
+
+Thus, maximizing the sum of the log likelihoods of individual datapoints also maximizes the likelihood of the data.
+
+The sum of the log likelihoods of the data points:
 $$
  = \sum_{i=1}^N \log\left(C e^{\frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}}\right)
 $$
@@ -63,7 +67,7 @@ $$
 $$
 Or
 $$
-\boxed{\frac{\partial L}{\partial w_j } = \frac{2}{N} X^T (\hat{y} - y)}
+\boxed{\frac{\partial L}{\partial w} = \frac{2}{N} X^T (\hat{y} - y)}
 $$
 
 ### Bias:
