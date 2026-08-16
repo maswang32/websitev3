@@ -83,7 +83,8 @@
 
 
 
-
+# To write down
+- [ ] math trick with fractions, 1 - a / (a + b) = b / (a + b)
 
 # Questions
 - [ ] What is an hMLP?
