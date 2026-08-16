@@ -71,7 +71,7 @@ $$
 $$
 
 ### Bias:
-Replace the $x_{ij}$ with a $1$, since $\frac{\partial \hat{y}}{\partial b} = 1$:
+Replace the $x_{ij}$ with a $1$, since $\frac{\partial \hat{y_i}}{\partial b} = 1$:
 $$
 \boxed{\frac{\partial L}{\partial b } = \frac{1}{N}\sum_{i=1}^N 2 (\hat{y}_i - y_i)}
 $$
