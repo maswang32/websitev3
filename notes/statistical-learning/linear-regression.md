@@ -32,10 +32,10 @@ $$
 
 This is also equivalent to minimizing the negative mean of the log likelihoods of the data points:
 $$
- = -\frac{1}{N}\sum_{i=1}^N \left[ \log\left(C e^{\frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}}\right) \right]
+ = -\frac{1}{N}\sum_{i=1}^N  \log\left(C e^{\frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}}\right) 
 $$
 $$
- = -\frac{1}{N}\sum_{i=1}^N \log\left(C\right) + \frac{-(y_i - \hat{y}_i)^2}{2\sigma^2}
+ = -\frac{1}{N}\sum_{i=1}^N \left[ \log\left(C\right) + \frac{-(y_i - \hat{y}_i)^2}{2\sigma^2} \right]
 $$
 We can ignore the normalizing constant without affecting the optimization problem:
 $$
@@ -57,10 +57,10 @@ $$
 \frac{\partial }{\partial w_j } \left[ \frac{1}{N}\sum_{i=1}^N (y_i - \hat{y}_i)^2 \right]
 $$
 $$
-\frac{\partial }{\partial w_j } \left[ \frac{1}{N}\sum_{i=1}^N (\hat{y}_i - y_i)^2 \right]
+= \frac{\partial }{\partial w_j } \left[ \frac{1}{N}\sum_{i=1}^N (\hat{y}_i - y_i)^2 \right]
 $$
 $$
-= \frac{1}{N}\sum_{i=1}^N 2 (\hat{y}_i - y_i) \cdot \frac{\partial \hat{y}}{\partial w_j}
+= \frac{1}{N}\sum_{i=1}^N 2 (\hat{y}_i - y_i) \cdot \frac{\partial \hat{y_i}}{\partial w_j}
 $$
 $$
 = \frac{1}{N}\sum_{i=1}^N 2 (\hat{y}_i - y_i) \cdot x_{ij}
@@ -78,6 +78,6 @@ $$
 
 Then we can proceed to optimize the weights and biases.
 
-If you look at logistic regression, the gradient is the same - this has to do with generalized linear models.
+If you look at logistic regression, the gradient has the same form - this has to do with generalized linear models.
 
 Last Reviewed: 8/16/2026
