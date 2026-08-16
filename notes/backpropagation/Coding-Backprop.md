@@ -130,7 +130,14 @@ return dL_dx, dL_dgamma, dL_dbeta
 
 
 # Debugging
-## 1. Make sure you are summing over the correct axis.
+## 1. Make sure you are not using the wrong variable (e.g. sum_exp vs log_sum_exp)
+This was an issue for me while doing softmax.
+
+This was also an issue for me when doing attention - make sure you use the scaled dot product, don't reuse the non-scaled one by accident!
+
+
+
+## 2. Make sure you are summing over the correct axis.
 For instance, if the forward pass is this:
 ```python
 x_normed = x_demeaned * x_std_inv  # (N,D) * (N,1)
@@ -154,9 +161,6 @@ dL_dx_std_inv = np.sum(
 ```
 We sum across the model_dim axis (D,), since during the forward pass, std_inv is broadcast to all dimensions.
 
-
-## 2. Make sure you are not using the wrong variable (e.g. sum_exp vs log_sum_exp)
-This was an issue for me while doing softmax.
 
 
 
@@ -206,9 +210,14 @@ This will mean
 
 
 # Hints/Things to remember
-1. For softmax, you only need to cache the output prob
-2. For layernorm, there are 7 lines of code in the forward pass
-3. For cross attention and self attention, if there is a mask, you do not need to consider it on the backwards pass. The operation in the backward pass would be to zero out the gradient of `dL_dscores`. But dL_dscores is (according to the softmax backward) `probs * (dL_dprobs - dot)`, and multiplying by probs (which is the attention mask) already zeros it out.
+1. Softmax
+    1. you only need to cache the output prob
+2. Layernorm
+    1. For layernorm, there are 7 lines of code in the forward pass
+3. attention
+    1. For cross attention and self attention, if there is a mask, you do not need to consider it on the backwards pass. The operation in the backward pass would be to zero out the gradient of `dL_dscores`. But dL_dscores is (according to the softmax backward) `probs * (dL_dprobs - dot)`, and multiplying by probs (which is the attention mask) already zeros it out.
+    2. for the attention operation itself, you only need to cache query, key, value, and attention matrix.
+    3. Don't forget to subtract max logits here
 
 
 
