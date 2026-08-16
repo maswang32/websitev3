@@ -3,8 +3,8 @@
 - The loss is binary cross entropy loss (which is mean negative log likelihood)
 - You have 
     - X (N,D) data matrix
-    - w (D,) weight matrix
-    - b bias scakar
+    - w (D,) weight vector
+    - b bias scalar
     - y (N,) label
 
 
