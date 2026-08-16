@@ -1,10 +1,10 @@
 # Setup
-- The forward pass is a linear layer with biasfollowed by a sigmoid.
+- The forward pass is a linear layer with bias followed by a sigmoid.
 - The loss is binary cross entropy loss (which is mean negative log likelihood)
 - You have 
     - X (N,D) data matrix
     - w (D,) weight matrix
-    - b (1,) bias matrix
+    - b bias scakar
     - y (N,) label
 
 
@@ -18,9 +18,8 @@ Where $p_i$ is the ith output of the sigmoid. Note that the first term is active
 
 
 The loss is the average negative log likelihood, or
-
 $$
-- \frac{1}{N} \sum_{i=1}^N \left[ \log(y_i) \right]
+- \frac{1}{N} \sum_{i=1}^N \left[ \log(p(y_i)) \right]
 $$
 $$
 \boxed{= - \frac{1}{N} \sum_{i=1}^N \left[  y_i\log(p_i) + (1-y_i)\log(1-p_i) \right]}
@@ -80,10 +79,10 @@ $$
 $$
 = \sum_{k=1}^N \frac{1}{N} \left[p_k  - y_k \right] x_{kj}
 $$
-We notice this is a matrix vector mulitplication across the $N$ axis. Since $X$ is $N \times D$, and $p-y$ is an $N$-vector, we have
+We notice this is a matrix vector multiplication contracting over the $N$ axis. Since $X$ is $N \times D$, and $p-y$ is an $N$-vector, we have
 $$
 \boxed{
-\frac{dL}{dw_j} = \frac{X^T (p - y)}{N}}
+\frac{dL}{dw} = \frac{X^T (p - y)}{N}}
 $$
 
 ### Bias
@@ -92,5 +91,6 @@ $$
 \frac{dL}{db}= \sum_{k=1}^N \frac{1}{N} \left[p_k  - y_k \right] 
 $$
 
+We have now derived the gradient of the loss with respect to all parameters, and can write a loop optimizing by gradient descent.
 
 Last Reviewed: 08/16/2026
