@@ -208,7 +208,7 @@ This will mean
 # Hints/Things to remember
 1. For softmax, you only need to cache the output prob
 2. For layernorm, there are 7 lines of code in the forward pass
-
+3. For cross attention and self attention, if there is a mask, you do not need to consider it on the backwards pass. The operation in the backward pass would be to zero out the gradient of `dL_dscores`. But dL_dscores is (according to the softmax backward) `probs * (dL_dprobs - dot)`, and multiplying by probs (which is the attention mask) already zeros it out.
 
 
 
