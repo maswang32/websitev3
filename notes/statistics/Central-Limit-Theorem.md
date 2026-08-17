@@ -10,7 +10,7 @@ Then as $n$ becomes large, $\bar{X}_n$ becomes approximately normally distribute
 - $E[\bar{X}_n] = E[X]$
 - $Var(\bar{X}_n) = \frac{1}{N} Var(X)$
 
-Equivalently, $\sigma_{\bar{X}} = \frac{\sigma_X}{N}$.
+Equivalently, $\sigma_{\bar{X}} = \frac{\sigma_X}{\sqrt{N}}$.
 
 
 # Law of Large Numbers

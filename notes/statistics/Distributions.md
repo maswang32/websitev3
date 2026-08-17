@@ -19,7 +19,7 @@ This is the chance that a number of events happens in a fixed amount of time, e.
 
 # Continuous Distributions
 ## Uniform
-- Expectation: $\frac{b - a}{2}$
+- Expectation: $\frac{a + b}{2}$
 - Variance: $\frac{(b-a)^2}{12}$
 
 The expected maximum of $n$ draws from $U(0,1) = \frac{n}{n+1}$.

@@ -1,5 +1,5 @@
 # p-value
-Probability of seeing the data given the null hypothesis
+Probability of seeing the data (or more extreme) given the null hypothesis
 
 ## Permutation Test
 If you randomly shuffle data and labels, what are the odds you get data this extreme or greater?
