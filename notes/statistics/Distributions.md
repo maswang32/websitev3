@@ -1,7 +1,7 @@
 # Discrete Distributions
 ## Bernoulli
 - Expectation: $p$
-- Variance: $p(1-p)$ f
+- Variance: $p(1-p)$
 
 Variance is maximized at $p=0.5$
 

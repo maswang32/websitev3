@@ -69,7 +69,7 @@ Now $E[t_1]$ = 1, since you will always see a new toy if you haven't seen any al
 
 Otherwise, the probabilty of seeing a new toy when you get a new box is $\frac{n-(i-1)}{n}$ if you have already seen $i-1$ toys.
 
-Since it it a geometric random variable with $p = \frac{n-(i-1)}{n}$, and the expectation is $\frac{1}{p}$, this means the expected number of boxes before seeing a new toy is $\frac{n}{n-(i-1)}$.
+Since it is a geometric random variable with $p = \frac{n-(i-1)}{n}$, and the expectation is $\frac{1}{p}$, this means the expected number of boxes before seeing a new toy is $\frac{n}{n-(i-1)}$.
 
 Thus, our expectation is
 

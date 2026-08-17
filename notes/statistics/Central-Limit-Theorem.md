@@ -1,5 +1,5 @@
 # Central Limit Theorem
-The distribution of the sample mean approaches a normal distribution with variance $\frac{Var(X)}{N}$, where $X$ is the variance of a single sample.
+The distribution of the sample mean approaches a normal distribution with variance $\frac{Var(X)}{N}$, where $Var(X)$ is the variance of a single sample.
 
 Formally, suppose we have 
 
