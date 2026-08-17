@@ -1,6 +1,4 @@
-# Random Variables and Probability Distributions
-
-## Definition of Random Variable
+# Definition of Random Variable
 
 <!-- ### Practical Definition
 In machine learning, it suffices to think of a random variable simply as a 'variable', or a placeholder for a number or vector. There are notions of probability and randomness associated with it, but these can be associated with other constructs, like probability distributions.
@@ -12,7 +10,7 @@ y = 2z
 $$
 Means 'take the value that $$z$$ takes, and multiply it by $$2$$ to get $$y$$. There is no concept of 'randomness' yet introduced. -->
 
-### Precise Definition
+## Precise Definition
 
 A random variable $X$ is a function from a sample space $\Omega$ to a set of outcomes $E$. It maps items in the sample space to items in $E$.
 
@@ -21,7 +19,7 @@ $\Omega = \{1,2,3,4,5,6\}$. The random variable $X$ is a function such that $X(\
 
 <!-- It might seem redundant to define a random variable as a function, but it is conceptually useful because functions can take on multiple values depending on their input. If we think of $$X$$ as a function, it is easier to cope with the possibility that $$X$$ may take on more than one value. -->
 
-### Operators on Random Variables
+## Operators on Random Variables
 If we assign
 $$
 Y = 2X
@@ -37,8 +35,8 @@ $$
 
 If $X$ is a random variable representing the value of a dice roll, $Y$ is a random variable representing twice the value of a dice roll.
 
-### More notes on notation
-#### Capital vs. Lowercase
+## More notes on notation
+### Capital vs. Lowercase
 While random variables are represented with capital letters, we typically use the corresponding lower case letter to denote a realization of that random variable. In math terms, we use $x$ to denote $X(\omega)$. 
 
 $$
@@ -49,16 +47,16 @@ While $X$ is a function, $x$ is a value.
 
 This is similar to how in mathematics more generally, if $f$ refers to a function, then $f(x)$ refers to a value, namely, the output of $f$ when its input is $x$, although this distinction is [blurred frequently](https://en.wikipedia.org/wiki/Abuse_of_notation#Function_notation).
 
-#### Bold vs unbolded
+### Bold vs unbolded
 Bolded random variables and their values (realizations) simply indicate that the random variable is vector-valued.
 
 
 
-### Sample Spaces in Machine Learning
+## Sample Spaces in Machine Learning
 The sample space is not usually referenced in machine learning. For instance, we might have a latent variable $\mathbf{Z}$ in a latent variable model. If $\mathbf{z} = \mathbf{Z}(\mathbf{w}) \in \mathbb{R}^d$, the sample space $\Omega$ is $\mathbb{R}^d$, and we think of $\mathbf{Z} : \Omega \rightarrow \mathbb{R}^d$ as $\mathbf{Z}(\omega) = \omega$.
 
 
-## Probability Distributions
+# Probability Distributions
 A probability distribution is a maps random variable ***values*** to densities. Formally, a random variable $\mathbf{X}$ is a function with an output domain (often $\mathbb{R}^d$), and the probability density function maps the output domain of $\mathbf{X}$ to density values in $\mathbb{R}$.
 $$
 p(\mathbf{x}) : \mathbb{R}^d \rightarrow \mathbb{R}.
@@ -72,14 +70,14 @@ $$
 We abbreviate "probability density function" as "PDF".
 
 
-#### Note
+## Note
 It is not the case that a random variable has a single probability distribution, although we often reference a "true" probability distribution. Rather, a probability distribution is simply a mapping from a random variable's value to a density value.
 
-### Notes on Notation
-#### $$Pr(x)$$ vs $$p(x)$$
+## Notes on Notation
+### $$Pr(x)$$ vs $$p(x)$$
 Typically, $Pr(A)$ refers to the probability of event $A$, while $p(x)$ refers to the value of the PDF at a data point $x$. Not everyone uses this notation, though.
 
-#### Resolving function vs. value dilemma
+### Resolving function vs. value dilemma
 We often use $f(x)$ to refer to the function $f$, instead of the value of $f$ at $x$. This is also true in statistics. We commonly use
 $$
 p(\mathbf{x})
@@ -88,7 +86,7 @@ $$
 To refer to the probability distribution $$p$$, even though it should denote the density value of the probability distiribution at the point $\mathbf{x}$. This is used ubiquitiously, and perhaps the inclusion of $\mathbf{x}$ helps specify that the distribution's input are realizations of the random variable $X$. Sometimes, this is important because $p$ may represent a *family* of distributions, not just a single probability distribution.
 
 
-#### Families of Probability Distributions
+### Families of Probability Distributions
 In machine learning, when we write something like $p_\theta$, we are typically referring to a *family* of probability distributions, not just a single distribution.
 
 For instance, if we draw $\mathbf{x_1}, \ldots , \mathbf{x}_N$ independently from a data distribution, we can write
@@ -102,7 +100,7 @@ In this case, the left hand side refers to the probability of observing $\mathbf
 
 
 
-### Distributions 'over' random variables.
+## Distributions 'over' random variables.
 If we write
 $$
 \mathcal{N}_x(0,I)
@@ -111,7 +109,7 @@ The $x$ in the subscript indicates that the distribution is "over" the random va
 
 This is useful to disambiguate the input to the PDF when we have several PDFs.
 
-#### Example
+### Example
 
 Suppose we have 
 
