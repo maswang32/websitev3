@@ -1,5 +1,8 @@
 # Jensens Inequality
-
+If $f$ is concave, then
+$$
+f\left(E[X]\right) \geq E[f(X)]
+$$
 
 ## Visual Explanation
 Imagine a bunch of datapoints $X$, and consider $y = \log(X)$.
