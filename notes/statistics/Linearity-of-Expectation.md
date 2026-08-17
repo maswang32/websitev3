@@ -27,8 +27,12 @@ Again, this is true even if the trials are not independent.
 Note that the expectation of an indicator variable for an event is the same as the probability that the event occurs. Thus, $E[1_A] = P(A)$, and the above expression is just the sum of the probabilities.
 
 
-## Example
+## Example 1
 How many fixed points are there when you do a random permutation of $n$ items?
+
+
+
+
 
 ### Answer
 The number of fixed points is
@@ -41,5 +45,42 @@ where $1_i$ is the indicator variable for if the item at position $i$ remained u
 $E[1_i]$ = $\frac{1}{n}$, since for any given item, there is a  $\frac{1}{n}$ chance that it moved.
 
 Therefore the answer is $n * \frac{1}{n} = 1$.
+
+
+## Example 2 (Coupon Collector)
+Suppose each cereal box comes with one of $n$ different possible toys. How many cereal boxes would you expect to buy before seeing all the toys?
+
+### Answer
+Let $T$ be the number of boxes it takes to see all $n$ toys.
+
+Let $t_i$ be the number of boxes it takes to see a new toy after $i - 1$ toys have already been seen.
+
+Then the time it takes to see all the toys can be segmented up into the amount of time it takes to see each new toy:
+$$
+T = t_1 + \cdots + t_n
+$$
+
+Taking the expectation and using linearity:
+$$
+E[T] = E[t_1 + \cdots + t_n] = E[t_1] + \cdots + E[t_n]
+$$
+
+Now $E[t_1]$ = 1, since you will always see a new toy if you haven't seen any already. 
+
+Otherwise, the probabilty of seeing a new toy when you get a new box is $\frac{n-i}{n}$.
+
+Since it it a geometric random variable with $p = \frac{n-i}{n}$, and the expectation is $\frac{1}{p}$, this means the expected number of boxes before seeing a new toy is $\frac{n}{n-i}$.
+
+Thus, our expectation is
+
+$$
+= 1 + \frac{n}{n-1} + \frac{n}{n-2} + \cdots + \frac{n}{2} + \frac{n}{1}
+$$
+Or
+$$
+n \left(\frac{1}{1} + \frac{1}{2} + \cdots + \frac{1}{n-2} + \frac{1}{n-1} + \frac{1}{n}\right)
+$$
+
+Or $n \cdot H_n$, where $H_n = \sum_{k=1}^{n} \frac{1}{k}$ is the $n$th harmonic number.
 
 Last Reviewed: 8/16/2026
