@@ -104,6 +104,11 @@ All the odd terms cancel, we get:
 $$
 \left(1 + \frac{s^2}{2!} + \frac{s^4}{4!} + \cdots \right) = \sum_{i=0}^\infty \frac{s^{2i}}{(2i)!}
 $$
+
+We are trying to create an upper bound for our probability. We can always loosen the upper bound by finding something that is bigger than our current expression, but is a little bit simpler.
+
+In the sum above, we can make the denominator smaller to make the expression bigger, which will eventually result in a looser (but simpler) upper bound, after plugging things in.
+
 Now $(2i)! = i! \times (i+1)(i+2)\cdots(2i) \geq i! \times 2^{i} $
 So
 $$
