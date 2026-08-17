@@ -48,7 +48,7 @@ $$
 = \frac{P(T|D)P(D)}{P(T|D)P(D) + P(T|D^c)P(D^c)}
 $$
 $$
-= \frac{0.9\times 0.01}{0.9 \times 0.01 + 0.9 \times 0.99}
+= \frac{0.9\times 0.01}{0.9 \times 0.01 + 0.09 \times 0.99}
 $$
 $$
 = 0.092

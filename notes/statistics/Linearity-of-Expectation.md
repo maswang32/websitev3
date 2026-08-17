@@ -42,7 +42,7 @@ E[1_1 + \cdots 1_n] = E[1_1] + \cdots + E[1_n]
 $$
 where $1_i$ is the indicator variable for if the item at position $i$ remained unchanged.
 
-$E[1_i]$ = $\frac{1}{n}$, since for any given item, there is a  $\frac{1}{n}$ chance that it moved.
+$E[1_i]$ = $\frac{1}{n}$, since for any given item, there is a  $\frac{1}{n}$ chance that it stayed.
 
 Therefore the answer is $n * \frac{1}{n} = 1$.
 
@@ -67,9 +67,9 @@ $$
 
 Now $E[t_1]$ = 1, since you will always see a new toy if you haven't seen any already. 
 
-Otherwise, the probabilty of seeing a new toy when you get a new box is $\frac{n-i}{n}$.
+Otherwise, the probabilty of seeing a new toy when you get a new box is $\frac{n-(i-1)}{n}$ if you have already seen $i-1$ toys.
 
-Since it it a geometric random variable with $p = \frac{n-i}{n}$, and the expectation is $\frac{1}{p}$, this means the expected number of boxes before seeing a new toy is $\frac{n}{n-i}$.
+Since it it a geometric random variable with $p = \frac{n-(i-1)}{n}$, and the expectation is $\frac{1}{p}$, this means the expected number of boxes before seeing a new toy is $\frac{n}{n-(i-1)}$.
 
 Thus, our expectation is
 
