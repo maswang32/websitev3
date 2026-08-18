@@ -33,21 +33,22 @@ For a Gaussian, 95% of the probaiblity mass sits within 1.96 standard deviations
 
 That means that if you run the experiment 100 times, 95% of of the time, the sample mean will fall within 1.96 standard deviations of the true mean.
 
-# Interpretation
+We can also build a confidence interval around $\bar{X}$, saying the true mean is 
+$$
+\bar{X} \pm 1.96 \frac{\sigma}{\sqrt{n}}
+$$
+
+## Interpretation
 The true mean $\mu$ is fixed - it is not random. The confidence interval is random, since it's built from a random sample. The p-value is the probability that your random confidence interval contains the true mean.
 
-# p-value
-Probability of seeing the data (or more extreme) given the null hypothesis
+## How many samples to you need?
 
-# Permutation Test
-If you randomly shuffle data and labels, what are the odds you get data this extreme or greater?
+We have $\epsilon = 1.96 \frac{\sigma}{\sqrt{n}}$, so equivalently
+$$
+n = \left(1.96 \frac{\sigma}{\epsilon} \right)^2
+$$
 
-# Type 1 and Type 2 Errors
-- Type 1 Error: False positive - you reject the null when it is actually true. We call the probability of a type 1 error $\alpha$. 
-- Type 2 Error: False negative - we accept the null hypothesis when the null hypothesis is false. We call the probability of a Type 2 error to be $\beta$.
 
-# Statistical Power
-This is 1 - $\beta$.
 
 
 
