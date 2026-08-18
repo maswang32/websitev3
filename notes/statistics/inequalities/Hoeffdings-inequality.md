@@ -132,6 +132,7 @@ $$
 Note that even if $X$ has a different distribution, the derivation would be similar, and we will get a Chernoff bound, which is a more general result.
 
 # More general Hoeffding's inequality
+Suppose $X_1, \cdots X_n$ are independent random variables, each between $[a,b]$. Then we can bound the probability of being far from the mean:
 $$
 P( |\bar{X} - \mu| \geq \epsilon) \leq 2 \exp\left(-\frac{2n\epsilon^2}{(b-a)^2}\right)
 $$

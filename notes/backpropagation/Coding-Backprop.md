@@ -194,6 +194,9 @@ We can use these single-letter labels for dimensions:
 4. d = model dimension
 5. k = query/key dimension
 6. v = value dimension
+7. h = number of heads
+8. m = query/key dimension after splitting up into heads
+9. w = value dimension after splitting up into heads
 
 
 This will mean
