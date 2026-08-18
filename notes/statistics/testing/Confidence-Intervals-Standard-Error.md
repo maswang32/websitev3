@@ -39,7 +39,7 @@ $$
 $$
 
 ## Interpretation
-The true mean $\mu$ is fixed - it is not random. The confidence interval is random, since it's built from a random sample. The p-value is the probability that your random confidence interval contains the true mean.
+The true mean $\mu$ is fixed - it is not random. The confidence interval is random, since it's built from a random sample. There is a 95% probability that your random confidence interval contains the true mean.
 
 ## How many samples to you need?
 

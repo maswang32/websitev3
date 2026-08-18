@@ -6,8 +6,9 @@ NOT these two things, which invert the conditioning:
 1. The probability of the null hypothesis
 2. The probabliity the results are due to chance
 
-$p$ is typically thresholded by $\alpha$, which is set to be 0.05 by convention
+$p$ is typically thresholded by $\alpha$, which is set to be 0.05 by convention.
 
+$\alpha$ is set by us, $p$ is determined by the experiment.
 
 # Permutation Test
 If you randomly shuffle data and labels, what are the odds you get data this extreme or greater?
@@ -20,8 +21,8 @@ If you randomly shuffle data and labels, what are the odds you get data this ext
 This is 1 - $\beta$.
 
 
-# Bonferri
-If $p=0.05$, that still means one out of every 20 experiments will show significance even if the null hypothesis is true. We have to adjust the threshold $\alpha$ by dividing it by the number of trials.
+# Bonferroni
+If $\alpha=0.05$, that still means one out of every 20 experiments could show significance even if the null hypothesis is true. We have to adjust the threshold $\alpha$ by dividing it by the number of trials.
 
 
 Last Reviewed 08/17/26
