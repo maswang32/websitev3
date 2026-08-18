@@ -49,9 +49,33 @@ n = \left(1.96 \frac{\sigma}{\epsilon} \right)^2
 $$
 
 
+# Wilson
+One thing to note is that the sample standard deviation is used to approximate true standard deviation.
+
+In some cases we can run into problems with this. For instance, suppose we are trying to estimate the mean accuracy $p$ of a system. The sample accuracy is a Bernoulli random variable. The standard error is
+$$
+\sqrt{\frac{Var(X)}{n}} = \sqrt{\frac{(1-\hat{p})\hat{p}}{n}} 
+$$
+
+If our estimate $\hat{p}$ is close to 1, (which is possible if the system is already quite accurate), then the variance gets very low. Also, the confidence interval goes over 1.
+
+Wilson's tests asks "which values of $p$ could have plausibly produced the observation?", and uses these values of $p$ as the confidence interval. A candidate for $p$ is plausible if the observed $\hat{p}$ sits within 1.96 standard deviations of $p$, **where the standard deviation is computed from $p$, not the estimate $\hat{p}$**.
+
+$$
+|\hat{p} - p| \leq 1.96 \sqrt{\frac{p(1-p)}{n}}
+$$
+
+We can solve this using the quadratic formula to find the center and endpoints of the confidence interval:
 
 
+$$
+\text{center} = \frac{\hat{p} + \frac{z^2}{2n}}{1 + \frac{z^2}{n}}
+$$
+$$
+\text{half-width} = \frac{z}{1 + \frac{z^2}{n}} \sqrt{\frac{\hat{p}(1-\hat{p})}{n} + \frac{z^2}{4n^2}}
+$$
 
+This is an asymmetric interval, and the center is not $\hat{p}$, but actually pulled toward $\frac{1}{2}$.
 
 
 Last Reviewed: 08/17/2026
