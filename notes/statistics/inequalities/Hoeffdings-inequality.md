@@ -131,4 +131,12 @@ $$
 
 Note that even if $X$ has a different distribution, the derivation would be similar, and we will get a Chernoff bound, which is a more general result.
 
+# More general Hoeffding's inequality
+$$
+P( Y \geq  E[Y] + \epsilon) \leq \exp\left(-\frac{2n\epsilon^2}{(b-a)^2}\right)
+$$
+$$
+P( |Y - E[Y]| \geq \epsilon) \leq 2 \exp\left(-\frac{2n\epsilon^2}{(b-a)^2}\right)
+$$
+
 Last Reviewed: 08/17/2026
