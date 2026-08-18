@@ -11,5 +11,7 @@
 - **Extremes of Uniforms** - $E[\max{X_1, \cdots, X_n}]$ when they are all uniform is $n/(n+1)$. Just imagine splitting the interval into $n+1$ equal gaps using $n$ points.
 - **Simulate when stuck**
 
+# Code
+- Use `0.5*(1+math.erf(x/math.sqrt(2)))` to simulate a normal CDF.
 
 Last Reviewed: 08/17/2026

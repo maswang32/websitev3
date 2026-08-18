@@ -59,6 +59,9 @@ Intuitively, if you imagine you have a thousand people, 99% of them do not have 
 
 Of the people that test positive, most of them will not have the disease, since 9% of 99% is much larger than 90% of 1%.
 
+# Bayesian Update
+
+Notice that to get from the prior $P(H)$ to the posterior $P(H|D)$, you multiply by $\frac{P(D|H)}{P(D)}$.
 
 # Questions
 Why is it called the evidence?
