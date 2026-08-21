@@ -64,7 +64,7 @@ class KnowledgeGraph:
         self,
         name,
         base_area=25,
-        parent_names=[],
+        parent_names=(),
         color=None,
     ):
         self.node_dict[name] = Node(
