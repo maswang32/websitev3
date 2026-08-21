@@ -96,7 +96,7 @@ class KnowledgeGraph:
         return node_stems_to_note_paths
 
     def render(self):
-        net = Network(
+        pyvisnet = Network(
             bgcolor="#000000",
             font_color="white",
             width="100%",  # Fill page horizontally
@@ -106,8 +106,10 @@ class KnowledgeGraph:
         node_stems_to_note_paths = self.find_note_paths()
 
         for node in self.node_dict.values():
+            # Compute Radius
             radius = np.sqrt(node.compute_area())
 
+            # Look up associated notes
             hyphenated_name = node.name.replace(" ", "-")
             note_path = node_stems_to_note_paths.get(hyphenated_name)
 
@@ -118,3 +120,27 @@ class KnowledgeGraph:
                 page_url = f"https://masonlwang.com/knowledgegraph/{relative_path[:-3].replace('\\', '/')}/"
                 with open(note_path, encoding="utf-8") as f:
                     node_text = f.read()
+
+            # Define node appearance
+            node_attrs = {
+                "label": node.name,
+                "title": node_text,
+                "size": radius,
+                "mass": radius**2 / 100,
+            }
+
+            if not note_path:
+                node_attrs["color"] = node.color
+            else:
+                node_attrs["color"] = {
+                    "background": node.color,
+                    "border": "white",
+                    "borderWidth": 1,
+                }
+                node_attrs["href"] = page_url
+                assert node.base_area > 0, (
+                    f"Node {node.name} with existing notes must have positive size"
+                )
+
+            # Add the node to the pyvisnet
+            pyvisnet.add_node(node.name, **node_attrs)
