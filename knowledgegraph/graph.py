@@ -144,3 +144,10 @@ class KnowledgeGraph:
 
             # Add the node to the pyvisnet
             pyvisnet.add_node(node.name, **node_attrs)
+
+        # Add edges connecting children to parent nodes
+        for node in self.node_dict.values():
+            for parent in node.parents:
+                pyvisnet.add_edge(
+                    node.name, parent.name, width=4, color=parent.color, arrows="to"
+                )
