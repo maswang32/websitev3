@@ -1,3 +1,6 @@
+import os
+from glob import glob
+
 import numpy as np
 from skimage.color import rgb2lab, lab2rgb
 from matplotlib.colors import to_rgb, to_hex
@@ -76,6 +79,13 @@ class KnowledgeGraph:
             color=color,
         )
 
+    def find_note_paths(self):
+        note_paths_by_stem = {}
+        notes_dir = os.path.join(os.path.dirname(__file__), "notes")
+        markdown_paths = glob(os.path.join(notes_dir, "**", "*.md"), recursive=True)
+        for path in markdown_paths:
+            stem = 
+
     def render(self):
         net = Network(
             bgcolor="#000000",
@@ -83,3 +93,6 @@ class KnowledgeGraph:
             width="100%",  # Fill page horizontally
             height="100vh",  # Graph is one viewport tall (browser window)
         )
+
+        for node in self.node_dict.values():
+            radius = np.sqrt(node.compute_area())
