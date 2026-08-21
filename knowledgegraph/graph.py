@@ -185,3 +185,7 @@ class KnowledgeGraph:
 
         # write html
         pyvisnet.write_html("index.html")
+
+
+def main():
+    M = KnowledgeGraph()
