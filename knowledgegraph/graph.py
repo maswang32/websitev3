@@ -189,3 +189,7 @@ class KnowledgeGraph:
 
 def main():
     M = KnowledgeGraph()
+
+
+if __name__ == "__main__":
+    main()
