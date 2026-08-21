@@ -2,6 +2,8 @@ import numpy as np
 from skimage.color import rgb2lab, lab2rgb
 from matplotlib.colors import to_rgb, to_hex
 
+from pyvis.network import Network
+
 
 class Node:
     def __init__(
@@ -72,4 +74,12 @@ class KnowledgeGraph:
             base_area=base_area,
             parents=[self.node_dict[parent] for parent in parent_names],
             color=color,
+        )
+
+    def render(self):
+        net = Network(
+            bgcolor="#000000",
+            font_color="white",
+            width="100%",  # Fill page horizontally
+            height="100vh",  # Graph is one viewport tall (browser window)
         )
