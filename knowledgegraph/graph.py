@@ -83,6 +83,8 @@ class KnowledgeGraph:
         # Dict mapping node file stems to note paths.
         node_stems_to_note_paths = {}
         notes_dir = os.path.join(os.path.dirname(__file__), "notes")
+
+        # recursive=True allows **
         markdown_paths = glob(os.path.join(notes_dir, "**", "*.md"), recursive=True)
         for path in markdown_paths:
             node_stem = os.path.splitext(os.path.basename(path))[0]
@@ -91,6 +93,7 @@ class KnowledgeGraph:
                     f"Duplicate markdown files: {node_stem} is found in {node_stems_to_note_paths[node_stem]} and {path}"
                 )
         node_stems_to_note_paths[node_stem] = path
+        return node_stems_to_note_paths
 
     def render(self):
         net = Network(
@@ -100,5 +103,18 @@ class KnowledgeGraph:
             height="100vh",  # Graph is one viewport tall (browser window)
         )
 
+        node_stems_to_note_paths = self.find_note_paths()
+
         for node in self.node_dict.values():
             radius = np.sqrt(node.compute_area())
+
+            hyphenated_name = node.name.replace(" ", "-")
+            note_path = node_stems_to_note_paths.get(hyphenated_name)
+
+            if not note_path:
+                node_text = ""
+            else:
+                relative_path = os.path.relpath(note_path, os.path.dirname(__file__))
+                page_url = f"https://masonlwang.com/knowledgegraph/{relative_path[:-3].replace('\\', '/')}/"
+                with open(note_path, encoding="utf-8") as f:
+                    node_text = f.read()
