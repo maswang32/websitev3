@@ -13,7 +13,7 @@ from matplotlib.colors import to_rgb, to_hex
 from pyvis.network import Network
 
 
-VIS_OPTIONS = {
+PYVIS_OPTIONS = {
     "layout": {
         "randomSeed": 3,
     },
@@ -179,3 +179,9 @@ class KnowledgeGraph:
                 pyvisnet.add_edge(
                     node.name, parent.name, width=4, color=parent.color, arrows="to"
                 )
+
+        # Set options
+        pyvisnet.set_options(json.dumps(PYVIS_OPTIONS))
+
+        # write html
+        pyvisnet.write_html("index.html")
