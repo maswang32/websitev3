@@ -1,3 +1,8 @@
+"""
+Rewritten manually 08/12/2026
+"""
+
+import json
 import os
 from glob import glob
 
@@ -6,6 +11,29 @@ from skimage.color import rgb2lab, lab2rgb
 from matplotlib.colors import to_rgb, to_hex
 
 from pyvis.network import Network
+
+
+VIS_OPTIONS = {
+    "layout": {
+        "randomSeed": 3,
+    },
+    "nodes": {
+        "font": {"size": 20},  # Default 14
+    },
+    "edges": {
+        "smooth": False,  # Straight edges, not curved
+    },
+    "physics": {
+        "solver": "hierarchicalRepulsion",  # DAG-friendly solver (default barnesHut)
+        "hierarchicalRepulsion": {
+            "centralGravity": 0.01,  # Weak pull to center (default 0)
+            "springLength": 120,  # Edge rest length (default 100)
+            "springConstant": 0.0007,  # Soft springs (default 0.01)
+            "damping": 0.5,  # Settles faster (default 0.09)
+            "avoidOverlap": 1.0,  # Circles do not overlap (default 0)
+        },
+    },
+}
 
 
 class Node:
