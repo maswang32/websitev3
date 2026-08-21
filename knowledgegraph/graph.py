@@ -92,7 +92,7 @@ class KnowledgeGraph:
                 raise ValueError(
                     f"Duplicate markdown files: {node_stem} is found in {node_stems_to_note_paths[node_stem]} and {path}"
                 )
-        node_stems_to_note_paths[node_stem] = path
+            node_stems_to_note_paths[node_stem] = path
         return node_stems_to_note_paths
 
     def render(self):
