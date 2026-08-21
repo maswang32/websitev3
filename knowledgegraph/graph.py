@@ -80,11 +80,17 @@ class KnowledgeGraph:
         )
 
     def find_note_paths(self):
-        note_paths_by_stem = {}
+        # Dict mapping node file stems to note paths.
+        node_stems_to_note_paths = {}
         notes_dir = os.path.join(os.path.dirname(__file__), "notes")
         markdown_paths = glob(os.path.join(notes_dir, "**", "*.md"), recursive=True)
         for path in markdown_paths:
-            stem = 
+            node_stem = os.path.splitext(os.path.basename(path))[0]
+            if node_stem in node_stems_to_note_paths:
+                raise ValueError(
+                    f"Duplicate markdown files: {node_stem} is found in {node_stems_to_note_paths[node_stem]} and {path}"
+                )
+        node_stems_to_note_paths[node_stem] = path
 
     def render(self):
         net = Network(
