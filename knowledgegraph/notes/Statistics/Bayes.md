@@ -64,6 +64,25 @@ Of the people that test positive, most of them will not have the disease, since 
 Notice that to get from the prior $P(H)$ to the posterior $P(H|D)$, you multiply by $\frac{P(D|H)}{P(D)}$.
 
 
+# Odds and Likelihood Ratio
+Odds are "how many times more likely is $H_1$ than $H_2$?
+
+You can compute this via Bayes:
+
+$$
+P(H_1 | D) = \frac{P(D | H_1)P(H_1)}{P(D)}
+$$
+$$
+P(H_2 | D) = \frac{P(D | H_2)P(H_2)}{P(D)}
+$$
+$$
+\frac{P(H_1 | D)}{P(H_2 | D)} = \frac{P(H_1)}{P(H_2)} \times \frac{P(D | H_1)}{P(D | H_2)}
+$$
+
+The term on the left is the "posterior odds". The term in the middle called "prior odds". The term on the right is the "likelihood ratio".
+
+You can take your prior odds and multiply by the likelihood ratio to get the posterior, or take the log of all three terms, which makes the likelihood ratio additive.
+
 # Questions
 Why is it called the evidence?
 
