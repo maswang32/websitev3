@@ -43,14 +43,33 @@ class Node:
 
     def compute_area(self):
         # Note, this function also returns self
-        descendant_nodes = self._collect_unique_descendant_nodes()
-        return sum(node.base_area for node in descendant_nodes)
+        descendants = self._collect_unique_descendants()
+        return sum(node.base_area for node in descendants)
 
-    def _collect_unique_descendant_nodes(self):
-        descendant_nodes = set()
+    def _collect_unique_descendants(self):
+        descendants = set()
         stack = [self]
         while stack:
             node = stack.pop()
-            descendant_nodes.add(node)
+            descendants.add(node)
             stack.extend(node.children)
-        return descendant_nodes
+        return descendants
+
+
+class KnowledgeGraph:
+    def __init__(self):
+        self.node_dict = {}
+
+    def add(
+        self,
+        name,
+        base_area=25,
+        parent_names=[],
+        color=None,
+    ):
+        self.node_dict[name] = Node(
+            name=name,
+            base_area=base_area,
+            parents=[self.node_dict[parent] for parent in parent_names],
+            color=color,
+        )
