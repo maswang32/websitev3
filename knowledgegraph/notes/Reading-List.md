@@ -131,7 +131,7 @@
 ## Long Content
 ### Books
 - [ ] Understanding Deep Learning
-    - [ ] Chapter 8, main text
+    - [x] Chapter 8, main text
 - [ ] Deep Learning Book
 - [ ] Scaling book: https://jax-ml.github.io/scaling-book/
 

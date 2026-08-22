@@ -47,8 +47,10 @@ Below, we have sparse datapoints and plot the smoothest possible fit for a 2-lay
 - **Inductive Bias** - model's tendency to prioritize one solution over another between data points
 - **Regularizer** - factor that biases a model's solution toward a subset of equivalent solutions.
 - **Curse of Dimensionality** - The volume of high-dimensional space typically overwhelms the number of datapoints. If you have high-dimensional input data, it is nearly impossible to cover the input space. For instance, if your input data is 40-dimensional, you can quantize each dimension into 10 bins and get $10^{40}$ bins! Even with 10k examples, there will only be one data point in every $10^{36}$ datapoints.
-- 
 
-
+# Other Notes
+- With sufficient data, you can't actually overparametrize
+- With smaller datasets on smaller data regimes, you can overparametrize.
+- Fitting a curve with 1000 polynomials somehow works better than fitting it with 20
 
 Last Reviewed: 8/12/2026
