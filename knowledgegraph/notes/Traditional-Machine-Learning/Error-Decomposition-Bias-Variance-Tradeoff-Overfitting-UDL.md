@@ -123,6 +123,10 @@ Given a data example, we have computed the expected loss with respect to differe
 - Increasing model capacity decreases bias, since the model can fit the training data better, but this often increases variance
 - For a fixed dataset, there is often an optimal model size.
 
+
+![alt text](Bias-Variance-Tradeoff.png)
+
+
 ## Overfitting
 - Extra model capacity fits the noise term instead of just reducing bias
 - For instance, imagine modeling a noisy sinusoid with a piecewise linear segments. If you model with fewer linear segments, the noise in the observations will cancel out over each segment. But if you increase the number of segments, there are fewer observations in each.
