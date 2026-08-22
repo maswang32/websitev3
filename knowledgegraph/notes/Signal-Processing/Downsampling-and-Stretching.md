@@ -1,15 +1,29 @@
-Remember that the number of DFT points is equal to the number of data points in the time domain. This means downsampling by a factor of N decreases the number of DFT points by the same factor, and stretching increases it by the same factor.
-
 # Downsampling
 ## Time Domain
-- Downsampling takes every $N$th data point.
+Downsampling by a factor of M takes every Mth data point.
+
+$$
+\text{Downsample}_M(x) = x[Mn]
+$$
+
 
 ## DFT Domain
-- Downsampling 'folds' the DFT spectrum on itself, which is called **aliasing**
+$$
+\text{Downsample}_M(x) \leftrightarrow \frac{1}{M}\text{Alias}_M(X)
+$$
+$$
+\text{Alias}_{M,\omega}(X) = \sum_{k=0}^{M-1} X\left(\omega + k \frac{2\pi}{M}\right)
+$$
+
+You can also remember it from the perspective of discrete frequency. Remember that the number of DFT points is equal to the number of data points in the time domain. This means downsampling by a factor of N decreases the number of DFT points by the same factor. To account for this decrease, you can think of the DFT spectrum as folded in on itself or overlapping. This is called **aliasing**.
 
 # Stretching
 ## Time Domain
-- Stretching inserts zeros between each datapoint.
+Stretching by a factor of $L$ inserts $L-1$ zeros between each datapoint.
+
+$$
+\text{Stretch}_L(x) = x\left[\frac{n}{L}\right], n = 0 \text{ mod } L
+$$
 
 ## DFT Domain
 - Stretching replicates the FFT spectrum over and over again.
