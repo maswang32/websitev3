@@ -26,12 +26,15 @@ In MNIST, double descent is present with the original data. For CIFAR-100 and MN
 
 # Explanation
 1. The test performance becomes worse when the number of parameters approaches the number of datapoints, as predicted by the bias-variance tradeoff
+    1. As the number of parameters approaches the number of examples, the model can contort itself to fit all the datapoints, but this function will not be very smooth, and may not generalize well.
 2. The test performance becomes better beyond this point.
     1. Here, the model fits the training data almost perfectly
     2. Thus, improvements come from between the datapoints (**inductive bias**). 
     3. Datapoints are very sparse in high-dimensional space (**curse of dimensionality**)
-    4. More parameters result in smoother functions that interpolate the training data
-    5. This results in better generalization.
+    4. More parameters result in smoother functions that interpolate the training data. Why this happens is unknown, since more parameters can also model very non-smooth functions, but here are two possibilities:
+        1. Network initialization is a smooth function, and the training process does not depart much from the initial values, keeping the model in the smooth subdomain.
+        2. Training algorithm may prefer smooth functions (it acts as an implicit regularizer)
+   5. This results in better generalization.
 
 
 Below, we have sparse datapoints and plot the smoothest possible fit for a 2-layer MLP given each number of hidden units. You see that the more hidden units we add, the smoother the curve is.
@@ -42,6 +45,7 @@ Below, we have sparse datapoints and plot the smoothest possible fit for a 2-lay
 
 # More terms
 - **Inductive Bias** - model's tendency to prioritize one solution over another between data points
+- **Regularizer** - factor that biases a model's solution toward a subset of equivalent solutions.
 - **Curse of Dimensionality** - The volume of high-dimensional space typically overwhelms the number of datapoints. If you have high-dimensional input data, it is nearly impossible to cover the input space. For instance, if your input data is 40-dimensional, you can quantize each dimension into 10 bins and get $10^{40}$ bins! Even with 10k examples, there will only be one data point in every $10^{36}$ datapoints.
 - 
 
