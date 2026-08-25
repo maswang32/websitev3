@@ -22,11 +22,23 @@ You can also remember it from the perspective of discrete frequency. Remember th
 Stretching by a factor of $L$ inserts $L-1$ zeros between each datapoint.
 
 $$
-\text{Stretch}_L(x) = x\left[\frac{n}{L}\right], n = 0 \text{ mod } L
+\text{Stretch}_{L,n}(x) = \delta_{(n = 0 \text{ mod } L)} \cdot x\left[\frac{n}{L}\right],
 $$
 
 ## DFT Domain
-- Stretching replicates the FFT spectrum over and over again.
-- If we look at just the positive frequencies, it looks like stretching essentially takes the spectrum and mirrors it across the old Nyquist frequency.
+- Stretching replicates the FFT spectrum over and over again, $L$ times.
+- If we look at just the positive frequencies (in the non-normalized spectrum), it looks like stretching essentially takes the spectrum and mirrors it across the old Nyquist frequency.
+
+$$
+\text{DTFT}_{\omega}[\text{Stretch}_L(x)] = \sum_{n=-\infty}^{\infty} \text{Stretch}_{L,n}(x)e^{-j\omega n}
+$$
+$$
+=\sum_{m=-\infty}^{\infty} x(m)e^{-j\omega mL}
+$$
+Where $m = n/L$
+$$
+= X(\omega L)
+$$
+
 
 Last Reviewed: 8/21/2026
