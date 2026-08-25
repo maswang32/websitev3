@@ -85,6 +85,8 @@
 
 # To write down
 - [ ] math trick with fractions, 1 - a / (a + b) = b / (a + b)
+- [ ] Interaction models
+- [ ] GPT-Live
 
 # Questions
 - [ ] What is an hMLP?

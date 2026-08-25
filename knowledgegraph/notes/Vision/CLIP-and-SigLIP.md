@@ -1,7 +1,8 @@
 # Both SigLIP and CLIP
 - Dual Encoders, one for vision, one for text
-- each produces a normalized (L2 Norm = 1) embedding
-
+- Each produces a normalized (L2 Norm = 1) embedding
+- The temperature is $\tau$
+    - Learn the multiplier $t=\frac{1}{\tau}, not the divider.
 
 
 # CLIP
@@ -18,6 +19,8 @@ In words:
         - In other words, the task is classifying an image input by identifying the correct text caption
         - The bottom sum is over the possible labels, which are different possible text captions
     - The second is taking text as input, and maximizing the probability for the correct image.
+- The multipler settles around 100, where it is clamped
+
 
 
 # SigLIP
@@ -35,7 +38,7 @@ $z_{ij}$ is $1$ if $i=j$, else $-1$
     - If bias is initialized around -10, sigmoids are around 0
         - loss is small at all the negative pairs, which means we can focus on the positive pairs.
         - The loss for positive pairs is large, since the sigmoids are so close to zero.
-- Easier to distribute.
+- Easier to distribute than CLIP
 - Beats CLIP on equal compute.
 
 
