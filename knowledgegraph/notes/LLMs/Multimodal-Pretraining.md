@@ -21,6 +21,21 @@
             3. positional encodings
         5. Passes through another transformer before going to the main backbone.
     2. CLIP or SigLIP (see notes)
-
+    3. Audio encoder - Qwen
+        1. Encoder is initialized from whisper
+        2. Encoder is trained on
+            1. ASR
+            2. speech to text translation
+            3. speech emotion recognition
+            4. speaker attributes (gender, language, dialect)
+            5. sound event classification
+            6. acoustic scene classification
+            7. audio captioning
+            8. music captioning
+            9. instrument/genre analysis
+            10. speech recognition with timestamps
+            11. AQA - audio question answering (free form response about a clip's content)
+        3. multimodal pretraining: LLM weights frozen, only audio encoder trained
+        4. SFT: encoder frozen, LLM trained
 
 Last Reviewed: 08/25/2026
