@@ -8,16 +8,21 @@
 - [x] Ultimate Interview Guide: https://silviasapora.github.io/blog/ml-interviews.html
 
 ## Review
-- [ ] Review Notes on Information Theory/Statistics/Probability
+- [x] Review Notes on Information Theory/Statistics/Probability
 
 
 ## Essential Papers/Posts
 - [x] Open AI RealTime
 - [x] Thinking Machines Interaction Model
+- [ ] Things I should know from xAI
+    - [ ] What is the scale of pretraining data in terms of number of hours?
+- [ ] Whisper
+- [ ] Review an image is 32 tokens
 - [ ] PPO
 - [ ] GRPO
+
+## Slightly Less Essential
 - [ ] On-Policy Distillation (TML Blog Post)
-- [ ] Things I should know from xAI
 - [ ] DeepSeek Math
 - [ ] DeepSeek R1
 - [ ] Kimi K3
