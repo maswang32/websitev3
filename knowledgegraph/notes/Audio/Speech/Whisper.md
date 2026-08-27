@@ -1,4 +1,11 @@
 # Sept 2022 Version
+## Tasks
+- Multilingual transcription
+- Speech trasnlation to english
+- language ID
+- voice activity detection
+- alignment
+
 ## Data
 - 680k hours
     - 438k hours english audio + transcripts
