@@ -42,9 +42,14 @@
 `<|startoftranscript|> <|fr|> <|translate|> <|notimestamps|> hello guys! <|endoftext|>`
 
 
-
 ### No Speech
 `<|startoftranscript|> <|nospeech|> <|endoftext|>`
+
+
+### Long form
+`<|startofprev|> ...previous text ... <|start of transcript|>`
+- no loss on the previous text tokens
+- `initial_prompt` is used for the user to specify the preceding transcript.
 
 ### What is prefixed?
 - `<|startoftranscript|>`
