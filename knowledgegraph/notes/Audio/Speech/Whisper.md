@@ -17,6 +17,8 @@
             - all caps
             - punctuation free
         - language mismatches
+            - if text language doesn't match audio language
+            - audio language classifier is proto-whisper fine-tuned on VoxLingua107
 - Undisclosed sources, but likely
     - Captioned video (youtube)
     - podcasts with published transcripts
