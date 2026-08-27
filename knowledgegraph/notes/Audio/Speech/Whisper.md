@@ -10,6 +10,7 @@
 - 680k hours
     - 438k hours english audio + transcripts
     - 126k hours non-English audio and english transcripts
+    - 117k hours non-english audio and non-english transcripts
 - Weakly-supervised web audio
     - human transcripts or subtitles, never verified, aligned, or curated
     - filtering
@@ -18,6 +19,8 @@
             - punctuation free
         - language mismatches
             - if text language doesn't match audio language
+                - route to english translation if text is english
+                - else reject
             - audio language classifier is proto-whisper fine-tuned on VoxLingua107
 - Undisclosed sources, but likely
     - Captioned video (youtube)
@@ -29,17 +32,19 @@
 ## Format
 ### English Transcription:
 
-`<|start of transcript|> <|en|> <|transcribe|> <|notimestamps|> hello guys! <|endoftext|>`
+`<|startoftranscript|> <|en|> <|transcribe|> <|notimestamps|> hello guys! <|endoftext|>`
 
 ### With timestamps
-`<|start of transcript|> <|en|> <|transcribe|> <|0.00|> hello, my name is mason <|3.14|> <|3.14|> and I like <|7.37|> <|endoftext|>`
+`<|startoftranscript|> <|en|> <|transcribe|> <|0.00|> hello, my name is mason <|3.14|> <|3.14|> and I like <|7.38|> <|endoftext|>`
 
 ### Translation
-`<|start of transcript|> <|fr|> <|translate|> <|notimestamps|> hello guys! <|endoftext|>`
+(Assume the audio is in french)
+`<|startoftranscript|> <|fr|> <|translate|> <|notimestamps|> hello guys! <|endoftext|>`
+
 
 
 ### No Speech
-`<|start of transcript|> <|nospeech|> <|endoftext|>`
+`<|startoftranscript|> <|nospeech|> <|endoftext|>`
 
 ### What is prefixed?
 - `<|startoftranscript|>`
