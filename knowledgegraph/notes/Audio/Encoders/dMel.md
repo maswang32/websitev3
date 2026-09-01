@@ -4,6 +4,6 @@
 - Each time frame becomes 80 tokens
     - These are predicted in parallel
 - Works for ASR and TTS
-- 16-bin vocab
+- 16-bin vocab (one for each intensity value)
 
 Last Reviewed: 8/31/2026
