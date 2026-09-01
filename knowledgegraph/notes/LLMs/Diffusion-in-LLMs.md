@@ -1,6 +1,7 @@
 # How do you have an LLM output continuous outputs with a diffusion head?
 Short answer - train the transformer to do next token prediction and diffusion.
 
+You can diffuse a whole modality block at once (transfusion) or diffuse one token at a time, or something in-between.
 
 # Transfusion
 ## Representations
@@ -23,6 +24,7 @@ Short answer - train the transformer to do next token prediction and diffusion.
             - Reshape, then pass to UNet Decoder (Upsampler)
         - Beats linear even on parameter-matched variants
         - Also reduces number of sequence slots an image costs
+        - Encoder and decoder are connected by **skip connections**, even though there is a transformer in between them.
 
 
 
