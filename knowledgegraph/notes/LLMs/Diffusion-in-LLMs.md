@@ -67,4 +67,10 @@ You can diffuse a whole modality block at once (transfusion) or diffuse one toke
     - the diffusion head's final output is fed back into the LLM again at the next position, using an input projection layer
 - Loss = next token prediction loss plus diffusion loss
 
+# What would I do?
+- Block level diffusion
+    - bidirectional attention within each block
+    - each block is conditioned on the previous blocks
+- underlying stream of control tokens that tells you when to stop generating
+
 Last Reviewed 8/31/2026
