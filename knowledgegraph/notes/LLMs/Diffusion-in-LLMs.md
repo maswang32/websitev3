@@ -72,5 +72,7 @@ You can diffuse a whole modality block at once (transfusion) or diffuse one toke
     - bidirectional attention within each block
     - each block is conditioned on the previous blocks
 - underlying stream of control tokens that tells you when to stop generating
+- Could even try rolling diffusion or diffusion forcing
+    - but KV-caching is strange, position's representation changes until it's fully denoised
 
 Last Reviewed 8/31/2026
