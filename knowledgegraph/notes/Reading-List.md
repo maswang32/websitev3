@@ -20,9 +20,9 @@
 - [ ] Review an image is 32 tokens
 - [ ] PPO
 - [ ] GRPO
+- [ ] On-Policy Distillation (TML Blog Post)
 
 ## Slightly Less Essential
-- [ ] On-Policy Distillation (TML Blog Post)
 - [ ] DeepSeek Math
 - [ ] DeepSeek R1
 - [ ] Kimi K3

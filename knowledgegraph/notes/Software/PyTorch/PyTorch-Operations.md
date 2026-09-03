@@ -10,7 +10,9 @@
 - torch.einsum - equivlaent to np.einsum
 - x.mT - swaps the last two dims
 - @ - contracts last dim on left with second-to-last on right
-
+- x.permute(0, 2, 3, 1)
+    - "the new shape, described in old axis names"
+    - The new shape is (old axis 0, old axis 2, old axis 3, old axis 1)
 
 Also
 - Use dim instead of axis
