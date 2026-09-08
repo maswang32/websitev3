@@ -20,6 +20,9 @@
 - Labeled positive and is positive / Number of examples you labeled as positives
 - True positives / (True positives + False positives)
 - TP / (TP + FP)
+- "Accuracy on positive subset of test set examples"
+- Also called true positive rate
+- More useful than specificity/false positive rates when there are lots of negatives.
 
 ## Recall
 - Labeled positive and is positive / Number of positives 
@@ -32,6 +35,14 @@
 - Recall of the negative class
 - TN / N
 - TN / (TN + FP)
+- "Accuracy on negative subset of test set examples"
+
+
+## False Positive Rate
+- FP/N
+- 1 minus specificity
+- 1 minus the accuracy on the negative subset of test set examples
+
 
 ## Analogy
 Imagine you have some gold pellets in a bunch of dirt pellets. The gold pellets are the positive examples, and the dirt pellets are the negative examples.
@@ -54,19 +65,40 @@ You can calculate precision, recall/sensitivity, and specificity for each catego
 In this case consider positives to be in the category, and negatives to be not in category.
 
 
+# F1 Score
+- Harmonic mean of precision and recall.
+- Harmonic so that a terrible value kills the score
+- Arithmetic means that 50% is always guaranteed.
+
 
 # Threshold
 - Your model gives you a score, you can threshold this score to determine if something gets classified as positive or negative.
 - Each threshold gives you a (precision, recall) pair.
 
+- You can look at your test data and figure out how low you need to set your threshold to get 100% recall
+- You can also look at your test data and figure out how high you need to set your threshold to get 100% precision, which is also 100% specificity
+    - might not be possible if the highest-scoring example is a negative example.
+- To decide which threshold is best, you only need to consider the thresholds where test datapoints lie.
+
+# ROC Graph
+- Y axis - True positive rate
+- X axis - False positive rate
+- Threshold 0 gives y=1, x=1
+- Threshold 1 gives us x=0 (no false positives), y=0
+- Thresholding such that only positive examples are above the threshold gives us x=0, y=(something)
+- y = x  is where true positive rate equals false positive rate
+- above the line means that the true positive rate is higher than the false positive rate.
+- You can consider some thresholds to be strictly better than others based on the ROC graph. 
+- Up and to the left is good
+- The Pareto frontier is up and to the left.
 
 
-# F1 Score
-- Harmonic mean of precision and recall.
-    - Harmonic so that a terrible value kills the score
-    - Arithmetic means that 50% is always guaranteed.
+# AUC
+- Area under the ROC curve, in [0, 1] x [0, 1]
+- More area is better.
+![AUC](AUC.png)
 
 
-## Averaging
+# Averaging
 - Micro-averaging - average per example
 - Macro-averaging - average per language
