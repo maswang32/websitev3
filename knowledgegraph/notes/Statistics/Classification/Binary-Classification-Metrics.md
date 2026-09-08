@@ -20,14 +20,14 @@
 - Labeled positive and is positive / Number of examples you labeled as positives
 - True positives / (True positives + False positives)
 - TP / (TP + FP)
-- "Accuracy on positive subset of test set examples"
-- Also called true positive rate
 - More useful than specificity/false positive rates when there are lots of negatives.
 
 ## Recall
 - Labeled positive and is positive / Number of positives 
 - TP / P
 - TP / (TP + FN)
+- "Accuracy on positive subset of test set examples"
+- Also called true positive rate
 - Also called "Sensitivity"
 
 ## Specificity
