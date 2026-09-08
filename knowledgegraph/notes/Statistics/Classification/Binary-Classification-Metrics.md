@@ -25,6 +25,13 @@
 - Labeled positive and is positive / Number of positives 
 - TP / P
 - TP / (TP + FN)
+- Also called "Sensitivity"
+
+## Specificity
+- What percentage of negatives were correctly identified as negative?
+- Recall of the negative class
+- TN / N
+- TN / (TN + FP)
 
 ## Analogy
 Imagine you have some gold pellets in a bunch of dirt pellets. The gold pellets are the positive examples, and the dirt pellets are the negative examples.
@@ -33,7 +40,18 @@ You take a scoop out of the gold and dirt mixture.
 
 Precision is the proportion of stuff in your scoop that is gold.
 
-Recall is how much of the total gold you got.
+Recall/Sensitivity is how much of the total gold you got.
+
+Specificity is the proportion of the dirt pellets you managed to ignore.
+
+## Decisions
+Choose the one with the better recall if capturing positives is more important
+Choose the one with better specificity if capturing negatives is more important
+
+## Generalization to multi-category
+You can calculate precision, recall/sensitivity, and specificity for each category.
+
+In this case consider positives to be in the category, and negatives to be not in category.
 
 
 
