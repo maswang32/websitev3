@@ -1,3 +1,99 @@
+# Dump
+- [ ] All gather vs all reduce
+- [ ] model size vs peak usage
+- [ ] pytorch lightning: https://pytorch-lightning.readthedocs.io/en/0.9.0/lightning-module.html
+- [ ] omegaconf - an interpolation is a placeholder value in omegaconf
+- [ ] resolve=True fills in any interpolations
+- [ ] MFCCs
+- [ ] Formants
+- [ ] PQDM
+- [ ] Cosine as a differential equation - the second derivative is related to the value. exponential is where first derivative is equal to the value.
+- [ ] If it's so well trained, then it's not that smart.
+- [ ] linear attentoin
+- [ ] deltanet
+- [ ] Recursive language models
+- [ ] Mhc
+- [ ] canon layers
+- [ ] yann lecun talks
+- [ ] git merging two branches is about merging histories, not merging files
+- [ ] GDPO
+- [ ] GRPO
+- [ ] Tool shaped objects
+- [ ] 26 essential papers
+- [ ] jeff dean on latent space pod
+- [ ] the cost of staying: https://x.com/amytam01/status/2023593365401636896?s=46
+- [ ] multimodal pretraining: https://x.com/tongpetersb/status/2029237530160169286?s=46
+- [ ] circuit tracing
+- [ ] openclaw-RL
+- [ ] attention residuals
+- [ ] christos tzamos - turn LLMs into computers
+- [ ] Oliver Sieberling: "A very interesting observation on backpropogation..."
+- [ ] Attention residuals revisited
+- [ ] A weird thought about transformers
+- [ ] Transformers are bayesian networks - yi ma, chapter 7
+- [ ] the neuroscience of transformers
+- [ ] Kaiming research philosophy according to Xie
+- [ ] Saining Xie podcast
+- [ ] Zhilin GTC 2026 keynote on scaling Kimi
+- [ ] World action model
+- [ ] Leworld model
+- [ ] All elementary functions from a single operator: https://x.com/_annieversary/status/2043619792804782540?s=46
+- [ ] 100 mental models
+- [ ] self distillation zero
+- [ ] wave field lab
+- [ ] project glasswing
+- [ ] recursive self-improvement
+- [ ] RL interview questions: https://x.com/sheriyuo/status/2063295181131247674?s=46
+    - [ ] extended: https://x.com/neural_avb/status/2063957500114960592?s=46
+    - [ ] answers: https://x.com/pradheepraop/status/2063736553357394025?s=46
+- [ ] claude skills: https://x.com/polydao/status/2060715587387400424?s=46
+- [ ] 1 hour stanford lecture: https://x.com/polydao/status/2063569155677098429?s=46
+- [ ] andrej karpathy AI: https://x.com/0xchromium/status/2063321324605280569?s=46
+- [ ] Bill freeman CVPR talk
+- [ ] 3blue1brown LLM and information theory
+- [ ] JEPA collection: https://x.com/abdelstark/status/2064298937939378420?s=46
+- [ ] yann lecun world models: https://x.com/chrisoffner3d/status/2064320485559599247?s=46
+- [ ] video models: https://x.com/majumdar_ani/status/2067619531124506742?s=46
+- [ ] data efficiency dwarkesh: https://x.com/dwarkesh_sp/status/2068019716849815869?s=46
+- [ ] is large company risky: https://x.com/zarazhangrui/status/2068522129193418759?s=46
+- [ ] biggest disad is the biggest ad: https://x.com/iampascio/status/2068631757784568094?s=46
+- [ ] principles of deep learning theory: https://x.com/k_solidified_/status/2069781542306775063?s=46
+- [ ] functional attention: https://x.com/phoenixyin13/status/2069953027931255247?s=46
+- [ ] scaling laws carefully: https://x.com/lilianweng/status/2070237256070389897?s=46
+- [ ] unconventional AI: https://x.com/naveengrao/status/2070184079199494583?s=46
+- [ ] why we think
+- [ ] robot learning oier mess: https://x.com/oier_mees/status/2064734602535612513?s=46
+- [ ] career advice in the age of AI: https://x.com/himanshustwts/status/2072942463548072006?s=46
+- [ ] ilya reading list
+- [ ] papers with code, most cited
+- [ ] claude and obsidian: https://x.com/0xchewa/status/2071564521735684253?s=46
+- [ ] language model harnesses are compositional generalizers: https://x.com/a1zhang/status/2079203524395573442?s=46
+- [ ] differential forms: surya ganguli: https://x.com/suryaganguli/status/2079521732915065007?s=46
+- [ ] imagination models: https://x.com/induction_labs/status/2080322704973160760?s=46
+- [ ] surya ganguli: https://x.com/suryaganguli/status/2080785091685748808?s=46
+- [ ] LLM history: https://x.com/waterloo_intern/status/2081762065392541951?s=46
+- [ ] KDA: https://x.com/iamgrigorev/status/2081763587488362888?s=46
+- [ ] LLMs can't jump: https://openreview.net/challenge?redirect=%2Fpdf%3Fid%3DklU4737opt
+- [ ] andrew ho last post: https://x.com/andrewho03/status/2082615798011744270?s=46
+- [ ] matrices as objects: https://x.com/mpoilerfx/status/2082650120328188144/video/1?s=46
+- [ ] regularization in RL: https://x.com/shikhargupta02/status/2082549694077817140?s=46
+- [ ] explorative modeling: https://x.com/alexiglad/status/2083230922196107288?s=46
+- [ ] continual learning predictions: https://x.com/dwarkesh_sp/status/2085781456375218232?s=46
+- [ ] dual form of NN: https://x.com/osieberling/status/2091278962001391974?s=46
+- [ ] scaling laws: https://x.com/_yusufknl/status/2090429393139097948?s=46
+- [ ] deep learning with python: https://x.com/fchollet/status/2091921787978445119?s=46
+- [ ] DP, TP, SP:
+    - [ ] DP - everyone gets a whole copy of the book, different sequences/sessions, gradients averaged a the end.
+    - [ ] TP - each GPU gets a slide of every weight matrix, they work together for computation
+    - [ ] SP - sequence parallel - spilt the sentences, each sequence gets split
+- [ ] drift models
+
+
+
+
+
+
+
 # Interview Reading List
 
 ## Job Search Advice
@@ -107,6 +203,10 @@
 - [x] Under the KL divergence interpretation of NLL, what about the input variable?
   - [ ] Answer: It's the KL divergence for a fixed input. As in, in a regression problem, imagine that for one input we observe multiple outputs. Then it's the KL divergence for those outputs vs. the model's predicted distribution for that input. Or, P(y|x) compared to the distribution over y|x.
 - [ ] For diffusion ELBO, what does it mean when we say: changing its parameters so that the static encoder does approximate the posterior
+- [ ] Why is KL positive?
+- [ ] forward vs reverse KL, mode-seeking vs mode-covering
+- [ ] KL vs. dimensionality
+
 
 
 
@@ -153,6 +253,8 @@
 - [ ] CS 231
 - [ ] CS 224N
 - [ ] CS 229 review
+- [ ] MIT Diffusion Class
+- [ ] Signals and Systems
 
 
 #### Less Important
@@ -242,7 +344,6 @@
 - [ ] VQVAE - Autoregressive coding
 - [ ] Auto-Encoding Variational Bayes
 - [ ] Scientific Theory of deep learning: https://x.com/learning_mech/status/2047723849874330047?s=46
-- [ ] I climb trees
 - [ ] Group testing, Amin Karbasi
 - [ ] why we think
 - [ ] robot learning: https://x.com/oier_mees/status/2064734602535612513?s=46
@@ -255,6 +356,8 @@
 - [ ] classifier-free guidance
 - [ ] ELBO: https://yunfanj.com/blog/2021/01/11/ELBO.html
 - [ ] Diffusion: https://calvinyluo.com/2022/08/26/diffusion-tutorial.html
+- [ ] RF inversion
+- [ ] Cross-attention-based condition editing
 
 
 #### LLM Setup/Architecture
@@ -349,6 +452,10 @@
 - [ ] Wavenet
 - [ ] tacotron
 - [ ] how many CNN layers does it take to compute a spectrogram?
+- [ ] Hubert
+- [ ] Wav2vec
+- [ ] w2v-bert
+- [ ] ICMC best paper
 
 
 
