@@ -39,6 +39,7 @@ Same as reduce, but does it on all ranks
 2. 2a 2b 2c --> (1a + 2a + 3a) (1b + 2b + 3b) (1c + 2c + 3c)
 3. 3a 3b 3c --> (1a + 2a + 3a) (1b + 2b + 3b) (1c + 2c + 3c)
 
+Equivalent to reduce scatter plus all gather
 
 # Scatter
 Takes a big tensor and shards it into smaller tensors across ranks
@@ -53,6 +54,8 @@ Takes a big tensor and shards it into smaller tensors across ranks
 1. 1a 1b 1c --> (1a + 2a + 3a) _              _
 2. 2a 2b 2c --> _              (1b + 2b + 3b) _
 3. 3a 3b 3c --> _              _              (1c + 2c + 3c)
+
+Same as reduce, but the result is sharded across ranks instead of stored on one.
 
 Source: https://en.wikipedia.org/wiki/Collective_operation
 Last Reviewed: 9/27/2026
