@@ -87,8 +87,23 @@
     - [ ] TP - each GPU gets a slide of every weight matrix, they work together for computation
     - [ ] SP - sequence parallel - spilt the sentences, each sequence gets split
 - [ ] drift models
-
-
+- [ ] reasoning in continuous space
+- [ ] the old world is dying: https://x.com/jasminewsun/status/2064830753264046100?s=46
+- [ ] RLHF: https://x.com/neural_avb/status/2064767466900009313?s=46
+- [ ] GRPO: https://x.com/neural_avb/status/2065097728393367794?s=46
+- [ ] robotics from first principles: https://x.com/sean_pixel/status/2064766757806760405?s=46
+    - [ ] https://x.com/retr0jirachi/status/2066383384381984856?s=46
+- [ ] how to be good at research: https://x.com/itsreallyvivek/status/2064686372737454155?s=46
+- [ ] On policy self distillation: https://x.com/dwarkesh_sp/status/2062353335529935114?s=46
+- [ ] biological neurons: https://x.com/jeffdean/status/2065471716734996823?s=46
+- [ ] OPSD: https://x.com/ar0cket1/status/2054108160450064571?s=46
+- [ ] how to read a paper: https://x.com/paperpaper886/status/2066148829439861016?s=46
+- [ ] zen: https://x.com/jxmnop/status/2066668040557867368?s=46
+- [ ] GLM 5.2
+- [ ] karpathy tutorial: https://x.com/0xmortyx/status/2066878111124250739?s=46
+- [ ] fix your life in one day: https://x.com/thedankoe/status/2010751592346030461?s=46
+- [ ] sample efficiency: https://x.com/sirbayes/status/2068071851990151377?s=46
+- [ ] the most human technology ever made: https://x.com/iidydwns/status/2077188443084644748?s=46
 
 
 
