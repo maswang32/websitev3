@@ -189,6 +189,15 @@
 - [ ] Risk is misunderstood: https://x.com/zarazhangrui/status/2068522129193418759?s=46
 - [ ] The cost of staying: https://x.com/amytam01/status/2023593365401636896?s=46
 - [ ] Ziming Liu: Blue-ocean opportunities in AI
+- [ ] Success:
+    - [ ] Professor Jiang: https://x.com/kelechisp/status/2093035153983504429?s=46
+    - [ ] Steve jobs: https://x.com/kelechisp/status/2093035153983504429?s=46
+    - [ ] Digital Renaissance: https://x.com/thedankoe/status/2093051293078261973?s=46
+    - [ ] How to win without being the best: https://x.com/Daywrotethis/status/2093191889944232234?s=46
+    - [ ] Rachmaninoff: https://x.com/Gena_I_Gorlin/status/2093103339718230133?s=46
+- [ ] Capital Legibility: https://x.com/nikunj/status/2092748226701210023?s=46
+- [ ] Learning Faster: https://x.com/0xHvdes/status/2094075106096009695?s=46
+- [ ] Doing better work: https://x.com/MaxTorchbearer/status/2093863687119352251?s=46
 
 
 #### AI
@@ -232,6 +241,11 @@
 - [ ] Stable Diffusion
 - [ ] VQVAE - Autoregressive coding
 - [ ] Auto-Encoding Variational Bayes
+- [ ] Scientific Theory of deep learning: https://x.com/learning_mech/status/2047723849874330047?s=46
+- [ ] I climb trees
+- [ ] Group testing, Amin Karbasi
+- [ ] why we think
+- [ ] robot learning: https://x.com/oier_mees/status/2064734602535612513?s=46
 
 
 #### Generative Models
@@ -261,6 +275,16 @@
 - [ ] Continual Learning
 - [ ] Latent Reasoning
 - [ ] andrej karpathy video on tokenization
+- [ ] Mesa Layer
+- [ ] Native sparse attention
+- [ ] Deepseek series
+- [ ] screening
+- [ ] mechanistic interpretability
+- [ ] ziming liu - blue ocean opportunities in AI
+- [ ] how LLMs really work: https://x.com/anuragdotdev/status/2093697517481517323?s=46
+- [ ] agent civilizations: https://x.com/dwarkesh_sp/status/2093833419377815719?s=46
+- [ ] Scaling laws: https://x.com/_yusufknl/status/2094528020610719767?s=46
+- [ ] Kimi R1
 
 
 #### World Models
@@ -324,6 +348,7 @@
 - [ ] Jukebox
 - [ ] Wavenet
 - [ ] tacotron
+- [ ] how many CNN layers does it take to compute a spectrogram?
 
 
 
