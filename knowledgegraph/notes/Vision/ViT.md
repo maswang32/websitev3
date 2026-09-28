@@ -1,3 +1,4 @@
+# hMLP
 - You patchify an image (say 64 x 64 x 3) into tiny patches (say 32 x 32 x 12 patches)
     - Means you split it up into 32 x 32 squares, then each the pixels in square is represented by a flattened vector.
 - Then you pass the 32 x 32 x 12 image into an MLP, getting a 32 x 32 x C1
