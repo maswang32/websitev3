@@ -1,3 +1,13 @@
+# Legend
+1. Each row is one device (a rank)
+2. Each column is a slot in a buffer (e.g. a chunk of a tensor)
+3. Letter says what GPU produced the data
+4. Number says which chunk it is
+5. Blank means that the device has no valid data in that slot
+
+
+
+
 # Gather
 1. a1 _  _  -->  a1 a2 a3
 2. _  a2 _  -->  _  a2 _
