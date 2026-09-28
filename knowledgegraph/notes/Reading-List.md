@@ -1,14 +1,6 @@
 # Dump
 - [ ] imagination models: https://x.com/induction_labs/status/2080322704973160760?s=46
 - [ ] surya ganguli: https://x.com/suryaganguli/status/2080785091685748808?s=46
-- [ ] LLM history: https://x.com/waterloo_intern/status/2081762065392541951?s=46
-- [ ] KDA: https://x.com/iamgrigorev/status/2081763587488362888?s=46
-- [ ] LLMs can't jump: https://openreview.net/challenge?redirect=%2Fpdf%3Fid%3DklU4737opt
-- [ ] andrew ho last post: https://x.com/andrewho03/status/2082615798011744270?s=46
-- [ ] matrices as objects: https://x.com/mpoilerfx/status/2082650120328188144/video/1?s=46
-- [ ] regularization in RL: https://x.com/shikhargupta02/status/2082549694077817140?s=46
-- [ ] explorative modeling: https://x.com/alexiglad/status/2083230922196107288?s=46
-- [ ] continual learning predictions: https://x.com/dwarkesh_sp/status/2085781456375218232?s=46
 - [ ] dual form of NN: https://x.com/osieberling/status/2091278962001391974?s=46
 - [ ] scaling laws: https://x.com/_yusufknl/status/2090429393139097948?s=46
 - [ ] deep learning with python: https://x.com/fchollet/status/2091921787978445119?s=46
@@ -31,7 +23,6 @@
 - [ ] zen: https://x.com/jxmnop/status/2066668040557867368?s=46
 - [ ] GLM 5.2
 - [ ] karpathy tutorial: https://x.com/0xmortyx/status/2066878111124250739?s=46
-- [ ] fix your life in one day: https://x.com/thedankoe/status/2010751592346030461?s=46
 - [ ] sample efficiency: https://x.com/sirbayes/status/2068071851990151377?s=46
 - [ ] the most human technology ever made: https://x.com/iidydwns/status/2077188443084644748?s=46
 
@@ -42,11 +33,7 @@
 # Interview Reading List
 - [ ] Things I should know from xAI
     - [ ] What is the scale of pretraining data in terms of number of hours?
-- [ ] Whisper
 - [ ] Review an image is 32 tokens
-- [ ] PPO
-- [ ] GRPO
-- [ ] On-Policy Distillation (TML Blog Post)
 
 ## Slightly Less Essential
 - [ ] DeepSeek Math
@@ -165,10 +152,11 @@
 ### Books
 - [ ] Understanding Deep Learning
     - [x] Chapter 8, main text
+- [ ] 26 essential papers
+    - [ ] Ilya's reading list: https://github.com/dzyim/ilya-sutskever-recommended-reading
+- [ ] Paperswithcode most cited
 - [ ] Deep Learning Book
 - [ ] Scaling book: https://jax-ml.github.io/scaling-book/
-
-#### Less Important
 - [ ] Principles of Deep Learning Theory: https://x.com/k_solidified_/status/2069781542306775063?s=46
 - [ ] Information Theory Book
 
@@ -182,9 +170,6 @@
 - [ ] MIT Diffusion Class
 - [ ] Signals and Systems
 - [ ] I Climb Trees
-
-
-#### Less Important
 - [ ] Robot Learning Course: https://x.com/oier_mees/status/2064734602535612513?s=46
 - [ ] https://deepgenerativemodels.github.io/
 
@@ -196,75 +181,72 @@
 
 ### Videos
 - [ ] 3blue one brown information theory and LLMs
-- [ ] Yann Lecun: https://x.com/chrisoffner3d/status/2064320485559599247?s=46
-- [ ] AMI Labs, Saining Xie interview
-- [ ] How We Scaled KIMI 2.5: https://www.youtube.com/watch?v=CwePo4847ho
+- [ ] Backprop video - Artem
 - [ ] How do LLMs work? Stanford lecture: https://x.com/polydao/status/2063569155677098429?s=46
-- [ ] Princeton Lecture on Random Matrices: https://x.com/mpoilerfx/status/2082650120328188144/video/1?s=46
-- [ ] Bill Freeman: CVPR Talk
 - [ ] Data Efficiency: Dwarkesh: https://x.com/dwarkesh_sp/status/2068019716849815869?s=46
+- [ ] AMI Labs, Saining Xie interview
+- [ ] Kaiming research philosophy according to Xie
+- [ ] Princeton Lecture on Random Matrices: https://x.com/mpoilerfx/status/2082650120328188144/video/1?s=46
+- [ ] Yann Lecun: https://x.com/chrisoffner3d/status/2064320485559599247?s=46
+- [ ] How We Scaled KIMI 2.5: https://www.youtube.com/watch?v=CwePo4847ho
+- [ ] Zhilin GTC 2026 keynote on scaling Kimi
+- [ ] Bill Freeman: CVPR Talk
 - [ ] RL is reverse KL, Nathan Lambert: https://x.com/shikhargupta02/status/2082549694077817140?s=46
 - [ ] Continual Learning Predictions: https://x.com/dwarkesh_sp/status/2085781456375218232?s=46
-- [ ] Backprop video - Artem
 - [ ] Karpathy - LLM Coding
 - [ ] Ilya podcast: If it's so well trained, then it's not that smart.
 - [ ] Jeff Dean on latent space podcast
-- [ ] Kaiming research philosophy according to Xie
-- [ ] Zhilin GTC 2026 keynote on scaling Kimi
 
 
 ### Blog Posts, X Posts, or Papers
 
-#### Advice:
-- [ ] Career Advice in the age of AI: https://x.com/himanshustwts/status/2072942463548072006?s=46
-- [ ] Biggest Disadvantage is biggest advantage: https://x.com/iampascio/status/2068631757784568094?s=46
+#### Advice
+##### General
 - [ ] 100 mental models
-- [ ] How to change your life in one day
+- [ ] Fix your life in one day: https://x.com/thedankoe/status/2010751592346030461?s=46
+- [ ] Biggest Disadvantage is biggest advantage: https://x.com/iampascio/status/2068631757784568094?s=46
 - [ ] Risk is misunderstood: https://x.com/zarazhangrui/status/2068522129193418759?s=46
 - [ ] The cost of staying: https://x.com/amytam01/status/2023593365401636896?s=46
-- [ ] Ziming Liu: Blue-ocean opportunities in AI
+- [ ] Rachmaninoff: https://x.com/Gena_I_Gorlin/status/2093103339718230133?s=46
 - [ ] Professor Jiang: https://x.com/kelechisp/status/2093035153983504429?s=46
 - [ ] Steve jobs: https://x.com/kelechisp/status/2093035153983504429?s=46
-- [ ] Digital Renaissance: https://x.com/thedankoe/status/2093051293078261973?s=46
 - [ ] How to win without being the best: https://x.com/Daywrotethis/status/2093191889944232234?s=46
-- [ ] Rachmaninoff: https://x.com/Gena_I_Gorlin/status/2093103339718230133?s=46
-- [ ] Capital Legibility: https://x.com/nikunj/status/2092748226701210023?s=46
 - [ ] Learning Faster: https://x.com/0xHvdes/status/2094075106096009695?s=46
 - [ ] Doing better work: https://x.com/MaxTorchbearer/status/2093863687119352251?s=46
 
+##### AI - Specific
+- [ ] Ziming Liu: Blue-ocean opportunities in AI
+- [ ] Capital Legibility: https://x.com/nikunj/status/2092748226701210023?s=46
+- [ ] Career Advice in the age of AI: https://x.com/himanshustwts/status/2072942463548072006?s=46
+- [ ] Digital Renaissance: https://x.com/thedankoe/status/2093051293078261973?s=46
 
-#### AI
-- [ ] Visualization of Gradient Descent Methods: https://towardsdatascience.com/a-visual-explanation-of-gradient-descent-methods-momentum-adagrad-rmsprop-adam-f898b102325c
+
+#### General AI Technical Knowledge
+##### Topics
 - [ ] Flow matching
 - [ ] DINO
 - [ ] SigLIP
-- [ ] Whisper
 - [ ] Adam
 - [ ] ODISE
 - [ ] SAM
-- [ ] Presto
-- [ ] DDIM/SDE interpretation
-- [ ] EDM
-- [ ] 26 essential papers
-- [ ] All elementary functions from a single operator
-- [ ] Self-Distillation Zero
-- [ ] Language model harnesses are compositional generalizers: https://x.com/a1zhang/status/2079203524395573442?s=46
-- [ ] Recursive Language Models
-- [ ] Tool Shaped Objects: https://x.com/willmanidis/status/2021655191901155534?s=46
+
+##### Posts
+- [ ] Scaling Laws: https://x.com/lilianweng/status/2070237256070389897?s=46
+- [ ] LLMs can't jump: https://openreview.net/pdf?id=klU4737opt
+- [ ] Explorative Modeling: https://x.com/alexiglad/status/2083230922196107288?s=46
+- [ ] Visualization of Gradient Descent Methods: https://towardsdatascience.com/a-visual-explanation-of-gradient-descent-methods-momentum-adagrad-rmsprop-adam-f898b102325c
 - [ ] Oliver Sieberling: "A very interesting observation on backpropogation is..."
+- [ ] Tool Shaped Objects: https://x.com/willmanidis/status/2021655191901155534?s=46
+- [ ] Scientific Theory of deep learning: https://x.com/learning_mech/status/2047723849874330047?s=46
+- [ ] All elementary functions from a single operator
+- [ ] Presto
 - [ ] Hanchen li: self improving AI reflections
-- [ ] Ilya's reading list: https://github.com/dzyim/ilya-sutskever-recommended-reading
-- [ ] paperswithcode most cited
 - [ ] Andrew Ho's Startup Post: https://x.com/andrewho03/status/2082615798011744270?s=46
 - [ ] Can LLMs be computers? https://www.percepta.ai/blog/can-llms-be-computers
   - [ ] Also see X post from Christos Tzamos
 - [ ] Wave Field Lab
-- [ ] Scaling Laws: https://x.com/lilianweng/status/2070237256070389897?s=46
-- [ ] Unconventional AI image generation: https://x.com/naveengrao/status/2070184079199494583?s=46
 - [ ] Test-Time thinking: https://lilianweng.github.io/posts/2025-05-01-thinking/
 - [ ] Sutton letter
-- [ ] LLMs can't jump: https://openreview.net/pdf?id=klU4737opt
-- [ ] Explorative Modeling: https://x.com/alexiglad/status/2083230922196107288?s=46
 - [ ] mHC
 - [ ] Video model tokenization: https://x.com/majumdar_ani/status/2067619531124506742?s=46
 - [ ] Hierarchical Reasoning Models
@@ -275,12 +257,12 @@
 - [ ] Stable Diffusion
 - [ ] VQVAE - Autoregressive coding
 - [ ] Auto-Encoding Variational Bayes
-- [ ] Scientific Theory of deep learning: https://x.com/learning_mech/status/2047723849874330047?s=46
 - [ ] Group testing, Amin Karbasi
 - [ ] why we think
 
 
 #### Generative Models
+- [ ] Unconventional AI image generation: https://x.com/naveengrao/status/2070184079199494583?s=46
 - [ ] instruct prompt2prompt
 - [ ] instruct pix2pix
 - [ ] dreamfusion
@@ -291,7 +273,13 @@
 - [ ] Cross-attention-based condition editing
 
 
-#### LLM Setup/Architecture
+#### LLMS
+- [ ] History of LLMs: https://x.com/waterloo_intern/status/2081762065392541951?s=46
+- [ ] Self-Distillation Zero
+- [ ] Recursive Language Models
+- [ ] Language model harnesses are compositional generalizers: https://x.com/a1zhang/status/2079203524395573442?s=46
+
+##### LLM Setup/Architecture
 - [ ] KV-Cache
 - [ ] LoRA
 - [ ] mamba
@@ -334,7 +322,10 @@
 
 
 
-#### RL
+#### Reinforcement Learning
+- [ ] PPO
+- [ ] GRPO
+- [ ] On-Policy Distillation (TML Blog Post)
 - [ ] GDPO
 - [ ] Ouyang
 - [ ] RLHF
@@ -346,7 +337,6 @@
 
 #### Physics/Stats/Math
 - [ ] Surya Ganguli Physics: https://x.com/suryaganguli/status/2079521732915065007?s=46
-- [ ] History of LLMs: https://x.com/waterloo_intern/status/2081762065392541951?s=46
 - [ ] Interpreting the determinant in terms of volume, determinant of jacobian
 - [ ] two sided vs one sided tests
 - [ ] 6.5 interpretations of KL divergence
@@ -379,6 +369,7 @@
 
 
 #### Audio Papers
+- [ ] Whisper series
 - [ ] Next scale prediction for audio
 - [ ] Conformer paper: https://arxiv.org/pdf/2005.08100
 - [ ] Physical Modeling: https://www.youtube.com/watch?v=hw9bWnDei-k
