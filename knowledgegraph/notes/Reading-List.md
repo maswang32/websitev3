@@ -1,13 +1,4 @@
 # Dump
-- [ ] All gather vs all reduce
-- [ ] model size vs peak usage
-- [ ] pytorch lightning: https://pytorch-lightning.readthedocs.io/en/0.9.0/lightning-module.html
-- [ ] omegaconf - an interpolation is a placeholder value in omegaconf
-- [ ] resolve=True fills in any interpolations
-- [ ] MFCCs
-- [ ] Formants
-- [ ] PQDM
-- [ ] Cosine as a differential equation - the second derivative is related to the value. exponential is where first derivative is equal to the value.
 - [ ] If it's so well trained, then it's not that smart.
 - [ ] linear attentoin
 - [ ] deltanet
@@ -442,6 +433,10 @@
 - [ ] aliasing
 - [ ] Downsampling and upsampling
 - [ ] Pole zero graphs
+- [ ] MFCCs
+- [ ] Formants
+- [ ] PQDM
+- [ ] Cosine as a differential equation - the second derivative is related to the value. exponential is where first derivative is equal to the value.
 
 
 #### AI Coding
@@ -471,6 +466,12 @@
 - [ ] Wav2vec
 - [ ] w2v-bert
 - [ ] ICMC best paper
+
+
+#### Software
+- [ ] Model size vs peak usage
+- [ ] PyTorch lightning: https://pytorch-lightning.readthedocs.io/en/0.9.0/lightning-module.html
+- [ ] omegaconf (an interpolation is a placeholder value in omegaconf, resolve=True fills in any interpolations)
 
 
 
