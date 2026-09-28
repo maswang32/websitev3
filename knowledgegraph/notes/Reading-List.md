@@ -1,8 +1,4 @@
 # Dump
-- [ ] papers with code, most cited
-- [ ] claude and obsidian: https://x.com/0xchewa/status/2071564521735684253?s=46
-- [ ] language model harnesses are compositional generalizers: https://x.com/a1zhang/status/2079203524395573442?s=46
-- [ ] differential forms: surya ganguli: https://x.com/suryaganguli/status/2079521732915065007?s=46
 - [ ] imagination models: https://x.com/induction_labs/status/2080322704973160760?s=46
 - [ ] surya ganguli: https://x.com/suryaganguli/status/2080785091685748808?s=46
 - [ ] LLM history: https://x.com/waterloo_intern/status/2081762065392541951?s=46
@@ -276,6 +272,7 @@
 - [ ] Oliver Sieberling: "A very interesting observation on backpropogation is..."
 - [ ] Hanchen li: self improving AI reflections
 - [ ] Ilya's reading list: https://github.com/dzyim/ilya-sutskever-recommended-reading
+- [ ] paperswithcode most cited
 - [ ] Andrew Ho's Startup Post: https://x.com/andrewho03/status/2082615798011744270?s=46
 - [ ] Can LLMs be computers? https://www.percepta.ai/blog/can-llms-be-computers
   - [ ] Also see X post from Christos Tzamos
