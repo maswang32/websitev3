@@ -40,21 +40,6 @@
 
 
 # Interview Reading List
-
-## Job Search Advice
-- [x] Notes on the interview job search - Alisa Liu
-- [x] How to get into a frontier lab, Vlad Feinberg
-- [x] Notes on the job search: https://x.com/yong_zhengxin/status/2069985772288016836?s=46
-- [x] Nathan Lambert: https://www.interconnects.ai/p/thoughts-on-the-hiring-market-in
-- [x] Ultimate Interview Guide: https://silviasapora.github.io/blog/ml-interviews.html
-
-## Review
-- [x] Review Notes on Information Theory/Statistics/Probability
-
-
-## Essential Papers/Posts
-- [x] Open AI RealTime
-- [x] Thinking Machines Interaction Model
 - [ ] Things I should know from xAI
     - [ ] What is the scale of pretraining data in terms of number of hours?
 - [ ] Whisper
@@ -79,8 +64,6 @@
   - [ ] Answers: https://x.com/pradheepraop/status/2063736553357394025?s=46
 
 
-## Courses
-- [ ] CS 336
 
 
 
@@ -178,7 +161,6 @@
 - r/machinelearning
 - r/learnmachinelearning
 
-
 ## Long Content
 ### Books
 - [ ] Understanding Deep Learning
@@ -191,14 +173,15 @@
 - [ ] Information Theory Book
 
 ### Classes
+- [ ] CS 336
 - [ ] Deep Learning, MIT class
-- [ ] I Climb Trees
 - [ ] CS 285L, Berkeley Deep Learning Course.
 - [ ] CS 231
 - [ ] CS 224N
 - [ ] CS 229 review
 - [ ] MIT Diffusion Class
 - [ ] Signals and Systems
+- [ ] I Climb Trees
 
 
 #### Less Important
@@ -240,12 +223,11 @@
 - [ ] Risk is misunderstood: https://x.com/zarazhangrui/status/2068522129193418759?s=46
 - [ ] The cost of staying: https://x.com/amytam01/status/2023593365401636896?s=46
 - [ ] Ziming Liu: Blue-ocean opportunities in AI
-- [ ] Success:
-    - [ ] Professor Jiang: https://x.com/kelechisp/status/2093035153983504429?s=46
-    - [ ] Steve jobs: https://x.com/kelechisp/status/2093035153983504429?s=46
-    - [ ] Digital Renaissance: https://x.com/thedankoe/status/2093051293078261973?s=46
-    - [ ] How to win without being the best: https://x.com/Daywrotethis/status/2093191889944232234?s=46
-    - [ ] Rachmaninoff: https://x.com/Gena_I_Gorlin/status/2093103339718230133?s=46
+- [ ] Professor Jiang: https://x.com/kelechisp/status/2093035153983504429?s=46
+- [ ] Steve jobs: https://x.com/kelechisp/status/2093035153983504429?s=46
+- [ ] Digital Renaissance: https://x.com/thedankoe/status/2093051293078261973?s=46
+- [ ] How to win without being the best: https://x.com/Daywrotethis/status/2093191889944232234?s=46
+- [ ] Rachmaninoff: https://x.com/Gena_I_Gorlin/status/2093103339718230133?s=46
 - [ ] Capital Legibility: https://x.com/nikunj/status/2092748226701210023?s=46
 - [ ] Learning Faster: https://x.com/0xHvdes/status/2094075106096009695?s=46
 - [ ] Doing better work: https://x.com/MaxTorchbearer/status/2093863687119352251?s=46
@@ -455,6 +437,16 @@
 
 
 # Deleted
+## Done
+- [x] Notes on the interview job search - Alisa Liu
+- [x] How to get into a frontier lab, Vlad Feinberg
+- [x] Notes on the job search: https://x.com/yong_zhengxin/status/2069985772288016836?s=46
+- [x] Nathan Lambert: https://www.interconnects.ai/p/thoughts-on-the-hiring-market-in
+- [x] Ultimate Interview Guide: https://silviasapora.github.io/blog/ml-interviews.html
+- [x] Review Notes on Information Theory/Statistics/Probability
+- [x] Open AI RealTime
+- [x] Thinking Machines Interaction Model
+
 ## Newletters (no need)
 - huggingface papers page
 - papers with code trending
