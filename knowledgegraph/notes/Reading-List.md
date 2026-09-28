@@ -1,12 +1,4 @@
 # Dump
-- [ ] If it's so well trained, then it's not that smart.
-- [ ] linear attentoin
-- [ ] deltanet
-- [ ] Recursive language models
-- [ ] Mhc
-- [ ] canon layers
-- [ ] yann lecun talks
-- [ ] git merging two branches is about merging histories, not merging files
 - [ ] GDPO
 - [ ] GRPO
 - [ ] Tool shaped objects
@@ -286,6 +278,7 @@
 - [ ] Continual Learning Predictions: https://x.com/dwarkesh_sp/status/2085781456375218232?s=46
 - [ ] Backprop video - Artem
 - [ ] Karpathy - LLM Coding
+- [ ] Ilya podcast: If it's so well trained, then it's not that smart.
 
 ### Blog Posts, X Posts, or Papers
 
