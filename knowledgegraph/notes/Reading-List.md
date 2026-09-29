@@ -217,13 +217,11 @@
 #### General AI Technical Knowledge
 ##### Topics
 - [ ] DINO
-- [x] SigLIP
 - [ ] Adam
 - [ ] ODISE
 - [ ] SAM
 
 ##### Posts
-- [ ] All elementary functions from a single operator
 - [ ] Scaling Laws: https://x.com/lilianweng/status/2070237256070389897?s=46
 - [ ] LLMs can't jump: https://openreview.net/pdf?id=klU4737opt
 - [ ] Explorative Modeling: https://x.com/alexiglad/status/2083230922196107288?s=46
@@ -431,6 +429,9 @@
 - [x] Review Notes on Information Theory/Statistics/Probability
 - [x] Open AI RealTime
 - [x] Thinking Machines Interaction Model
+- [x] SigLIP
+- [x] All elementary functions from a single operator
+
 
 ## Newletters (no need)
 - huggingface papers page
