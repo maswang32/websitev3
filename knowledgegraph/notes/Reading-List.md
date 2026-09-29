@@ -35,13 +35,6 @@
     - [ ] What is the scale of pretraining data in terms of number of hours?
 - [ ] Review an image is 32 tokens
 
-## Slightly Less Essential
-- [ ] DeepSeek Math
-- [ ] DeepSeek R1
-- [ ] Kimi K3
-- [ ] Transfusion
-  - [ ] Multimodal Pretraining: https://x.com/tongpetersb/status/2029237530160169286?s=46
-- [ ] Flow Matching
 
 
 ## Interview Questions
@@ -105,7 +98,7 @@
 - [ ] GPT-Live
 
 # Questions
-- [ ] What is an hMLP?
+- [x] What is an hMLP?
 - [ ] What audio tokenizer does TML use?
 - [ ] LLM Tokenization: what is bits per byte?
 - [ ] when you have like dx = dy, what lets you integrate both sides? If you integrate the RHS from 0 to T, what are the limits of the integral on the RHS?
@@ -223,14 +216,14 @@
 
 #### General AI Technical Knowledge
 ##### Topics
-- [ ] Flow matching
 - [ ] DINO
-- [ ] SigLIP
+- [x] SigLIP
 - [ ] Adam
 - [ ] ODISE
 - [ ] SAM
 
 ##### Posts
+- [ ] All elementary functions from a single operator
 - [ ] Scaling Laws: https://x.com/lilianweng/status/2070237256070389897?s=46
 - [ ] LLMs can't jump: https://openreview.net/pdf?id=klU4737opt
 - [ ] Explorative Modeling: https://x.com/alexiglad/status/2083230922196107288?s=46
@@ -238,7 +231,6 @@
 - [ ] Oliver Sieberling: "A very interesting observation on backpropogation is..."
 - [ ] Tool Shaped Objects: https://x.com/willmanidis/status/2021655191901155534?s=46
 - [ ] Scientific Theory of deep learning: https://x.com/learning_mech/status/2047723849874330047?s=46
-- [ ] All elementary functions from a single operator
 - [ ] Presto
 - [ ] Hanchen li: self improving AI reflections
 - [ ] Andrew Ho's Startup Post: https://x.com/andrewho03/status/2082615798011744270?s=46
@@ -262,6 +254,7 @@
 
 
 #### Generative Models
+- [ ] Flow matching
 - [ ] Unconventional AI image generation: https://x.com/naveengrao/status/2070184079199494583?s=46
 - [ ] instruct prompt2prompt
 - [ ] instruct pix2pix
@@ -275,6 +268,13 @@
 
 #### LLMS
 - [ ] History of LLMs: https://x.com/waterloo_intern/status/2081762065392541951?s=46
+- [ ] DeepSeek Math
+- [ ] DeepSeek R1
+- [ ] DeepSeek Series
+- [ ] Kimi R1
+- [ ] Kimi K3
+- [ ] Transfusion
+  - [ ] Multimodal Pretraining: https://x.com/tongpetersb/status/2029237530160169286?s=46
 - [ ] Self-Distillation Zero
 - [ ] Recursive Language Models
 - [ ] Language model harnesses are compositional generalizers: https://x.com/a1zhang/status/2079203524395573442?s=46
@@ -287,7 +287,7 @@
 - [ ] Linear Attention
 - [ ] DeltaNet
 - [ ] Qwen
-- [ ] KDA :https://x.com/iamgrigorev/status/2081763587488362888?s=46
+- [ ] KDA: https://x.com/iamgrigorev/status/2081763587488362888?s=46
 - [ ] Attention Residuals
   - [ ] Attention Residuals revisted
 - [ ] Looped Transformers: https://x.com/ridgerzhu/status/2046736781035618602?s=46
@@ -297,16 +297,9 @@
 - [ ] Continual Learning
 - [ ] Latent Reasoning
 - [ ] andrej karpathy video on tokenization
-- [ ] Mesa Layer
-- [ ] Native sparse attention
-- [ ] Deepseek series
-- [ ] screening
-- [ ] mechanistic interpretability
-- [ ] ziming liu - blue ocean opportunities in AI
 - [ ] how LLMs really work: https://x.com/anuragdotdev/status/2093697517481517323?s=46
 - [ ] agent civilizations: https://x.com/dwarkesh_sp/status/2093833419377815719?s=46
 - [ ] Scaling laws: https://x.com/_yusufknl/status/2094528020610719767?s=46
-- [ ] Kimi R1
 
 
 #### World Models
@@ -390,14 +383,15 @@
 - [ ] omegaconf (an interpolation is a placeholder value in omegaconf, resolve=True fills in any interpolations)
 
 
+# Less Important
 
-#### Less Important
-- [ ] LLM Arch:
-  - [ ] The Neuroscience of Transformers
-  - [ ] Transformers are Bayesian Networks
-  - [ ] Functional Attention: https://x.com/phoenixyin13/status/2069953027931255247?s=46
-  - [ ] Canon Layers
-  - [ ] Native Sparse Attention
+## LLMs
+- [ ] screening
+- [ ] The Neuroscience of Transformers
+- [ ] Transformers are Bayesian Networks
+- [ ] Functional Attention: https://x.com/phoenixyin13/status/2069953027931255247?s=46
+- [ ] Canon Layers
+- [ ] Native Sparse Attention
 - [ ] Scientific Theory of Deep Learning: https://x.com/learning_mech/status/2047723849874330047?s=46
 - [ ] Mesa Layer: https://x.com/googleresearch/status/2047630714145776053?s=46
 - [ ] OpenClaw RL
@@ -408,7 +402,7 @@
 - [ ] Diffusion Tutorial: https://calvinyluo.com/2022/08/26/diffusion-tutorial.html --- do all the derivations by hand
 - [ ] ViLA U
 
-##### Less Important (Audio):
+## Audio:
 - [ ] Transformers with Convolutional Context https://arxiv.org/pdf/1904.11660
 - [ ] Deep Audio Priors Emerge from Harmonic Convolution
 - [ ] wave2midi2wave
