@@ -56,13 +56,13 @@ $$
 \log(p_{\phi}(\mathbf{x})) = \log \left(\int p_{\phi}(\mathbf{x}, \mathbf{z}) d\mathbf{z} \right)
 $$
 
-Let $q(\mathbf{z})$ be a distribution over $\mathbf{z}$.
+Let $q_{\theta}(\mathbf{z})$ be a distribution over $\mathbf{z}$.
 $$
- = \log \left(\int q(\mathbf{z})\frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q(\mathbf{z})} d\mathbf{z} \right)
+ = \log \left(\int q_{\theta}(\mathbf{z})\frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} d\mathbf{z} \right)
 $$
 By Jensen's inequality, we get that this is greater than or equal to:
 $$
- \geq \int q(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q(\mathbf{z})} \right] d\mathbf{z}
+ \geq \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
 $$
 This expression is called the evidence lower bound, since $p_{\phi}(\mathbf{x})$ is called the evidence in Bayes' rule.
 
