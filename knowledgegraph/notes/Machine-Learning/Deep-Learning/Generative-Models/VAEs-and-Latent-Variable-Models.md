@@ -3,7 +3,7 @@
 
 - VAEs allow you to sample from $p(\mathbf{x})$, but cannot evaluate the probability density for given data samples.
 
-- Maximum likelihood estimation is not possible - therefore, VAEs maximize a lower bound on the likelihood.**
+- Maximum likelihood estimation is not possible - therefore, VAEs maximize a lower bound on the likelihood.
 
 # Latent Variable Models
 Model a joint distribution $p(\mathbf{x}, \mathbf{z})$, and express $p(\mathbf{x})$ as:
