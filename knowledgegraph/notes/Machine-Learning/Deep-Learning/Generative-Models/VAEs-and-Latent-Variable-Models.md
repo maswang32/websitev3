@@ -27,25 +27,25 @@ $p(\mathbf{z})$ could be the standard normal distribution, and $p_{\phi}(\mathbf
 
 The data probability is
 $$
-p_{\phi}(\mathbf{x}) = \int p(\mathbf{x}, \mathbf{z} | \phi) d\mathbf{z}
+p_{\phi}(\mathbf{x}) = \int p_{\phi}(\mathbf{x}, \mathbf{z}) d\mathbf{z}
 $$
 $$
- = \int p(\mathbf{x}, \mathbf{z} | \phi) p(\mathbf{z}) d\mathbf{z}
+ = \int p_{\phi}(\mathbf{x} | \mathbf{z}) p(\mathbf{z}) d\mathbf{z}
 $$
 $$
  = \int N_{\mathbf{x}}\left[ \mathbf{f}[\mathbf{z}, \phi], \sigma^2 \mathbf{I} \right] \cdot N_{\mathbf{z}} [\mathbf{0}, \mathbf{I}] d\mathbf{z}
 $$
 
-Which is a weighted sum of gaussians of different means, where the means are the output of the decoder over $f[\mathbf{z}, \phi]$ where $\mathbf{z} \sim p(\mathbf{z})$, and the weight on each gaussian is $p(\mathbf{z})$.
+Which is a weighted sum of Gaussians of different means, where the means are the decoder outputs $\mathbf{f}[\mathbf{z}, \phi]$ where $\mathbf{z} \sim p(\mathbf{z})$, and the weight on each Gaussian is $p(\mathbf{z})$.
 
-### Ancestral sampling.
-You can generate samples by sampling $\mathbf{z} \sim N(0, \mathbf{I})$ then passing it through the decoder, then sampling from the distribution outputted by the decoder.
+### Ancestral Sampling
+You can generate samples by sampling $\mathbf{z} \sim N_{\mathbf{z}}[\mathbf{0}, \mathbf{I}]$ then passing it through the decoder, then sampling from the distribution outputted by the decoder.
 
 
 # Training
 The goal is to maximize the probability of the observed training data:
 $$
-\sum_{i=1}^N \log \left[ p_{\phi}(\mathbf{x}) \right]
+\sum_{i=1}^N \log \left[ p_{\phi}(\mathbf{x}_i) \right]
 $$
 Our expression for $p_{\phi}(\mathbf{x})$ is 
 $$ \int N_{\mathbf{x}}\left[ \mathbf{f}[\mathbf{z}, \phi], \sigma^2 \mathbf{I} \right] \cdot N_{\mathbf{z}} [\mathbf{0}, \mathbf{I}] d\mathbf{z}
@@ -56,15 +56,15 @@ $$
 \log(p_{\phi}(\mathbf{x})) = \log \left(\int p_{\phi}(\mathbf{x}, \mathbf{z}) d\mathbf{z} \right)
 $$
 
-Let $q_(z)$ be a distribution over $z$.
+Let $q(\mathbf{z})$ be a distribution over $\mathbf{z}$.
 $$
  = \log \left(\int q(\mathbf{z})\frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q(\mathbf{z})} d\mathbf{z} \right)
 $$
-By ELBO, we get that this is greater than or equal to:
+By Jensen's inequality, we get that this is greater than or equal to:
 $$
  \geq \int q(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q(\mathbf{z})} \right] d\mathbf{z}
 $$
-This expression is called the evidence lower bound, since $p_{\phi}(\mathbf{x})$ is called the evidence in Baye's Rule.
+This expression is called the evidence lower bound, since $p_{\phi}(\mathbf{x})$ is called the evidence in Bayes' rule.
 
 
 
