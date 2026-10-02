@@ -148,6 +148,10 @@ Note that in a VAE, the prior $p(\mathbf{z})$ is typically a normal distribution
 
 In other words, you can view the ELBO (which we want to maximize) as a reconstruction term minus the divergence of $q_{\theta}(\mathbf{z} | \mathbf{x})$ from the prior $p(\mathbf{z})$.
 
+The reconstruction term is intractable to compute directly, but can be approximated by sampling.
+
+CONTINUE FROM AFTER FIGURE 17.8
+
 # Questions
 - What is the final model for $p(\mathbf{x})$?
 - Figure 17.7 caption
