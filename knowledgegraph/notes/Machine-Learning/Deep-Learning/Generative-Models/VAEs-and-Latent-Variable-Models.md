@@ -21,7 +21,7 @@ You can write a mixture of gaussians this way, for instance the latent variable 
 
 We can compute $p(\mathbf{x})$ directly by marginalizing (summing) over $\mathbf{z}$.
 
-## Example 2 - Latent Variable Model
+## Continuous Latent Variable Model
 $p(\mathbf{z})$ could be the standard normal distribution, and $p_{\phi}(\mathbf{x} | \mathbf{z})$ could be approximated by the decoder of a VAE, with mean $\mathbf{f}[\mathbf{z}, \phi]$ and spherical covariance $\sigma^2 \mathbf{I}$.
 
 
@@ -42,7 +42,7 @@ Which is a weighted sum of Gaussians of different means, where the means are the
 You can generate samples by sampling $\mathbf{z} \sim N_{\mathbf{z}}[\mathbf{0}, \mathbf{I}]$ then passing it through the decoder, then sampling from the distribution outputted by the decoder.
 
 
-# Training
+# Derivation
 The goal is to maximize the probability of the observed training data:
 $$
 \sum_{i=1}^N \log \left[ p_{\phi}(\mathbf{x}_i) \right]
@@ -66,9 +66,72 @@ $$
 $$
 This expression is called the evidence lower bound, since $p_{\phi}(\mathbf{x})$ is called the evidence in Bayes' rule.
 
+## ELBO Intuition
+The log-likelihood of the data is a function of the parameters $\phi$.
+
+Similarly, the ELBO is also a function of the parameters $\phi$, for any fixed $\theta$. This function must lie below the log likelihood for all values of $\phi$.
+
+When we change $\theta,$ we modify the ELBO function, which changes the lower bound.
+
+When we change $\phi$, we are moving along the lower bound function.
+
+![ELBO Diagram](ELBO-Diagram.png)
 
 
+## Tightness of Bound
+$$
+\text{ELBO}[\phi, \theta] =  \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+$$
+Factoring out $p(\mathbf{x})$:
+$$
+= \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) p_{\phi}(\mathbf{x})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+$$
+$$
+= \int q_{\theta}(\mathbf{z}) \left( \log\left[p_{\phi}(\mathbf{x}) \right] + \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z})} \right] \right) d\mathbf{z}
+$$
+$$
+= \int q_{\theta}(\mathbf{z})  \log\left[p_{\phi}(\mathbf{x}) \right]d\mathbf{z} + \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+$$
+$$
+= \log\left[p_{\phi}(\mathbf{x}) \right] + \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+$$
+$$
+= \log\left[p_{\phi}(\mathbf{x}) \right] - \int q_{\theta}(\mathbf{z}) \log \left[ \frac{q_{\theta}(\mathbf{z})}{p_{\phi}(\mathbf{z} | \mathbf{x}) } \right] d\mathbf{z}
+$$
+$$
+= \log\left[p_{\phi}(\mathbf{x}) \right] - \mathbb{E}_{\mathbb{z} \sim q_{\theta}(\mathbf{z})} \left[ \log \left[ \frac{q_{\theta}(\mathbf{z})}{p_{\phi}(\mathbf{z} | \mathbf{x}) } \right] \right]
+$$
+$$
+= \log\left[p_{\phi}(\mathbf{x}) \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z}) \parallel p_{\phi}(\mathbf{z} | \mathbf{x}) \right)
+$$
+From this derivation, the ELBO is equal to the original log likelihood minus the KL divergence between $q_{\theta}(\mathbf{z})$ and $p_{\phi}(\mathbf{z} | \mathbf{x})$. 
 
+This is the same as the divergence between the posterior distribution (what latents $\mathbf{z}$ could explain the data $\mathbf{x}$) 
+
+
+## ELBO is recontruction loss plus prior KL
+$$
+\text{ELBO}[\phi, \theta] =  \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+$$
+Factoring out $p(\mathbf{z})$:
+$$
+= \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x} | \mathbf{z}) p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+$$
+$$
+= \int q_{\theta}(\mathbf{z}) \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] d \mathbf{z} + \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+$$
+$$
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right]+ \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[ \log \left[ \frac{p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z} \right]
+$$
+$$
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[ \log \left[ \frac{q_{\theta}(\mathbf{z})}{p_{\phi}(\mathbf{z})} \right] d\mathbf{z} \right]
+$$
+$$
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z}) \parallel p_{\phi}(\mathbf{z}) \right)
+$$
+In other words, you can view the ELBO (which we want to maximize) as a reconstruction term minus the distance between the prior and the posterior
 
 # Questions
-What is the final model for $p(\mathbf{x})$?
+- What is the final model for $p(\mathbf{x})$?
+- Figure 17.7 caption
+- What does the KL divergence mean
