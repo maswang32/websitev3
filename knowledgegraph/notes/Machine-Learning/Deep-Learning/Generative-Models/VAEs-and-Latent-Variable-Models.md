@@ -56,13 +56,13 @@ $$
 \log(p_{\phi}(\mathbf{x})) = \log \left(\int p_{\phi}(\mathbf{x}, \mathbf{z}) d\mathbf{z} \right)
 $$
 
-Let $q_{\theta}(\mathbf{z})$ be a distribution over $\mathbf{z}$.
+Let $q_{\theta}(\mathbf{z} | \mathbf{x})$ be a distribution over $\mathbf{z}$.
 $$
- = \log \left(\int q_{\theta}(\mathbf{z})\frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} d\mathbf{z} \right)
+ = \log \left(\int q_{\theta}(\mathbf{z} | \mathbf{x})\frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} d\mathbf{z} \right)
 $$
 By Jensen's inequality, we get that this is greater than or equal to:
 $$
- \geq \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+ \geq \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 This expression is called the evidence lower bound, since $p_{\phi}(\mathbf{x})$ is called the evidence in Bayes' rule.
 
@@ -80,54 +80,54 @@ When we change $\phi$, we are moving along the lower bound function.
 
 ## Tightness of Bound
 $$
-\text{ELBO}[\phi, \theta] =  \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+\text{ELBO}[\phi, \theta] =  \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 Factoring out $p(\mathbf{x})$:
 $$
-= \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) p_{\phi}(\mathbf{x})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+= \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) p_{\phi}(\mathbf{x})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 $$
-= \int q_{\theta}(\mathbf{z}) \left( \log\left[p_{\phi}(\mathbf{x}) \right] + \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z})} \right] \right) d\mathbf{z}
+= \int q_{\theta}(\mathbf{z} | \mathbf{x}) \left( \log\left[p_{\phi}(\mathbf{x}) \right] + \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] \right) d\mathbf{z}
 $$
 $$
-= \int q_{\theta}(\mathbf{z})  \log\left[p_{\phi}(\mathbf{x}) \right]d\mathbf{z} + \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+= \int q_{\theta}(\mathbf{z} | \mathbf{x})  \log\left[p_{\phi}(\mathbf{x}) \right]d\mathbf{z} + \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 $$
-= \log\left[p_{\phi}(\mathbf{x}) \right] + \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+= \log\left[p_{\phi}(\mathbf{x}) \right] + \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{z} | \mathbf{x}) }{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 $$
-= \log\left[p_{\phi}(\mathbf{x}) \right] - \int q_{\theta}(\mathbf{z}) \log \left[ \frac{q_{\theta}(\mathbf{z})}{p_{\phi}(\mathbf{z} | \mathbf{x}) } \right] d\mathbf{z}
+= \log\left[p_{\phi}(\mathbf{x}) \right] - \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{q_{\theta}(\mathbf{z} | \mathbf{x})}{p_{\phi}(\mathbf{z} | \mathbf{x}) } \right] d\mathbf{z}
 $$
 $$
-= \log\left[p_{\phi}(\mathbf{x}) \right] - \mathbb{E}_{\mathbb{z} \sim q_{\theta}(\mathbf{z})} \left[ \log \left[ \frac{q_{\theta}(\mathbf{z})}{p_{\phi}(\mathbf{z} | \mathbf{x}) } \right] \right]
+= \log\left[p_{\phi}(\mathbf{x}) \right] - \mathbb{E}_{\mathbb{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[ \log \left[ \frac{q_{\theta}(\mathbf{z} | \mathbf{x})}{p_{\phi}(\mathbf{z} | \mathbf{x}) } \right] \right]
 $$
 $$
-= \log\left[p_{\phi}(\mathbf{x}) \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z}) \parallel p_{\phi}(\mathbf{z} | \mathbf{x}) \right)
+= \log\left[p_{\phi}(\mathbf{x}) \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p_{\phi}(\mathbf{z} | \mathbf{x}) \right)
 $$
-From this derivation, the ELBO is equal to the original log likelihood minus the KL divergence between $q_{\theta}(\mathbf{z})$ and $p_{\phi}(\mathbf{z} | \mathbf{x})$. 
+From this derivation, the ELBO is equal to the original log likelihood minus the KL divergence between $q_{\theta}(\mathbf{z} | \mathbf{x})$ and $p_{\phi}(\mathbf{z} | \mathbf{x})$. 
 
 This is the same as the divergence between the posterior distribution (what latents $\mathbf{z}$ could explain the data $\mathbf{x}$) 
 
 
 ## ELBO is recontruction loss plus prior KL
 $$
-\text{ELBO}[\phi, \theta] =  \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+\text{ELBO}[\phi, \theta] =  \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 Factoring out $p(\mathbf{z})$:
 $$
-= \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{x} | \mathbf{z}) p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+= \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{x} | \mathbf{z}) p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 $$
-= \int q_{\theta}(\mathbf{z}) \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] d \mathbf{z} + \int q_{\theta}(\mathbf{z}) \log \left[ \frac{p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z}
+= \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] d \mathbf{z} + \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
 $$
 $$
-= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right]+ \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[ \log \left[ \frac{p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z})} \right] d\mathbf{z} \right]
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right]+ \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[ \log \left[ \frac{p_{\phi}(\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z} \right]
 $$
 $$
-= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[ \log \left[ \frac{q_{\theta}(\mathbf{z})}{p_{\phi}(\mathbf{z})} \right] d\mathbf{z} \right]
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[ \log \left[ \frac{q_{\theta}(\mathbf{z} | \mathbf{x})}{p_{\phi}(\mathbf{z})} \right] d\mathbf{z} \right]
 $$
 $$
-= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z}) \parallel p_{\phi}(\mathbf{z}) \right)
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p_{\phi}(\mathbf{z}) \right)
 $$
 In other words, you can view the ELBO (which we want to maximize) as a reconstruction term minus the distance between the prior and the posterior
 
