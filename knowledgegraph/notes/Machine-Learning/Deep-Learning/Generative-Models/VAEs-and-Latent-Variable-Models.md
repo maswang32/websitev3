@@ -107,7 +107,11 @@ $$
 $$
 From this derivation, the ELBO is equal to the original log likelihood minus the KL divergence between $q_{\theta}(\mathbf{z} | \mathbf{x})$ and $p_{\phi}(\mathbf{z} | \mathbf{x})$. 
 
-This KL is basically the difference between the encoder and decoder distributions. The decoder has some distribution of $\mathbf{z}$ given $\mathbf{x}$, which is intractable to compute. The encoder approximates that as best as it can with $q$.
+This KL is basically the difference between the encoder and decoder distributions.
+
+The decoder (and prior) imply some distribution of $\mathbf{z}$ given $\mathbf{x}$, which is intractable to compute.
+
+The encoder approximates that as best as it can with $q$.
 
 ## ELBO is Reconstruction Loss Minus Prior KL
 $$
