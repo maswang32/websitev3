@@ -107,11 +107,15 @@ $$
 $$
 From this derivation, the ELBO is equal to the original log likelihood minus the KL divergence between $q_{\theta}(\mathbf{z} | \mathbf{x})$ and $p_{\phi}(\mathbf{z} | \mathbf{x})$. 
 
-This KL is basically the difference between the encoder and decoder distributions for $\mathbf{z}$ given $\mathbf{x}$.
+This KL is basically the difference between the encoder and decoder distributions for $\mathbf{z}$ given $\mathbf{x}$, which is called the posterior distribution (it is the distribution of $\mathbf{z}$ after observing $\mathbf{x}$.)
 
-The decoder (and prior) imply some distribution of $\mathbf{z}$ given $\mathbf{x}$, which is intractable to compute.
+The decoder (and prior) imply some distribution of $\mathbf{z}$ given $\mathbf{x}$. However, this is intractable to compute. If we write it using Bayes' rule, we get
+$$
+p_{\phi}(\mathbf{z} | \mathbf{x}) = \frac{p_{\phi}(\mathbf{x} | \mathbf{z}) p(\mathbf{z})}{p_{\phi}(\mathbf{x})}
+$$
+And the evidence term $p_{\phi}(\mathbf{x})$ is not possible to compute, as shown before.
 
-The encoder approximates that as best as it can with $q$.
+Instead, the encoder approximates that as best as it can with $q$, and the tightness of the bound (how close ELBO is to the likelihood) is determined by how well the encoder estimates the true posterior implied by the decoder.
 
 ## ELBO is Reconstruction Loss Minus Prior KL
 $$
