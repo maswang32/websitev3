@@ -117,6 +117,13 @@ And the evidence term $p_{\phi}(\mathbf{x})$ is not possible to compute, as show
 
 Instead, the encoder approximates that as best as it can with $q$, and the tightness of the bound (how close ELBO is to the likelihood) is determined by how well the encoder estimates the true posterior implied by the decoder.
 
+Additionally, we choose a simple parametric form for $q_{\theta}(\mathbf{z} | \mathbf{x})$, which is a Gaussian with mean and covariance given by a neural network $\mathbf{g}$.
+
+We write $q_{\theta}(\mathbf{z} | \mathbf{x}) = N_z ( \mathbf{g}_{\phi}(\mathbf{x})_{\mu}, \mathbf{g}_{\phi}(\mathbf{x})_{\Sigma}$
+
+
+This parametric form will have some error with the posterior implied by the decoder, but it is what we do to make it expressible by a neural network.
+
 ## ELBO is Reconstruction Loss Minus Prior KL
 $$
 \text{ELBO}[\phi, \theta] =  \int q_{\theta}(\mathbf{z} | \mathbf{x}) \log \left[ \frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right] d\mathbf{z}
