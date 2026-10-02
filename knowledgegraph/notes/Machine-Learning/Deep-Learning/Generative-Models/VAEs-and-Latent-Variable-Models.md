@@ -16,8 +16,8 @@ p(\mathbf{x}, \mathbf{z}) = p(\mathbf{x} | \mathbf{z}) p(\mathbf{z})
 $$
 This breakdown lets you model complex distributions. 
 
-## Example 1 - Mixture of Gaussians
-You can write a mixture of gaussians this way, for instance the latent variable $\mathbf{z}$ could be discrete, and tell you which Gaussian you are sampling from, and $p(\mathbf{x} | \mathbf{z})$ would be a different Gaussian based on the value of $\mathbf{z}$.
+## Mixture of Gaussians
+You can write a mixture of Gaussians this way, for instance the latent variable $\mathbf{z}$ could be discrete, and tell you which Gaussian you are sampling from, and $p(\mathbf{x} | \mathbf{z})$ would be a different Gaussian based on the value of $\mathbf{z}$.
 
 We can compute $p(\mathbf{x})$ directly by marginalizing (summing) over $\mathbf{z}$.
 
@@ -48,17 +48,18 @@ $$
 \sum_{i=1}^N \log \left[ p_{\phi}(\mathbf{x}_i) \right]
 $$
 Our expression for $p_{\phi}(\mathbf{x})$ is 
-$$ \int N_{\mathbf{x}}\left[ \mathbf{f}[\mathbf{z}, \phi], \sigma^2 \mathbf{I} \right] \cdot N_{\mathbf{z}} [\mathbf{0}, \mathbf{I}] d\mathbf{z}
+$$
+\int N_{\mathbf{x}}\left[ \mathbf{f}[\mathbf{z}, \phi], \sigma^2 \mathbf{I} \right] \cdot N_{\mathbf{z}} [\mathbf{0}, \mathbf{I}] d\mathbf{z}
 $$
 But computing this integral is intractable. Instead, we will maximize a lower bound on the log-likelihood, called the evidence lower bound or ELBO.
 
 $$
-\log(p_{\phi}(\mathbf{x})) = \log \left(\int p_{\phi}(\mathbf{x}, \mathbf{z}) d\mathbf{z} \right)
+\log \left[ p_{\phi}(\mathbf{x}) \right] = \log \left[\int p_{\phi}(\mathbf{x}, \mathbf{z}) d\mathbf{z} \right]
 $$
 
 Let $q_{\theta}(\mathbf{z} | \mathbf{x})$ be a distribution over $\mathbf{z}$.
 $$
- = \log \left(\int q_{\theta}(\mathbf{z} | \mathbf{x})\frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} d\mathbf{z} \right)
+ = \log \left[\int q_{\theta}(\mathbf{z} | \mathbf{x})\frac{p_{\phi}(\mathbf{x},\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} d\mathbf{z} \right]
 $$
 By Jensen's inequality, we get that this is greater than or equal to:
 $$
@@ -128,7 +129,7 @@ $$
 $$
 = \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p(\mathbf{z}) \right)
 $$
-In other words, you can view the ELBO (which we want to maximize) as a reconstruction term minus the divergence of $q_{\phi}(\mathbf{z} | \mathbf{x})$ from the prior $p(\mathbf{z})$
+In other words, you can view the ELBO (which we want to maximize) as a reconstruction term minus the divergence of $q_{\theta}(\mathbf{z} | \mathbf{x})$ from the prior $p(\mathbf{z})$.
 
 # Questions
 - What is the final model for $p(\mathbf{x})$?
