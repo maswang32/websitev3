@@ -107,7 +107,7 @@ $$
 $$
 From this derivation, the ELBO is equal to the original log likelihood minus the KL divergence between $q_{\theta}(\mathbf{z} | \mathbf{x})$ and $p_{\phi}(\mathbf{z} | \mathbf{x})$. 
 
-This KL is basically the difference between the encoder and decoder distributions.
+This KL is basically the difference between the encoder and decoder distributions for $\mathbf{z}$ given $\mathbf{x}$.
 
 The decoder (and prior) imply some distribution of $\mathbf{z}$ given $\mathbf{x}$, which is intractable to compute.
 
@@ -133,6 +133,8 @@ $$
 $$
 = \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p(\mathbf{z}) \right)
 $$
+Note that in a VAE, the prior $p(\mathbf{z})$ is typically a normal distribution with unit covariance, and has no parameters.
+
 In other words, you can view the ELBO (which we want to maximize) as a reconstruction term minus the divergence of $q_{\theta}(\mathbf{z} | \mathbf{x})$ from the prior $p(\mathbf{z})$.
 
 # Questions
