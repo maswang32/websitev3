@@ -325,9 +325,31 @@ Also note that when we interpolate in the latent space, we use **spherical inter
 ![VAE Interpolation](VAE-Interpolation.png)
 
 ## Disentanglement
-Disentanglement tries
+Disentanglement tries to make latent space dimensions correspond to real-world properties that are independent.
 
+### Regularization
+You can make the loss include regularization terms for the posterior $q_{\theta}(\mathbf{z} | \mathbf{x})$ or the aggregated posterior $q_{\theta}(\mathbf{z})$:
+$$
+L = \text{ELBO}[\theta, \phi] 
++ \lambda_1 \mathbb{E}_{\mathbf{x} \sim p(\mathbf{x})} \left[\text{r}_1\left[ q_{\theta}(\mathbf{z} | \mathbf{x}) \right] \right]
++ \lambda_2 \text{r}_2\left[ q_{\theta}(\mathbf{z}) \right]
+$$
 
+#### Beta-VAE
+For instance, in the **beta-VAE**, we upweight the second term in the ELBO:
 
-# Questions
-- What does the KL divergence mean
+$$
+\text{ELBO}[\theta, \phi] \approx \log \left[p_{\phi}(\mathbf{x | \mathbf{z}^*}) \right] - \beta \cdot D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p(\mathbf{z}) \right)
+$$
+
+The prior is a multivariate normal with spherical covariance, so its dimensions are independent - thus, if we upweight the second term, we are encouraging the dimensions in the encoder's outputs (the approximated posterior distribution) to be less correlated.
+
+#### Total Correlation VAE
+This one 
+- Adds a term to decrease the total correlation between latent space variables
+- Maximizes mutual information between a subset of latent variables and the observed data.
+
+This can be seen in the chairs below, different latent dimensions correspond to different interpretable aspects.
+![Total Correlation VAE](Total-Correlation-VAE.png)
+
+Last Reviewed 10/3/2026
