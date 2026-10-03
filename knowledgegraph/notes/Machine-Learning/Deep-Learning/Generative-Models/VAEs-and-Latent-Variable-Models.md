@@ -247,5 +247,43 @@ We can backpropogate through the mean $\mathbf{\mu}$ and covariance $\mathbf{\Si
 
 This is similar to **straight through** estimation, which is just using the gradient of the sample as the gradient of the mean, but is not exactly the same due to the covariance estimation.
 
+# Applications
+## Approximating Sample Probability
+### Using Monte Carlo
+Recall that
+$$
+p_{\phi}(\mathbf{x})
+= \int p_{\phi}(\mathbf{x} | \mathbf{z}) p(\mathbf{z}) d\mathbf{z}
+= \mathbb{E}_{\mathbf{z} \sim p(\mathbf{z})} \left[ p_{\phi}(\mathbf{x} | \mathbf{z}) \right]
+$$
+In principle, we could try to compute this using Monte Carlo, by sampling random latents from $p(\mathbf{z})$ and computing $p_{\phi}(\mathbf{x} | \mathbf{z})$ using the decoder.
+
+However, the curse of dimensionality means that almost all values we draw for $\mathbf{z}$ will have very low probability for $p_{\phi}(\mathbf{x} | \mathbf{z})$. (Think about it - what is the chance that by randomly sampling $\mathbf{z}$, we get close to the image after decoding?).
+
+### Using Importance Sampling 
+Instead, we can use importance sampling. We can sample from $q_{\theta}(\mathbf{z} | \mathbf{x})$, evaluate the decoder probability, and rescale those probabilities by $\frac{p(\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})}$.
+$$
+p_{\phi}(\mathbf{x})
+= \int p_{\phi}(\mathbf{x} | \mathbf{z}) p(\mathbf{z}) d\mathbf{z}
+$$
+$$
+= \int \frac{p_{\phi}(\mathbf{x} | \mathbf{z}) p(\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} q_{\theta}(\mathbf{z} | \mathbf{x}) d\mathbf{z}
+$$
+$$
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[ \frac{p_{\phi}(\mathbf{x} | \mathbf{z}) p(\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right]
+$$
+$$
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[ p_{\phi}(\mathbf{x} | \mathbf{z})  \frac{p(\mathbf{z})}{q_{\theta}(\mathbf{z} | \mathbf{x})} \right]
+$$
+And we can estimate this expectation using Monte-Carlo.
+
+This is going to be more efficient than sampling the whole space of $\mathbf{z}$, since we are mostly sampling relevant values of $\mathbf{z}$ given by the encoder, which will have higher likelihoods according to the decoder.
+
+In addition, the likelihoods $p_{\phi}(\mathbf{x} | \mathbf{z}) p(\mathbf{z})$ that we are trying to estimate is proportional to the posterior $p_{\phi}(\mathbf{z} | \mathbf{x})$, which the encoder attempts to estimate.
+
+This likelihood estimation can be used
+1. To detect anomalies (low likelihood)
+2. Can be a better estimate of the likelihood than the ELBO, and could be used to evaluate the quality of the model by evaulating the likelihood of test data.
+
 # Questions
 - What does the KL divergence mean
