@@ -145,6 +145,7 @@
 ### Books
 - [ ] Understanding Deep Learning
     - [x] Chapter 8, main text
+    - [x] Chapter 17, main text
 - [ ] 26 essential papers
     - [ ] Ilya's reading list: https://github.com/dzyim/ilya-sutskever-recommended-reading
 - [ ] Paperswithcode most cited
