@@ -285,5 +285,49 @@ This likelihood estimation can be used
 1. To detect anomalies (low likelihood)
 2. Can be a better estimate of the likelihood than the ELBO, and could be used to evaluate the quality of the model by evaulating the likelihood of test data.
 
+## Generation
+Vanilla VAEs usually give low quality.
+
+Usually the examples shown are the mean of the decoder distribution, which are pretty blurry.
+
+If we sample from the decoder distribution, then the images get quite noisy. Usually this sampling is not done because the noise represents parts of the image that aren't modeled.
+
+This is because
+1. Decoder noise is naive spherical Gaussian
+2. Prior is naive Gaussian
+3. Posterior approximation is Gaussian model
+
+### Aggregated Posterior Sampling
+One improvement, instead of sampling from $p(\mathbf{z})$, sample from the aggregated posterior 
+$$
+\frac{1}{N}\sum_{i=1}^N q_{\theta}(\mathbf{z} | \mathbf{x_i})
+$$
+Which is the average posterior over all examples, and is a mixture of Gaussians which represents the latent space better.
+
+### Other Things People Do to Improve Generation
+1. Hierarchical Priors (this includes diffusion models)
+2. Specialized architectures
+3. regularization techniques 
+
+## Resynthesis/Latent Space interpolation
+You can project an image $\mathbf{x}$ into the latent space by using the encoder or by optimizing for the $\mathbf{z}$ that maximizes the posterior probability $p(\mathbf{z} | \mathbf{x})p(\mathbf{z})$.
+
+Once you do this, you can do something like, compute the latent vectors of a bunch of smiling images and a bunch of neutral images.
+
+Then you can compute the difference in means between these two set of latent vectors, to get a vector for "smiling".
+
+Then we can add this vector to images to make them "smile".
+
+This can be done in GANs, but in GANs, there is no encoder, so another procedure must be done to find the latent vector representing the data.
+
+Also note that when we interpolate in the latent space, we use **spherical interpolation** or slerp.
+
+![VAE Interpolation](VAE-Interpolation.png)
+
+## Disentanglement
+Disentanglement tries
+
+
+
 # Questions
 - What does the KL divergence mean
