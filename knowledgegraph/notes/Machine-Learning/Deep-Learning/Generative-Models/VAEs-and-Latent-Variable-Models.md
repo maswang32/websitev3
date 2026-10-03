@@ -39,7 +39,7 @@ $$
 $$q_{\phi}(\mathbf{z} | \mathbf{x}) = N_{\mathbf{z}} ( \mathbf{g}_{\phi}(\mathbf{x})_{\mu}, \mathbf{g}_{\phi}(\mathbf{x})_{\Sigma})$$
 This is another normal distribution whose mean and variance are approximated by a neural network $\mathbf{g}$, called the encoder. 
 
-The data likelihood under the parameters $\phi$ is:
+The likelihood of $\mathbf{x}$ under the parameters $\phi$ is:
 $$
 p_{\phi}(\mathbf{x}) = \int p_{\phi}(\mathbf{x}, \mathbf{z}) d\mathbf{z}
 $$
@@ -186,7 +186,8 @@ $$
 = \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[ \log \left[ \frac{q_{\theta}(\mathbf{z} | \mathbf{x})}{p(\mathbf{z})} \right] \right]
 $$
 $$
-= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p(\mathbf{z}) \right)
+\boxed{
+= \mathbb{E}_{\mathbf{z} \sim q_{\theta}(\mathbf{z} | \mathbf{x})} \left[   \log \left[ p_{\phi}(\mathbf{x} | \mathbf{z} ) \right] \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p(\mathbf{z}) \right)}
 $$
 
 ### Interpretation
@@ -194,6 +195,57 @@ In other words, you can view the ELBO (which we want to maximize) as a reconstru
 
 The reconstruction term is intractable to compute directly, but can be approximated by sampling.
 
+# Training and Optimization
+## Approximating the ELBO objective in closed form
+### Monte Carlo Approximation for the Reconstruction Term
+The boxed equation provides the ELBO for a particular example $\mathbf{x}$.
+The first term in the equation involves an expectation over $\mathbf{z}$, which cannot be computed directly.
+
+However, we can sample from this distribution, since the encoder will give us the distribuiton in a simple form. Thus, we write
+
+$$
+\text{ELBO}[\theta, \phi] \approx \log \left[p_{\phi}(\mathbf{x | \mathbf{z}^*}) \right] - D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p(\mathbf{z}) \right)
+$$
+
+Where $\mathbf{z}^*$ is a sample from $q_{\theta}(\mathbf{z} | \mathbf{x})$.
+
+### Closed form expression for the KL term
+The second term is the KL divergence between the prior and the encoder's provided distribution, both of which are normal distributions. The KL between the standard normal distribution and $N_{\mathbf{z}}(\mathbf{\mu}, \mathbf{\Sigma})$ is
+
+$$
+D_{\text{KL}}\left(q_{\theta}(\mathbf{z} | \mathbf{x}) \parallel p(\mathbf{z}) \right) = \frac{1}{2} \left( \text{Tr}[\mathbf{\Sigma}] + \mathbf{\mu}^T\mathbf{\mu} - d_{\mathbf{z}} - \log\left[\text{det}[\mathbf{\Sigma}] \right] \right)
+$$
+where $d_\mathbf{z}$ is the latent dimension.
+
+## Training Algorithm
+
+### Forward Pass
+For a given $\mathbf{x}$ in our dataset:
+1. Compute the distribution of $q_{\theta}(\mathbf{z} | \mathbf{x})$ using the encoder.
+2. Draw a sample $\mathbf{z^*}$ from this distribution.
+3. Compute the ELBO using the above two formulas.
+
+
+
+### Diagram
+![VAE Diagram](VAE-Diagram.png)
+
+This is
+1. **Variational** since it computes an approximation to the posterior
+2. **Autoencoder** since you have an encoder that compresses the data, and a decoder that decompresses it.
+
+### Backward Pass - Reparametrization Trick
+There is one complication in the backwards pass that autodifferentiation cannot handle. How do we differentiate through the sampling step?
+
+In order do this, we use the **reparametrization trick**. We express the sampling step as 
+$$
+\mathbf{z^*} = \mathbf{\mu} + \Sigma^{1/2} \epsilon^*
+$$
+Then, the sampling step is equivalent to computing the mean and covariance of the distribution using the encoder's neural network, and multiplying the covariance by standard gaussian noise.
+
+We can backpropogate through the mean $\mathbf{\mu}$ and covariance $\mathbf{\Sigma}^{1/2}$. We do not need to backpropogate through $\epsilon^*$ since there are no parameters we need to optimize in that branch (the "stochastic" branch).
+
+This is similar to **straight through** estimation, which is just using the gradient of the sample as the gradient of the mean, but is not exactly the same due to the covariance estimation.
 
 # Questions
 - What does the KL divergence mean
