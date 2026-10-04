@@ -63,12 +63,12 @@ $$
 W_{t} \sim \mathcal{N}(\mathbf{0}, t\mathbf{I})
 $$
 $$
-W_{ct} \sim \mathcal{N}(\mathbf{0}, ct\mathbf{I}) = \sqrt{c} \cdot W_t
+W_{ct} \sim \mathcal{N}(\mathbf{0}, ct\mathbf{I})
 $$
 $$
-W_{ct} = \sqrt{c} W_{t}
+W_{ct} \overset{d}{=} \sqrt{c} W_{t}
 $$
-In other words, if zoom out on a Wiener process in both the time and spatial dimensions, the distribution is identical: when we zoom out by a factor of $c$ on the time axis, we have also increase the magnitudes by a factor of $\sqrt{c}$.
+In other words, if you zoom out on a Wiener process in both the time and spatial dimensions, the distribution is identical when we zoom out by a factor of $c$ on the time axis and $\sqrt{c}$ on the spatial axes.
 
 ### Heat Diffusion
 Heat diffusion through metal is Brownian motion of energy.
