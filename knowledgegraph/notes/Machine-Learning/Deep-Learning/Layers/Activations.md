@@ -9,25 +9,24 @@ $$
 
 # Pocketed Activation
 ## Dead ReLU problem
-The dead ReLU problem occurs when the pre-activation (before the ReLU is applied) gets negative, and far from zero. 
+The dead ReLU problem occurs when the pre-activation (before the ReLU is applied) gets negative, and far from zero.
 
 Gradient does not flow backward through a ReLU that is dead. If no training examples can activate it, it is likely to remain dead, since the weights feeding into that preactivation will not be updated either.
 
 ## Pocketed Activations
 To solve this issue, there are pocketed activations, like GeLU, Swish and Mish.
 
-If the preactivation is very negative, there is still a gradient.
-
 Instead of the preactivation becoming super negative, they typically get stuck in the pocket near zero, which is a local minima.
 
 Enough examples can potentially remove from pocket by pushing the preactivation one way or the other.
 
 ## GeLU
-GeLU is like setting the dropout probabilty to the CDF of the neuron value, and taking the expectation
+GeLU has a relationship to dropout.
+GeLU is like setting the "keep" probabilty ($1 - p_{dropout}$) to the CDF of the neuron value, and taking the expectation
 $$
-\text{GeLU}(\mathbf{x}) = x \Phi(\mathbf{x})
+\text{GeLU}(x) = x \Phi(x)
 $$
-Where $\Phi(\mathbf(x))$ is the standard Gaussian CDF function.
+Where $\Phi(x)$ is the standard Gaussian CDF function.
 
 
 # Observations on Activations
