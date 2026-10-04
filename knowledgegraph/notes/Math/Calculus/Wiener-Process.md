@@ -37,7 +37,7 @@ $$
 2. The change in any time interval is independent from the change at any non-overlapping time interval.
 
 ### Variance
-Since the change in non-overlapping time intervals is independent, and we can think of the position at time $t$ as the sum of tiny, independent, incremental changes in non-overlapping intervals.
+Since the change in non-overlapping time intervals is independent, we can think of the position at time $t$ as the sum of tiny, independent, incremental changes in non-overlapping intervals.
 
 Recall that the variance of the sum of two independent random variables is the sum of the variances.  This means that the variance accumulates linearly over time.
 
@@ -46,7 +46,7 @@ $$
 W_{t} \sim \mathcal{N}(\mathbf{0}, t\mathbf{I})
 $$
 
-Observe that the total distance traveled in $t$ time is about $\sqrt{t}$. If we were traveling in a straight line, we would travel $t$ distance in $t$ time.
+Observe that the displacement in $t$ time is about $\sqrt{t}$. If we were traveling in a straight line, we would displace $t$ distance in $t$ time.
 
 ### Infinitesimal Version
 We can think of the Wiener process like this: At every time step, we take an infinitesimally small step in a random direction proportional to a vector sampled from the standard normal:
