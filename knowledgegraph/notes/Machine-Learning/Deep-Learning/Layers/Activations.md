@@ -3,7 +3,7 @@ $$
 \text{GLU} = (\mathbf{A}\mathbf{x} + \mathbf{b})\odot\sigma(\mathbf{C}\mathbf{x} + \mathbf{d})
 $$
 $$
-\text{SwiGLU} = (\mathbf{A}\mathbf{x} + \mathbf{b})\codot\text{Swish}(\mathbf{C}\mathbf{x} + \mathbf{d})
+\text{SwiGLU} = (\mathbf{A}\mathbf{x} + \mathbf{b})\odot\text{Swish}(\mathbf{C}\mathbf{x} + \mathbf{d})
 $$
 
 
@@ -18,7 +18,7 @@ To solve this issue, there are pocketed activations, like GeLU, Swish and Mish.
 
 Instead of the preactivations becoming super negative, they typically get stuck in the pocket near zero, which is a local minimum of the activation function's output.
 
-Neurons that land in the pocket still receive some gradient. Enough examples can potentially remove from pocket by pushing the preactivation one way or the other.
+Neurons that land in the pocket still receive some gradient. Enough examples can potentially remove them from the pocket by pushing the preactivation one way or the other.
 
 ## GeLU
 GeLU has a relationship to dropout.
