@@ -37,4 +37,7 @@ The result is 1-5 million gaussians per scene.
 ## Rendering
 Rendering avoids computation in empty space, unlike volumetric rendering using NeRFs.
 
+# To do:
+I have read the introduction, keep reading past the intro
+
 Last Reviewed: 10/3/2026
