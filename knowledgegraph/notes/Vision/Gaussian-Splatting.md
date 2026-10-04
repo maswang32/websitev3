@@ -1,10 +1,7 @@
 # Overview 
-Gaussian Splats are a novel 3D representation, where 3D scenes are represented by millions of 3D Gaussians of various shapes and opacities.
-
-
-We can couple this with a real-time differentiable renderer, which allows us to do realtime novel view synthesis as well as speedy optimization.
-
-Then we can reconstruct a scene from sparse views, and do real-time novel view synthesis on it.
+1. Gaussian Splats are a novel 3D representation, where 3D scenes are represented by millions of 3D Gaussians of various shapes and opacities.
+2. We can couple this with a real-time differentiable renderer, which allows us to do realtime novel view synthesis as well as speedy optimization to fit a scene
+3. Gaussian Splats combine the best of both worlds: the continuous nature of NeRFs, as well as the speedy rendering/rasterization of meshes.
 
 
 # Benefits of Gaussian Splatting

@@ -1,4 +1,8 @@
 # Dump
+- [ ] Gaussian splatting - past the intro
+- [ ] Pixel UMM
+    - [ ] https://x.com/CongWei1230/status/2105808995910816159
+- [ ] latest video generation model, HMMPixelVideoGen
 - [ ] imagination models: https://x.com/induction_labs/status/2080322704973160760?s=46
 - [ ] surya ganguli: https://x.com/suryaganguli/status/2080785091685748808?s=46
 - [ ] dual form of NN: https://x.com/osieberling/status/2091278962001391974?s=46
@@ -206,6 +210,7 @@
 - [ ] Steve jobs: https://x.com/kelechisp/status/2093035153983504429?s=46
 - [ ] How to win without being the best: https://x.com/Daywrotethis/status/2093191889944232234?s=46
 - [ ] Learning Faster: https://x.com/0xHvdes/status/2094075106096009695?s=46
+- [ ] Getting rich is a skill issue: https://x.com/devoncnp/status/2105345806870126935?s=46
 - [ ] Doing better work: https://x.com/MaxTorchbearer/status/2093863687119352251?s=46
 
 ##### AI - Specific
