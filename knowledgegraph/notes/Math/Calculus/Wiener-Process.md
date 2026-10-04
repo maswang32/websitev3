@@ -30,15 +30,24 @@ And, for any $t_2 > t_1$:
 $$
 W_{t_2} - W_{t_1} \sim \mathcal{N}(\mathbf{0}, (t_2 - t_1)\mathbf{I})
 $$
-Recall that the variance of the sum of two independent random variables is the sum of the variances. Since the direction you go at any time interval is independent from the direction you go at any non-overlapping time interval, the variance accumulates linearly over time. We have:
+
+### Independence
+1. $W_{t_2} - W_{t_1}$ is independent from $W_{s}$, $s < t_1$.
+2. The change in any time interval is independent from the change at any non-overlapping time interval.
+
+### Variance
+Recall that the variance of the sum of two independent random variables is the sum of the variances. Since the change in non-overlapping time intervals is independent, and we can think of the position at time $t$ as the sum of tiny, incremental changes in non-overlapping intervals, the variance accumulates over time.
+
+### Marginalization
 $$
 W_{t} \sim \mathcal{N}(\mathbf{0}, t\mathbf{I})
 $$
 
-In other words, at every time step, we take an infinitesimally small step in a random direction proportional to a vector sampled from the standard normal:
-
+### Infinitesimal Version
+We can think of the Wiener process like this: At every time step, we take an infinitesimally small step in a random direction proportional to a vector sampled from the standard normal:
 $$
 dW \sim \mathcal{N}(\mathbf{0}, \mathbf{I} dt)
 $$
 
 Last Reviewed: 10/3/2026
+ 
