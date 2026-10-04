@@ -1,9 +1,9 @@
 # Gated Activations
 $$
-\text{GLU} = (\mathbf{A}\mathbf{x} + \mathbf{b})\cdot\sigma(\mathbf{C}\mathbf{x} + \mathbf{D})
+\text{GLU} = (\mathbf{A}\mathbf{x} + \mathbf{b})\odot\sigma(\mathbf{C}\mathbf{x} + \mathbf{d})
 $$
 $$
-\text{SwiGLU} = (Ax + b)*\text{Swish}(Cx + D)
+\text{SwiGLU} = (\mathbf{A}\mathbf{x} + \mathbf{b})*\text{Swish}(\mathbf{C}\mathbf{x} + \mathbf{d})
 $$
 
 
@@ -16,9 +16,9 @@ Gradient does not flow backward through a ReLU that is dead. If no training exam
 ## Pocketed Activations
 To solve this issue, there are pocketed activations, like GeLU, Swish and Mish.
 
-Instead of the preactivation becoming super negative, they typically get stuck in the pocket near zero, which is a local minima.
+Instead of the preactivation becoming super negative, they typically get stuck in the pocket near zero, which is a local minimum of the activation function's output.
 
-Enough examples can potentially remove from pocket by pushing the preactivation one way or the other.
+Neurons that land in the pocket still receieve some gradient. Enough examples can potentially remove from pocket by pushing the preactivation one way or the other.
 
 ## GeLU
 GeLU has a relationship to dropout.
@@ -36,4 +36,4 @@ The ReLU squared activation also does this
 
 The Snake activation also does this - it has a $x^2$ term in its expansion
 
-Last Reviewed: 1/17/25
+Last Reviewed: 10/4/2026
