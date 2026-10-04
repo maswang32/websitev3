@@ -32,11 +32,13 @@ W_{t_2} - W_{t_1} \sim \mathcal{N}(\mathbf{0}, (t_2 - t_1)\mathbf{I})
 $$
 
 ### Independence
-1. $W_{t_2} - W_{t_1}$ is independent from $W_{s}$, $s < t_1$.
+1. $W_{t_2} - W_{t_1}$ is independent from $W_{s}$, $s < t_1 < t_2$.
 2. The change in any time interval is independent from the change at any non-overlapping time interval.
 
 ### Variance
-Recall that the variance of the sum of two independent random variables is the sum of the variances. Since the change in non-overlapping time intervals is independent, and we can think of the position at time $t$ as the sum of tiny, incremental changes in non-overlapping intervals, the variance accumulates over time.
+Since the change in non-overlapping time intervals is independent, and we can think of the position at time $t$ as the sum of tiny, independent, incremental changes in non-overlapping intervals.
+
+Recall that the variance of the sum of two independent random variables is the sum of the variances.  This means that the variance accumulates linearly over time.
 
 ### Marginalization
 $$
