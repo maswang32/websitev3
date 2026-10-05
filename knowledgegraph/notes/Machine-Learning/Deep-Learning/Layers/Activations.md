@@ -22,15 +22,15 @@ To solve this issue, there are pocketed activations, like GeLU, Swish and Mish.
 
 These pocketed activations have a global minimum near zero. 
 
-Focusing on a specific example during the backward pass. 
+Focusing on a specific example during the backward pass: 
 
 If the upstream gradient says the post-activation value needs to decrease:
-1. In a ReLU, the gradient on the pre-activation will push to to become negative.
+1. In a ReLU, the gradient on the pre-activation will push to become negative.
 2. In a pocketed activation, the gradient on the pre-activation will push it **closer** to the global minimum, regardless of where the pre-activation is right now.
 
 Thus, instead of the preactivations becoming super negative, they typically get stuck in the pocket near zero. 
 
-Enough examples can potentially remove them from the pocket. Suppose we have a batch of examples and the upstream gradient says the post-activation value needs to increase. For some examples (those to the right of the global minimum), this means increasing the preactivation value, and for others (those to the left of the global minimum), this means decreasing the preactivation value. Usually the slope on the right side of the pocket is higher, so ot's possible these effects can push the preactivation out of the pocket. 
+Enough examples can potentially remove them from the pocket. Suppose we have a batch of examples and the upstream gradient says the post-activation value needs to increase. For some examples (those to the right of the global minimum), this means increasing the preactivation value, and for others (those to the left of the global minimum), this means decreasing the preactivation value. Usually the slope on the right side of the pocket is higher, so it's possible these effects can push the preactivation out of the pocket. 
 
 ## GeLU
 GeLU has a relationship to dropout.
