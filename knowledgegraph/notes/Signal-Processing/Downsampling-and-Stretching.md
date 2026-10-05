@@ -17,6 +17,8 @@ $$
 
 You can also remember it from the perspective of discrete frequency. Remember that the number of DFT points is equal to the number of data points in the time domain. This means downsampling by a factor of N decreases the number of DFT points by the same factor. To account for this decrease, you can think of the DFT spectrum as folded in on itself or overlapping. This is called **aliasing**.
 
+For instance, downsampling by a factor of 2 is like slicing the spectrum in half, then overlaying the halves.
+
 # Stretching
 ## Time Domain
 Stretching by a factor of $L$ inserts $L-1$ zeros between each datapoint.
@@ -27,7 +29,8 @@ $$
 
 ## DFT Domain
 - Stretching replicates the FFT spectrum over and over again, $L$ times.
-- If we look at just the positive frequencies (in the non-normalized spectrum), it looks like stretching essentially takes the spectrum and mirrors it across the old Nyquist frequency.
+- Stretching doubles the length of the signal, and thus the length of the DFT. To account for this, we replicate the spectrum over and over again.
+- If we look at just the positive frequencies (in the non-normalized spectrum), it looks like stretching by a factor of 2 essentially takes the spectrum and mirrors it across the old Nyquist frequency. If we stretch by a factor of 3, it is like appending the forward spectrum again.
 
 $$
 \text{DTFT}_{\omega}[\text{Stretch}_L(x)] = \sum_{n=-\infty}^{\infty} \text{Stretch}_{L,n}(x)e^{-j\omega n}
