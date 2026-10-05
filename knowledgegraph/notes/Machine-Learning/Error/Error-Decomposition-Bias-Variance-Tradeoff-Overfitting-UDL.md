@@ -17,6 +17,8 @@ From a probabilitistic perspective, the best thing that the model can do is pred
 ## Bias
 **Model is not flexible enough**
 - The model may be restricted and cannot fit the true function - e.g., MLP fitting a piecewise linear function to a sinusoid.
+- Even if there is no noise and the training data converges to the training distribution, they model may not be flexible enough.
+- We can increase the model parameters to reduce bias, but this can increase variance.
 
 ## Variance
 **Training Data is not enough**
@@ -24,6 +26,14 @@ The training data is a *sample* from the true training distribution - resulting 
 
 - Improved by adding more data.
 - variance also exists in the optimization process.
+
+## Note on Bias and Variance
+Bias and Variance are "how the model fills in the blanks" for limited training data.
+
+- You cannot eliminate noise.
+- You can reduce bias arbitrarily by choosing larger and more complex models. But there will still be variance and noise.
+- You can remove variance with unlimited training data. But there will still be bias and noise.
+
 
 
 ## Mathematical Noise-Bias-Variance Decomposition (MSE Loss)
