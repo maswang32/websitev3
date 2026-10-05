@@ -27,13 +27,19 @@ The training data is a *sample* from the true training distribution - resulting 
 - Improved by adding more data.
 - variance also exists in the optimization process.
 
-## Note on Bias and Variance
+## More notes on Bias, Variance, and Noise
 Bias and Variance are "how the model fills in the blanks" for limited training data.
 
 - You cannot eliminate noise.
 - You can reduce bias arbitrarily by choosing larger and more complex models. But there will still be variance and noise.
 - You can remove variance with unlimited training data. But there will still be bias and noise.
 
+### A Simple Formula:
+test error = train error + (test error - train error)
+
+train error = bias
+
+(test error - train error) = variance
 
 
 ## Mathematical Noise-Bias-Variance Decomposition (MSE Loss)
