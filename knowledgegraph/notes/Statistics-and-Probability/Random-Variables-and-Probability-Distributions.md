@@ -55,7 +55,7 @@ y = 2z
 $$
 Means 'take the value that $z$ takes, and multiply it by $2$ to get $y$.
 
-### Sample spaces in machine learning
+### Sample Spaces in Machine Learning
 The sample space is not usually referenced in machine learning. For instance, we might have a latent variable $\mathbf{Z}$ in a latent variable model. If $\mathbf{z} = \mathbf{Z}(\mathbf{w}) \in \mathbb{R}^d$, the sample space $\Omega$ is $\mathbb{R}^d$, and we think of $\mathbf{Z} : \Omega \rightarrow \mathbb{R}^d$ as $\mathbf{Z}(\omega) = \omega$.
 
 

@@ -19,11 +19,14 @@ On the right hand side:
 
 On the left hand side, $P(\text{Hypothesis} | \text{Data})$ is called the **posterior**, or the probability of the hypothesis after observing the data.
 
+Thus, the posterior likelihood of the hypothesis is equal to the prior likelihood of the hypothesis, times the likelihood of the data under the hypothesis divided by the likelihood of the data.
+
+In one sentence, Posterior = Likelihood times Prior, divided by Evidence.
 
 ## Analysis
 - If the **prior** belief in the hypothesis is high, then the **posterior** is higher.
 - If the **likelihood** (probability of the data given the hypothesis) is high, then our **posterior** (updated belief in our hypothesis) is high
-- If the probability of the **data** we observed is low, then the **posterior** is higher
+- If the probability of the **data** we observed is low (the data is extraordinary!), then the **posterior** is higher.
 
 
 # Disease Question
@@ -82,6 +85,18 @@ $$
 The term on the left is the "posterior odds". The term in the middle called "prior odds". The term on the right is the "likelihood ratio".
 
 You can take your prior odds and multiply by the likelihood ratio to get the posterior, or take the log of all three terms, which makes the likelihood ratio additive.
+
+
+# Notes
+In some cases, you can ignore the denominator by ensuring that the numerator sums to one.
+
+For instance, for a fixed $\matbhf{x}*$,
+$$
+p(\mathbf{z} | \mathbf{x}*)  = (p(\mathbf{x}* | \mathbf{z}) p(\mathbf{z})) / p(\mathbf{x}*)
+$$
+But we can ignore $p(\mathbf{x}*)$ since we are interested in a distribution with respect to $\mathbf{z}.$
+
+To get this distribution, we can evaluate $p(\mathbf{x*} | \mathbf{z}) p(\mathbf{z})$ at all $\mathbf{z}$ and ensure it integrates to 1, by rescaling it by a factor of C, ignoring the need for $p(\mathbf{x}*)$ term (which is 1/C).
 
 # Questions
 Why is it called the evidence?

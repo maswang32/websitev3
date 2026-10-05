@@ -38,4 +38,6 @@ In other words, the taking a linear combination on the input side is greater tha
 
 When we compute expectations, we are essentially taking linear combinations.
 
+Thus, $\log[E[X]] \geq E[\log[X]]$
+
 Last Reviewed: 08/17/26
