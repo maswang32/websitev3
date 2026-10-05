@@ -30,9 +30,7 @@ If the upstream gradient says the post-activation value needs to decrease:
 
 Thus, instead of the preactivations becoming super negative, they typically get stuck in the pocket near zero. 
 
-Enough examples can potentially remove them from the pocket. Suppose we have a batch of examples and the upstream gradient says the post-activation value needs to increase. For some examples (those to the right of the global minimum), this means increasing the preactivation value, and for others (those to the left of the global minimum), this means decreasing the preactivation value.
-
-It's possible these effects can push the preactivation out of the pocket. 
+Enough examples can potentially remove them from the pocket. Suppose we have a batch of examples and the upstream gradient says the post-activation value needs to increase. For some examples (those to the right of the global minimum), this means increasing the preactivation value, and for others (those to the left of the global minimum), this means decreasing the preactivation value. Usually the slope on the right side of the pocket is higher, so ot's possible these effects can push the preactivation out of the pocket. 
 
 ## GeLU
 GeLU has a relationship to dropout.
