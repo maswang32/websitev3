@@ -1,4 +1,6 @@
 # Dump
+- [ ] why does gradient descent work https://x.com/0xeronn/status/2106531272981930287/video/1?s=46
+- [ ] Looped DiT https://x.com/askalphaxiv/status/2106284078077202738?s=46
 - [ ] Gaussian splatting - past the intro
 - [ ] Pixel UMM
     - [ ] https://x.com/CongWei1230/status/2105808995910816159
