@@ -1,3 +1,13 @@
+Classical theory suggests that with more parameters, we will overfit more.
+
+That is only the case on smaller models on smaller data regimes. 
+
+With larger models on larger data regimes, generalization actually improves with more parameters
+
+With sufficient data, you can't actually really overparametrize
+
+
+
 # Definition
 
 **Double Descent** is the phenonmenon where, as we increase the number of parameters in a neural network, test loss will decrease at first (classical/underparametrized regime), then increase as we overfit to the training set and the number of parameters reaches the number of training points (critical regime), then decrease once more as we add more parameters (modern regime).
@@ -51,6 +61,6 @@ Below, we have sparse datapoints and plot the smoothest possible fit for a 2-lay
 # Other Notes
 - With sufficient data, you can't actually overparametrize
 - With smaller datasets on smaller data regimes, you can overparametrize.
-- Fitting a curve with 1000 polynomials somehow works better than fitting it with 20
+- Fitting a curve with 1000 polynomials somehow works better than fitting it with 20 - there is a greater bias toward smoothness.
 
 Last Reviewed: 8/12/2026
