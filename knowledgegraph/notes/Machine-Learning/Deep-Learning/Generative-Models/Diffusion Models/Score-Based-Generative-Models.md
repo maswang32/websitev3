@@ -67,7 +67,7 @@ $$
 E_{\mathbf{x} \sim p(\mathbf{x})}\left[ \lVert \nabla_\mathbf{x} \log(p_\theta(\mathbf{x})) - s_\theta (\mathbf{x}) \rVert^2 _2 \right]
 $$
 
-How do we know the ground truth score function? There is a technique called **score matching**, which will be covered later.
+How do we know the ground truth score function? We do not, and in fact, the target we fit our score function to is a conditional score function that is easy to compute. There is a technique called **score matching**, which will be covered later.
 
 # Generating Samples from a Score Function using Langevin Sampling
 Langevin sampling allows you to sample from a distribution given its score function. First, we draw from an arbitrary distribution:
@@ -121,11 +121,11 @@ This complicates Langevin sampling, since $\mathbf{x}_0$ (the first sampling ste
 ### 1. Adding two random variables
 1. Recall from [Brad Osgood's course](https://see.stanford.edu/course/ee261) that adding two random variables $Z = X + Y$ results in a distribution that is a *convolution* of the distributions of $X$ and $Y$.
 
-2. By adding noise to our data, we are essentially *smoothing* the data distribution with a *gaussian kernel*.
+2. By adding noise to our data, we are essentially *smoothing* the data distribution with a *gaussian kernel*, thus giving it a gradient that can be climbed using Langevin sampling (noisy gradient ascent).
 
 3. This smoothing can be thought of as *increasing the support* of the distribution. Think about it - if we add lots of noise, almost anything can arise with some probability.
 
-4. In addition, we can represent our data distribution as a set of discrete samples, or impulse functions at each datapoint. The sifting theorem means that the noisy data distribution can be represented as a **mixture of Gaussians**.
+4. In addition, we can represent our training data as a set of discrete samples, or impulse functions at each datapoint. The sifting theorem means that the noisy data distribution can be represented as a **mixture of Gaussians**.
 
 ### 2. Score function of a Gaussian
 
@@ -154,7 +154,7 @@ $$
 That means that the score function is proportional to the opposite of the noise added!
 
 ### 3. Score function of Mixture of Gaussians
-1. The score function of a *mixture of gaussians* is approximately piecewise linear. It would be exactly piecewise linear if our smoothed distribution was piece-wise Gaussian. However, in a mixture of Gaussians, there is some spillover from other Gaussians everywhere.
+1. The score function of a *mixture of gaussians* is approximately piecewise linear. It would be exactly piecewise linear if our smoothed distribution was piecewise Gaussian. However, in a mixture of Gaussians, there is some spillover from other Gaussians everywhere.
 
 2. Since ReLU neural networks output piecewise linear functions, they are great for modeling score functions. (This was from Mert's class)
 
@@ -204,7 +204,7 @@ q(\mathbf{z}) = N_\mathbf{z}(0,  \sigma_i^2 \mathbf{I})
 $$
 This can be interpreted as the following: to evaluate the probability density at $\mathbf{x}$, consider a vector $\mathbf{y}$ from the data distribution, and evaluate 
 1. The probability of sampling $\mathbf{y}$, and
-1. The probability of sampling the noise $\mathbf{x} - \mathbf{y}$ that would be needed to result in drawing the sample $\mathbf{x}$.
+2. The probability of sampling the noise $\mathbf{x} - \mathbf{y}$ that would be needed to result in drawing the sample $\mathbf{x}$.
 
 Multiply these probabilties and add them up (integrate) over all values of $\mathbf{y}$.
 
@@ -261,13 +261,15 @@ $$
 \sum_{i=1}^L \lambda(i) \mathbb{E}_{\mathbf{x} \sim p_{\sigma_i}(\mathbf{x})}[\lVert \nabla_\mathbf{x} \log(p_{\sigma_i}(\mathbf{x})) - s_\theta (\mathbf{x}, i) \rVert^2 _2]
 $$
 
-Usually, the loss weighting is $\lambda(i) = \sigma_i^2$. This would mean higher noise levels have a greater loss.
+The ground truth score estimates are usually estimated as $\frac{-\mathbf{z}}{\sigma}$. This means that lower noise levels have large score function targets (which makes sense, since lower noise levels indicate sharper gaussians, which have a sharper slope and lower values).
 
-The ground truth score estimates are usually estimated as $\frac{-\mathbf{z}}{\sigma}$. This is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target. This is a common theme in all diffusion models.
+Usually, the loss weighting is $\lambda(i) = \sigma_i^2$. This would mean that the loss scaling for each noise level cancels out with the scale of the score estimate targets.
+
+Also, as we noted before, $\frac{-\mathbf{z}}{\sigma}$ is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target, which is easy to compute. Since $s_{\theta}$ does not know $\mathbf{y}$, it will marginalize over that variable, and approximate $\nabla_\mathbf{x} \log(p_{\sigma_i}(\mathbf{x}))$. This is a common theme in all diffusion models.
 
 
 ## Sampling
-We can run Langevin dynamics in sequence for each noise level. This means runnning Langevin chains for all noise levels.
+We can run Langevin dynamics in sequence for each noise level. This means running Langevin chains for all noise levels.
 
 
 ### Recommendations
