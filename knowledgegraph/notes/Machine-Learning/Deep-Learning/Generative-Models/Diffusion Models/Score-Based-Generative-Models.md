@@ -79,7 +79,7 @@ $$
 Then we iteratively perform "noisy gradient ascent":
 
 $$
-\mathbf{x}_{i+1} = \mathbf{x}_{i} + \mathbf{\epsilon} \nabla_\mathbf{x} \log (p(\mathbf{x})) + \sqrt{2 \mathbf{\epsilon}} \mathbf{z}_i, \quad i = 0, \ldots, K
+\mathbf{x}_{i+1} = \mathbf{x}_{i} + \epsilon \nabla_\mathbf{x} \log (p(\mathbf{x})) + \sqrt{2 \epsilon} \mathbf{z}_i, \quad i = 0, \ldots, K
 $$
 
 Where $\mathbf{z}_i \sim \mathcal{N}(0, \mathbf{I})$.
@@ -135,18 +135,18 @@ $$
 \nabla \log \left[\exp\frac{-(x-\mu)^2 }{\sigma^2} \right] = \frac{-2(x - \mu)}{\sigma^2}
 $$
 
-2. In fact, if we consider the Gaussian distribution as originating from a data point at $\mu$ with added noise $\mathbf{\epsilon} \sim \mathcal{N}(0,\sigma^2)$, then we have that a sample $\mathbf{x}$ from the Gaussian is:
+2. In fact, if we consider the Gaussian distribution as originating from a data point at $\mu$ with added noise $\mathbf{n} \sim \mathcal{N}(0,\sigma^2)$, then we have that a sample $\mathbf{x}$ from the Gaussian is:
 
 $$
-x = \mu + \sigma \mathbf{\epsilon}
+x = \mu + \sigma \mathbf{n}
 $$
 
 And the score function is 
 
 $$
 \frac{-2(x - \mu)}{\sigma^2}
- = \frac{-2(\mu + \sigma \mathbf{\epsilon} - \mu)}{\sigma^2}
- = \frac{-2\mathbf{\epsilon} }{\sigma}
+ = \frac{-2(\mu + \sigma \mathbf{n} - \mu)}{\sigma^2}
+ = \frac{-2\mathbf{n} }{\sigma}
 $$
 
 That means that the score function is proportional to the opposite of the noise added!
@@ -245,7 +245,7 @@ Which is saying, given an $\mathbf{x}$, draw a sample $\mathbf{n}$ (noise) from 
 
 # Training and Sampling
 ## Training
-Drawing samples from $p_{\sigma_i}(\mathbf{x})$ is easy, we can just draw a sample $\mathbf{y} \sim p(\mathbf{y})$ from our dataset and add noise to get $\mathbf{y} + \sigma_i \mathbf{\epsilon}$.
+Drawing samples from $p_{\sigma_i}(\mathbf{x})$ is easy, we can just draw a sample $\mathbf{y} \sim p(\mathbf{y})$ from our dataset and add noise to get $\mathbf{y} + \sigma_i \mathbf{z}$.
 
 We can fit a neural network to the score function of each noisy distribution:
 
@@ -261,7 +261,7 @@ $$
 
 Usually, the loss weighting is $\lambda(i) = \sigma_i^2$. This would mean higher noise levels have a greater loss.
 
-The ground truth score estimates are usually estimated as $\frac{-\mathbf{\epsilon}}{\sigma}$. This is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target. This is a common theme in all diffusion models.
+The ground truth score estimates are usually estimated as $\frac{-\mathbf{n}}{\sigma}$. This is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target. This is a common theme in all diffusion models.
 
 
 ## Sampling
