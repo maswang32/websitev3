@@ -19,11 +19,11 @@ We can imagine applying this diffusion process to our data. As $t$ changes, the 
 
 In addition, we can let $\mathbf{X}_t$ be a random variable representing the value of a datapoint at diffusion time $t$, and use $\mathbf{x}_t$ to represent a realization of $\mathbf{X}_t$.
 
-We choose our diffusion process so that $p_T$ does not depend on $p_0$.
+We choose our diffusion process so that $p_T$ does not depend on $p_0$. Typically this is something like pure Gaussian noise.
 
 ### Additional Thoughts
-- In DDPMs, the *drift coefficient* $\mathbf{f}(\mathbf{x}, t)$ would be analogous to $\sqrt{1-\beta_t}$ when defining the forward process. It is kind of like the derivative of the coefficient on $\mathbf{x}_0$.
-- in DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the derivative of $\sigma_i$ or the derivative of the coefficent on the noise term in DDPMs. It represents the variance of the noise added at each step.
+- In DDPMs, the *drift coefficient* $\mathbf{f}(\mathbf{x}, t)$ would be analogous to $\sqrt{1-\beta_t}$ when defining the forward process. It is kind of like the time-derivative of the coefficient on $\mathbf{x}_0$.
+- in DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the time-derivative of $\sigma_i$ or the time-derivative of the coefficent on the noise term in DDPMs. It represents the variance of the noise added at each step.
 
 
 ## Choices of $\mathbf{f}(\mathbf{x},t), g(t)$
@@ -65,7 +65,7 @@ This should be a continuous weighted sum of:
 
 $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
-\mathbb{E}_{p_t(\mathbf{x})}
+\mathbb{E}_{\mathbf{x} \sim p_t(\mathbf{x})}
 \left[
 \lambda(t)
 \lVert
@@ -88,13 +88,14 @@ To implement this weighting, we also rescale the outputs of the network, so its 
 
 In addition, we use the exponential moving average of the weights during sampling.
 
+We can use denoising score matching to optimize this objective.
+
 ### Additional Thoughts:
 - The expectation here is proportional to the expected amount of noise added. 
 
 - Note that in DDPM, the network is always predicting samples from $\mathcal{N}(0, I)$ no matter the timestep, which is similar to rescaling the outputs of the network in DDIM.
 
 
-We can use denoising score matching to optimize this objective.
 
 ## Actual Optimization
 We have
