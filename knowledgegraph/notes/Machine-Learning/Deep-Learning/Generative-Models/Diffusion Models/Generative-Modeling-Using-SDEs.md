@@ -74,7 +74,7 @@ $$
 \right]
 $$
 
-Where $\lambda(t)$ is a weighting function. We would like to balance the losses across time, so we choose
+Where $\lambda(t)$ is a weighting function. We would like to balance the losses across different values of $t$. One way to do this is to adjust by the magnitude of the target we are fitting to, which in practice is the score estimate conditioned on $\mathbf{x}_0$, or $\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t | \mathbf{x}_0)$. Thus, we select:
 
 $$
 \lambda(t) \propto 1/
@@ -83,6 +83,7 @@ $$
 \nabla_{\mathbf{x}_t}
 \log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0) \rVert^2_2
 $$
+Often, these weights are proportional to $\frac{1}{\sigma^2}$, just like they were in NCSNs.
 
 To implement this weighting, we also rescale the outputs of the network, so its outputs are on the same scale across time-steps.
 
