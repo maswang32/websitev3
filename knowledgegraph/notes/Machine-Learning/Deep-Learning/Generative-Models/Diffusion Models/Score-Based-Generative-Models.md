@@ -26,8 +26,9 @@ If we do not require $p_\theta(\mathbf{x})$ to be a valid probabilty density fun
 The score function is the gradient of the log of the probability density function, or
 
 $$
-s_\theta (\mathbf{x}) \triangleq \nabla_\mathbf{x} \log(p(\mathbf{x}))
+s(\mathbf{x}) \triangleq \nabla_\mathbf{x} \log(p(\mathbf{x}))
 $$
+We can model this with a neural network $s_\theta$.
 
 ![Score function of a mixture of 2 Gaussians](MOG_Score.png)
 
@@ -64,7 +65,7 @@ The normalizing constant imposes restrictive architectural choices (like inverti
 We can attempt to fit the score function by minimizing 
 
 $$
-E_{\mathbf{x} \sim p(\mathbf{x})}\left[ \lVert \nabla_\mathbf{x} \log(p_\theta(\mathbf{x})) - s_\theta (\mathbf{x}) \rVert^2 _2 \right]
+E_{\mathbf{x} \sim p(\mathbf{x})}\left[ \lVert \nabla_\mathbf{x} \log(p(\mathbf{x})) - s_\theta (\mathbf{x}) \rVert^2 _2 \right]
 $$
 
 How do we know the ground truth score function? We do not, and in fact, the target we fit our score function to is a conditional score function that is easy to compute. There is a technique called **score matching**, which will be covered later.
@@ -79,7 +80,7 @@ $$
 Then we iteratively perform "noisy gradient ascent":
 
 $$
-\mathbf{x}_{i+1} = \mathbf{x}_{i} + \epsilon \nabla_\mathbf{x} \log (p(\mathbf{x})) + \sqrt{2 \epsilon} \mathbf{z}_i, \quad i = 0, \ldots, K
+\mathbf{x}_{i+1} = \mathbf{x}_{i} + \epsilon \nabla_\mathbf{x} \log (p(\mathbf{x}_i)) + \sqrt{2 \epsilon} \mathbf{z}_i, \quad i = 0, \ldots, K
 $$
 
 Where $\mathbf{z}_i \sim \mathcal{N}(0, \mathbf{I})$.
@@ -105,8 +106,8 @@ Modeling the score function naively is difficult, because our estimates of the s
 Note that
 
 $$
-\mathbb{E}_{\mathbf{x} \sim p(\mathbf{x})}\left[ \lVert \nabla_\mathbf{x} \log(p_\theta(\mathbf{x})) - s_\theta (\mathbf{x}) \rVert^2 _2 \right] =
-\int p(\mathbf{x}) \lVert \nabla_\mathbf{x} \log(p_\theta(\mathbf{x})) - s_\theta (\mathbf{x}) \rVert^2 _2  d \mathbf{x}
+\mathbb{E}_{\mathbf{x} \sim p(\mathbf{x})}\left[ \lVert \nabla_\mathbf{x} \log(p(\mathbf{x})) - s_\theta (\mathbf{x}) \rVert^2 _2 \right] =
+\int p(\mathbf{x}) \lVert \nabla_\mathbf{x} \log(p(\mathbf{x})) - s_\theta (\mathbf{x}) \rVert^2 _2  d \mathbf{x}
 $$
 
 So the distance between the score and our estimate are downweighted in regions where $p(\mathbf{x})$ is small (low density regions).
@@ -132,7 +133,7 @@ This complicates Langevin sampling, since $\mathbf{x}_0$ (the first sampling ste
 1. Note that the score function of a Gaussian is linear:
 
 $$
-\nabla \log \left[\exp\frac{-(x-\mu)^2 }{\sigma^2} \right] = \frac{-2(x - \mu)}{\sigma^2}
+\nabla \log \left[\exp\frac{-(x-\mu)^2 }{2\sigma^2} \right] = \frac{-(x - \mu)}{\sigma^2}
 $$
 
 2. In fact, if we consider the Gaussian distribution as originating from a data point at $\mu$ with added noise $\mathbf{n} \sim \mathcal{N}(0,\sigma^2)$, then we have that a sample $\mathbf{x}$ from the Gaussian is:
@@ -146,9 +147,9 @@ Where $\mathbf{z} \sim \mathcal{N}(0,\mathbf{I})$.
 And the score function is 
 
 $$
-\frac{-2(x - \mu)}{\sigma^2}
- = \frac{-2(\mu + \sigma \mathbf{z} - \mu)}{\sigma^2}
- = \frac{-2\mathbf{z} }{\sigma}
+\frac{-(x - \mu)}{\sigma^2}
+ = \frac{-(\mu + \sigma \mathbf{z} - \mu)}{\sigma^2}
+ = \frac{-\mathbf{z} }{\sigma}
 $$
 
 That means that the score function is proportional to the opposite of the noise added!
