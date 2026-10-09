@@ -138,15 +138,17 @@ $$
 2. In fact, if we consider the Gaussian distribution as originating from a data point at $\mu$ with added noise $\mathbf{n} \sim \mathcal{N}(0,\sigma^2)$, then we have that a sample $\mathbf{x}$ from the Gaussian is:
 
 $$
-x = \mu + \sigma \mathbf{n}
+x = \mu + \sigma \mathbf{z}
 $$
+
+Where $\mathbf{z} \sim \mathcal{N}(0,\mathbf{I})$.
 
 And the score function is 
 
 $$
 \frac{-2(x - \mu)}{\sigma^2}
- = \frac{-2(\mu + \sigma \mathbf{n} - \mu)}{\sigma^2}
- = \frac{-2\mathbf{n} }{\sigma}
+ = \frac{-2(\mu + \sigma \mathbf{z} - \mu)}{\sigma^2}
+ = \frac{-2\mathbf{z} }{\sigma}
 $$
 
 That means that the score function is proportional to the opposite of the noise added!
@@ -261,7 +263,7 @@ $$
 
 Usually, the loss weighting is $\lambda(i) = \sigma_i^2$. This would mean higher noise levels have a greater loss.
 
-The ground truth score estimates are usually estimated as $\frac{-\mathbf{n}}{\sigma}$. This is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target. This is a common theme in all diffusion models.
+The ground truth score estimates are usually estimated as $\frac{-\mathbf{z}}{\sigma}$. This is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target. This is a common theme in all diffusion models.
 
 
 ## Sampling
