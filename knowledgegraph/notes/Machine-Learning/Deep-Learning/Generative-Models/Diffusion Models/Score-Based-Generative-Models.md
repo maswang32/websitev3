@@ -262,11 +262,11 @@ $$
 \sum_{i=1}^L \lambda(i) \mathbb{E}_{\mathbf{x} \sim p_{\sigma_i}(\mathbf{x})}[\lVert \nabla_\mathbf{x} \log(p_{\sigma_i}(\mathbf{x})) - s_\theta (\mathbf{x}, i) \rVert^2 _2]
 $$
 
-The ground truth score estimates are usually estimated as $\frac{-\mathbf{z}}{\sigma}$. This means that lower noise levels have large score function targets (which makes sense, since lower noise levels indicate sharper gaussians, which have a sharper slope and lower values).
+The ground truth score estimates are usually estimated as $\frac{-\mathbf{z}}{\sigma_i}$. This means that lower noise levels have large score function targets (which makes sense, since lower noise levels indicate sharper gaussians, which have a sharper slope and lower values).
 
 Usually, the loss weighting is $\lambda(i) = \sigma_i^2$. This would mean that the loss scaling for each noise level cancels out with the scale of the score estimate targets.
 
-Also, as we noted before, $\frac{-\mathbf{z}}{\sigma}$ is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target, which is easy to compute. Since $s_{\theta}$ does not know $\mathbf{y}$, it will marginalize over that variable, and approximate $\nabla_\mathbf{x} \log(p_{\sigma_i}(\mathbf{x}))$. This is a common theme in all diffusion models.
+Also, as we noted before, $\frac{-\mathbf{z}}{\sigma_i}$ is the score function of $p_{\sigma_i}(\mathbf{x} |\mathbf{y})$. In other words, we fit the marginal score function $s_{\theta}(\mathbf{x}, i)$ using the conditional score function as a target, which is easy to compute. Since $s_{\theta}$ does not know $\mathbf{y}$, it will marginalize over that variable, and approximate $\nabla_\mathbf{x} \log(p_{\sigma_i}(\mathbf{x}))$. This is a common theme in all diffusion models.
 
 
 ## Sampling
