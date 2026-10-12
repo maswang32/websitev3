@@ -31,6 +31,9 @@
 - [ ] karpathy tutorial: https://x.com/0xmortyx/status/2066878111124250739?s=46
 - [ ] sample efficiency: https://x.com/sirbayes/status/2068071851990151377?s=46
 - [ ] the most human technology ever made: https://x.com/iidydwns/status/2077188443084644748?s=46
+- [ ] From Sampling to Reinforce: https://x.com/barrowjoseph/status/2107945207870206380?s=46
+- [ ] MIT Self-Assembly: https://x.com/mcgovernmit/status/2108617144837521466?s=46
+
 
 
 
