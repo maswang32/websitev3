@@ -33,6 +33,10 @@
 - [ ] the most human technology ever made: https://x.com/iidydwns/status/2077188443084644748?s=46
 - [ ] From Sampling to Reinforce: https://x.com/barrowjoseph/status/2107945207870206380?s=46
 - [ ] MIT Self-Assembly: https://x.com/mcgovernmit/status/2108617144837521466?s=46
+- [ ] Smorph
+- [ ] VAE explanation: https://x.com/goyal__pramod/status/2109379310541050297?s=46
+- [ ] The model swallows the harness: https://x.com/pmddomingos/status/2109420932955804040?s=46
+
 
 
 
