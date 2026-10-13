@@ -96,7 +96,7 @@ To implement this weighting, we also rescale the outputs of the network, so its 
 
 
 ### Additional Thoughts:
-- The expectation here is inversely proportional to the variance of the noise added. 
+- The expectation here is inversely proportional to the variance of the noise added. Recall in our NCSN notes that smaller noise levels have larger score magnitudes. 
 
 - Note that in DDPM, the network is always predicting samples from $\mathcal{N}(0, I)$ no matter the timestep, which is similar to rescaling the outputs of the network in DDIM.
 
@@ -123,7 +123,7 @@ $$
 \lambda(t)
 \left[
 \mathbb{E}_{\mathbf{x_0} \sim p_0(\mathbf{x})}
-\mathbb{E}_{\mathbf{x_t} p_t(\mathbf{x_t} \mid \mathbf{x_0})}
+\mathbb{E}_{\mathbf{x_t} \sim p_t(\mathbf{x_t} \mid \mathbf{x_0})}
 \left[
 \lVert
 \nabla_\mathbf{x} \log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0) -
