@@ -355,9 +355,9 @@ Then perform this process:
 
 1. $\mathbf{x}_T \sim \pi$
 
-2. $$
+2. $
 \mathbf{x}_{t + \Delta t} = \mathbf{x}_t + \left[ f(\mathbf{x}_t,t) - g^2(t) s_\theta(\mathbf{x}_t, t) \right] \Delta t + g(t)\mathbf{z}_t\sqrt{| \Delta t |}
-$$
+$
 
 Where $\mathbf{z}_t \sim \mathcal{N}(0, I)$. 
 
@@ -409,4 +409,4 @@ For instance, we can apply score-based models to the task of image inpainting. T
 # Connection to DDPM
 Once I finish my page on DDPM, you will be able to see that the ELBO objective that DDPM uses is the same as a the score-matching objective.
 
-Last Reviewed: 10/8/2026
+Last Reviewed: 2/4/2025
