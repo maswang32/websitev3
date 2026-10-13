@@ -11,19 +11,21 @@ $$
 d\mathbf{x} = \mathbf{f}(\mathbf{x}, t) dt + g(t)d\mathbf{w}
 $$
 
-$d\mathbf{w}$ can be viewed as infinitesimal white noise, and characterizes a [Wiener Process](Wiener-Process.md).
+- $d\mathbf{w}$ can be viewed as infinitesimal white noise, and characterizes a [Wiener Process](Wiener-Process.md).
 
-$\mathbf{f}$ is a vector-valued function representing the *drift coefficient* and $g(t)$ is a scalar-valued function called the *diffusion coefficient*.
+- $\mathbf{f}$ is a vector-valued function representing the *drift coefficient* and $g(t)$ is a scalar-valued function called the *diffusion coefficient*.
+  - The drift coefficient determines how $\mathbf{x}$ evolves over time deterministically
+  - Observe that the diffusion coefficient is stochastic, but also does not depend on $\mathbf{x}$. it does depend on $t$, however.
 
 We can imagine applying this diffusion process to our data. As $t$ changes, the distribution of our data changes. We can use $p_t(\mathbf{x})$ to denote the probability distribution of our data at diffusion time $t$, where $t \in [0,T]$. The data distribution (with no diffusion) is $p_0(\mathbf{x})$.
 
 In addition, we can let $\mathbf{X}_t$ be a random variable representing the value of a datapoint at diffusion time $t$, and use $\mathbf{x}_t$ to represent a realization of $\mathbf{X}_t$.
 
-We choose our diffusion process so that $p_T$ does not depend on $p_0$. Typically this is something like pure Gaussian noise.
+We choose our diffusion process so that $p_T$ does not depend on $p_0$. Typically this is something like pure Gaussian noise. This allows easy initialization of the reverse diffusion process, which goes from $t=T$ to $t=0$.
 
 ### Additional Thoughts
-- In DDPMs, the *drift coefficient* $\mathbf{f}(\mathbf{x}, t)$ would be analogous to $\sqrt{1-\beta_t}$ when defining the forward process. It is kind of like the time-derivative of the coefficient on $\mathbf{x}_0$.
-- in DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the time-derivative of $\sigma_i$ or the time-derivative of the coefficent on the noise term in DDPMs. It represents the variance of the noise added at each step.
+- In DDPMs, the *drift coefficient* $\mathbf{f}(\mathbf{x}, t)$ would be analogous to $\sqrt{1-\beta_t}$ when defining the forward process. In the SDE model, the drift coefficient tells you the deterministic part of $\mathbf{x}$'s change over time. In DDPMs, this deterministic part is the $\mathbf{x}_0$ component, which diminishes over time as we add more and more noise. Thus, the drift coefficient is kind of like the time-derivative of the coefficient on $\mathbf{x}_0$ in DDPMs.
+- In DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the time-derivative of $\sigma_i$ or the time-derivative of the coefficent on the noise term in DDPMs. It represents the variance of the noise added at each step.
 
 
 ## Choices of $\mathbf{f}(\mathbf{x},t), g(t)$
@@ -33,7 +35,7 @@ We can choose the diffusion and drift coefficients as hyperparameters. For insta
 $$
 d\mathbf{x} = e^t d\mathbf{w}
 $$
-Which means that the variance grows exponentially as time increases, and is similar to choosing a geometric progression of noise scales $\sigma_1, \ldots, \sigma_L$. For instance, the Variance Exploding SDE, the Variance Preserving SDE, and the sub-VP SDE work well for generating images.
+Which means that the variance grows exponentially as time increases, and is similar to choosing a geometric progression of noise scales $\sigma_1, \ldots, \sigma_L$. This is an example of a  **variance exploding** SDE. The Variance Exploding SDE, the Variance Preserving SDE, and the sub-VP SDE work well for generating images.
 
 # Reverse-Time Diffusion
 
