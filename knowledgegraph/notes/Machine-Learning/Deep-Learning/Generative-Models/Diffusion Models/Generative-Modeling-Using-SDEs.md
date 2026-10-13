@@ -181,7 +181,7 @@ $$
 
 <span style="color:blue">To Do: Prove this Lemma</span>.
 
-In other words, we can approximate the marginal score function by sampling from the posterior, and aggregating the score esimates that we can from single samples.
+In other words, we can approximate the marginal score function by sampling from the posterior, and aggregating the score estimates that we can from single samples.
 
 ### Bias Variance Decomposition
 By the law of total variance, we have:
@@ -192,8 +192,6 @@ $$
 $$
 
 For any random variable $Z$.
-
-<span style="color:blue">To Do: Prove this Decomposition</span>.
 
 ### Another Equality
 Consider the new expression
@@ -402,9 +400,8 @@ Note that the denominator disappears since it does not depend on $\mathbf{x}$. B
 
 For instance, we can apply score-based models to the task of image inpainting. The masked image is given, as $p(\mathbf{y})$, and the forward process is also given (how to mask the image).
 
-
-<span style="color:blue">I am pretty sure $\nabla_\mathbf{x} \log p(\mathbf{y} \mid \mathbf{x})$ is zero everywhere, but I suppose maximizing that will just be ensuring that the non-masked region stays the same.
-</span>
+### Additional Note
+I am pretty sure $\nabla_\mathbf{x} \log p(\mathbf{y} \mid \mathbf{x})$ is zero everywhere, but I suppose maximizing that will just be ensuring that the non-masked region stays the same.
 
 # Connection to DDPM
 Once I finish my page on DDPM, you will be able to see that the ELBO objective that DDPM uses is the same as a the score-matching objective.
