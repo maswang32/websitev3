@@ -10,6 +10,7 @@ Minimal example:
 [project]
 name = "soundmaker"
 version = "0.1.0"
+dependencies = ["torch"]
 ```
 
 You run `pip install -e .` in the same directory as pyproject.toml.
