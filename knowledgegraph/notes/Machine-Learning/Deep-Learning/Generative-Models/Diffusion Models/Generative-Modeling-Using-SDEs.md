@@ -1,4 +1,4 @@
-# Forward-Time Diffusion
+# 1. Forward-Time Diffusion
 
 For a noise-conditional score network, there is a finite number of noise levels.
 
@@ -37,7 +37,7 @@ d\mathbf{x} = e^t d\mathbf{w}
 $$
 Which means that the variance grows exponentially as time increases, and is similar to choosing a geometric progression of noise scales $\sigma_1, \ldots, \sigma_L$. This is an example of a  **variance exploding** SDE. The Variance Exploding SDE, the Variance Preserving SDE, and the sub-VP SDE work well for generating images.
 
-# Reverse-Time Diffusion
+# 2. Reverse-Time Diffusion
 
 The reverse diffusion process is defined as:
 
@@ -51,7 +51,7 @@ We can sample from any marginal distribution $p_t$ (determined by the forward pr
 
 ### Additional Thoughts
 - Note that $dt$ represents an infinitesimal *negative* time step, since we are integrating from higher $t$ to lower $t$.
-- **What is a Reverse-Time SDE?** In this case, $\mathbf{\bar{w}}$ is described as 'reverse-time brownian motion'. In practice, $d\mathbf{\bar{w}}$ is Gaussian Noise, just like $d\mathbf{w}$ in the forward process.
+- $\mathbf{\bar{w}}$ is described as 'reverse-time brownian motion'. In practice, $d\mathbf{\bar{w}}$ is Gaussian Noise, just like $d\mathbf{w}$ in the forward process.
 
 
 
