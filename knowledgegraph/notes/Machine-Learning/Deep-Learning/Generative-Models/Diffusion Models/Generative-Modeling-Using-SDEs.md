@@ -123,11 +123,11 @@ $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x}_0 \sim p_0(\mathbf{x})}
+\mathbb{E}_{\mathbf{x}_0 \sim p_0(\mathbf{x}_0)}
 \mathbb{E}_{\mathbf{x}_t \sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \lVert
-\nabla_\mathbf{x} \log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0) -
+\nabla_{\mathbf{x}_t} \log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0) -
 \mathbf{s}_\theta(\mathbf{x}_t, t)  \rVert^2_2
 \right]
 \right]
@@ -159,20 +159,20 @@ $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x}_0 \sim p_0(\mathbf{x})}
+\mathbb{E}_{\mathbf{x}_0 \sim p_0(\mathbf{x}_0)}
 \mathbb{E}_{\mathbf{x}_t \sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \lVert
-\nabla_\mathbf{x} \log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0) -
+\nabla_{\mathbf{x}_t} \log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0) -
 \mathbf{s}_\theta(\mathbf{x}_t, t)  \rVert^2_2
 \right]
 \right]
 $$
 
 
-### I. Lemma - Express Marginal Distribution as an expectation of the conditional 
+### I. Lemma - Express Marginal Score as an expectation of the conditional scores
 
-We first show that we can estimate the marginal distribution as an expectation of the conditionals:
+We first show that we can estimate the marginal score as an expectation of the conditional scores:
 
 $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \mathbb{E}_{\mathbf{x}_0\sim p_t(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
@@ -254,7 +254,7 @@ $$
 \right] - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
 $$
 
-Where we use $C$ to denote the variance expression, which is constant given the forward process and does not depend on model parameters $\theta$. By the Lemma, this is equal to
+Where we use $C$ to denote the variance expression, which depends on $\mathbf{x}_t$ and the forward process, but not on the model parameters $\theta$. By the Lemma, this is equal to
 
 $$
 \tag{**}
@@ -277,7 +277,7 @@ $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
 $$
 
-We can change how we express the order of the two expectations on the RHS:
+We can change how we express the order of the two expectations on the LHS:
 $$
 \mathbb{E}_{\mathbf{x}_0\sim p_0(\mathbf{x}_0)}
 \mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
