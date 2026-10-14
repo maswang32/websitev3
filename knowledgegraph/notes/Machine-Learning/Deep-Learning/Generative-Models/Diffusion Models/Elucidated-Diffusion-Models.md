@@ -178,7 +178,11 @@ $$
 This should be indistinguishable from pure Gaussian Noise, assuming $\sigma_{max} >> \sigma_{data}$. However, the values here may be quite large, which is to say that they are not samples from a *standard* Gaussian distribution, like they are in DDPM. 
 
 
-During the sampling process, we should start with a sample from $$\mathbf{x}_{0} \sim \mathcal{N} ( \mathbf{0}, \sigma_{max}^2 \mathbf{I} )$$, and denoise images sequentially such that we get $\mathbf{x}_1, \mathbf{x}_1, \ldots \mathbf{x}_N$, where
+During the sampling process, we should start with a sample from
+
+$$\mathbf{x}_{0} \sim \mathcal{N} ( \mathbf{0}, \sigma_{max}^2 \mathbf{I} )$$ 
+
+and denoise images sequentially such that we get $\mathbf{x}_1, \mathbf{x}_1, \ldots \mathbf{x}_N$, where
 
 $$
 \mathbf{x}_i \sim p(\mathbf{x}_i ; \sigma_i)
@@ -234,11 +238,7 @@ Also, in the EDM formulation, we have:
 This means that $t$ and $\sigma$ become interchangeable. Also, since the noise trajectories are linear, we have that a single step to $t = 0$ will give you the denoised image. The tangent line to the trajectory points towards the denoiser output. The plots show you that we only have slight curvature at some intermediate time steps, but at the first and last time steps, we are linear.
 
 
-<img src="image-1.png" width="400">
-
 ![Trajectories](image-1.png)
-
-<img src="./image-1.png" width="400">
 
 
 It should make sense that since the derivative is a linear approximation to the noise trajectory, the noise trajectory should be as linear as possible.
