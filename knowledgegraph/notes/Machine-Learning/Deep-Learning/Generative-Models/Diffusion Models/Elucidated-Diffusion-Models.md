@@ -365,7 +365,7 @@ Other Notes:
 
 ### Config C
 Adjust Config A:
-- remove 4x4 layers (these overfit), double 16x16 layer capacity
+- Remove bottleneck 4x4 layers (these overfit), double 16x16 layer capacity
 
 
 | Resolution | # Chan. - Conf. B | # Chan. Conf. C |
