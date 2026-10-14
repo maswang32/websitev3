@@ -278,8 +278,7 @@ $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
 $$
 
-By using the chain rule:
-
+We can change how we express the order of the two expectations on the RHS:
 $$
 \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0)}
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
@@ -310,7 +309,7 @@ $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right] \right]
 $$
 
-The $C$ term can be taken out of the inner expectation, and remains constant with repsect to $\theta$ when it is taken outside of the outer expecation:
+The $C$ term can be taken out of the inner expectation, and remains constant with respect to $\theta$ when it is taken outside of the outer expecation:
 
 $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
