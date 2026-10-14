@@ -195,13 +195,20 @@ Which comes from the chain rule.
 
 Substituting the RHS of the first equation into the RHS of the second,
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x_0}) d\mathbf{x}_0 \right]}{p_t(\mathbf{x_t})}
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x_0}) d\mathbf{x}_0 \right]}{p_t(\mathbf{x}_t)}
 $$
-The gradient can be moved inside the integral, and only applies to one term:
+The gradient can be moved inside the integral, only applies to the one term depending on $\mathbf{x}_t$
 $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{ \int \nabla_{\mathbf{x}_t} \left[ p_t(\mathbf{x}_t | \mathbf{x}_0) \right] p_t(\mathbf{x_0}) d\mathbf{x}_0 }{p_t(\mathbf{x_t})}
 $$
-
+Note that 
+$$
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) = \frac{\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0)}{p_t(\mathbf{x_t}  | \mathbf{x}_0 )} \Rightarrow \nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0) = \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0)
+$$
+Substituting the expression for $\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0)$ in:
+$$
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{ \int \left[ \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) \right] p_t(\mathbf{x_0}) d\mathbf{x}_0 }{p_t(\mathbf{x_t})}
+$$
 
 
 
