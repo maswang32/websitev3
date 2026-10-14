@@ -94,13 +94,13 @@ $$
 $$
 Often, these weights are proportional to $\sigma^2$, just like they were in NCSNs.
 
-To implement this weighting, we also rescale the outputs of the network, so its outputs are on the same scale across time-steps.
+To implement this weighting, we rescale the outputs of the network, so its outputs are on the same scale across time-steps.
 
 
 ### Additional Thoughts:
-- The expectation here is inversely proportional to the variance of the noise added. Recall in our NCSN notes that smaller noise levels have larger score magnitudes. 
+- The weights are proportional to the amount of noise added: Recall in our NCSN notes that smaller noise levels have larger score magnitudes. The expectation in the denominator is actually inversely proportional to the variance of the noise added.
 
-- Note that in DDPM, the network is always predicting samples from $\mathcal{N}(0, I)$ no matter the timestep, which is similar to rescaling the outputs of the network in DDIM.
+- Note that in DDPM, the network is always predicting samples from $\mathcal{N}(0, I)$ no matter the timestep, which is similar to rescaling the outputs of the network in score-based models.
 
 
 
