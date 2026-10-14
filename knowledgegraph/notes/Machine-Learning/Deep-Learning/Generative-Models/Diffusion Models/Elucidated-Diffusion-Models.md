@@ -42,7 +42,7 @@ $D$ may not necessarily be approximated by a neural network itself. It may have 
 ### Additional Thoughts
 Note that we can derive the expression for the score function's estimate by recognizing the that distribution of the noisy data is a mixture of Gaussians. Also, note that this is equivalent to estimating the score as 
 $$
-\frac{\hat{\mathbf{n}}}{\sigma^2}
+\frac{\hat{\mathbf{-n}}}{\sigma^2}
 $$
 Where $\hat{\mathbf{n}}$ estimates the added noise. We argued that this estimates the score function in [Score Based Generative Models](Score-Based-Generative-Models.md)
 
@@ -90,7 +90,7 @@ Equivalently,
 $$
 \frac{d\mathbf{x}}{s(t)} = d\hat{\mathbf{x}}
 \Rightarrow
-d\hat{\mathbf{x}} = \frac{d\mathbf{x}}{s(t)}
+d\hat{\mathbf{x}} = \frac{1}{s(t)}d\mathbf{x}
 $$
 Flipping both expressions:
 $$
@@ -106,8 +106,10 @@ $$
 $$
 
 $$
-= s(t) \nabla_{\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right)
+\boxed{
+\nabla_{\hat{\mathbf{x}}} \log p(\hat{\mathbf{x}} ; \sigma(t)) = s(t) \nabla_{\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right)}
 $$
+This tells us the relationship between the score function of the unscaled, and the score function of the scaled.
 
 #### 4. Substituting in the score function expressed in terms of $\mathbf{x}$
 $$
@@ -119,7 +121,8 @@ d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} - s(t) \left[ \dot \sigma
 $$
 
 $$
-d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} - s(t)^2 \left[ \dot \sigma(t) \sigma(t) \nabla_{\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right) \right] \right] dt
+\boxed{
+d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} - s(t)^2 \left[ \dot \sigma(t) \sigma(t) \nabla_{\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right) \right] \right] dt}
 $$
 
 The formula above is our ODE when we have a scaling function.
@@ -140,7 +143,10 @@ Thus,
 
 $$
 \nabla_{\mathbf{x}} \log p \left( \frac{ \mathbf{x} }{ s(t) }, \sigma(t)\right) = 
-\frac{\nabla_{\hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right)}{s(t)} = \frac{ D( \hat{\mathbf{x} } ; \sigma) - \hat{ \mathbf{x} } }{\sigma(t)^2 s(t)}
+\frac{\nabla_{\hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right)}{s(t)}
+$$
+$$
+= \frac{ D( \hat{\mathbf{x} } ; \sigma) - \hat{ \mathbf{x} } }{\sigma(t)^2 s(t)}
 = \frac{ D( \frac{ \mathbf{x} }{ s(t) } ; \sigma) - \frac{ \mathbf{x} }{s(t)} }{ \sigma(t)^2 s(t)}
 $$
 
