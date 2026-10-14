@@ -1,7 +1,7 @@
 # Elucidated Diffusion Models
 
 ## Noisy Data Distributions
-Let $p(\mathbf{y})$ denote the distribution of data examples $\mathbf{y}$.Consider the family of distributions obtained by adding Gaussian noise of standard deviation $\sigma$ to the data distribution. Note that $\sigma$ is not restricted to being between $0$ and $1$, and it can actually be very large.
+Let $p(\mathbf{y})$ denote the distribution of data examples $\mathbf{y}$. Consider the family of distributions obtained by adding Gaussian noise of standard deviation $\sigma$ to the data distribution. Note that $\sigma$ is not restricted to being between $0$ and $1$, and it can actually be very large.
 
 We can denote the distribution of noisy data $\mathbf{x}$ at a noise level $\sigma$ to be
 
@@ -20,15 +20,15 @@ $$
 
 At time $t$, a datapoint $\mathbf{x}$ will be distributed according to $p(\mathbf{x} ; \sigma(t))$. Thus, $\sigma(t)$ is the desired noise level at time $t$, which is monotonically increasing. For instance, $\sigma(t) \propto \sqrt{t}$ is constant-speed heat diffusion. The formula includes the score function for the distribution at noise level $\sigma(t)$.
 
-<span style="color:blue">To Do: Derive the ODE</span>.
+Note that there is no randomness introduced into the forward or backwards process yet. Rather, the forward process simulates the addition of noise by moving in the opposite direction that the score functions points to.
 
-Despite the fact that we are simulating the addition of noise, there is no randomness introduced into the forward or backwards process yet.
+TODO: Derive this ODE.
 
 ## Score Function
 Suppose we have optimized a denoising function $D$ to our data at a certain noise level $\sigma$. The denoising function minimizes this objective:
 
 $$
-\mathbb{E}_{\mathbf{y} \sim p_{data}} \mathbb{E}_{\mathbf{n} \sim \mathcal{N}(\mathbf{0}, \sigma^2 \mathbf{I})} \left| \left| D(\mathbf{y} + \mathbf{n}  ; \sigma ) - \mathbf{y} \right| \right|^2 _2
+\mathbb{E}_{\mathbf{y} \sim p_{\text{data}}} \mathbb{E}_{\mathbf{n} \sim \mathcal{N}(\mathbf{0}, \sigma^2 \mathbf{I})} \left| \left| D(\mathbf{y} + \mathbf{n}  ; \sigma ) - \mathbf{y} \right| \right|^2 _2
 $$
 
 This objective is analyzed more in [my notes on SDEs](Generative-Modeling-Using-SDEs.md). Our score function will be equal to 
@@ -37,11 +37,15 @@ $$
 \nabla \log_{\mathbf{x}} p \left( \mathbf{x}; \sigma(t) \right) = \left( D(\mathbf{x};\sigma) - \mathbf{x} \right) / \sigma^2
 $$
 
-Note that we can derive this by recognizing the that distribution of the noisy data is a mixture of Gaussians. 
+$D$ may not necessarily be approximated by a neural network itself. It may have some pre and post-processing steps. For instance, in DDPM, we predict the noise instead of the denoised image. In EDM, there is pre-conditioning and post-conditioning for the neural network to estimate $D$.
 
-<span style="color:blue">To Do: Derive this, show that it is the score function for a single Gaussian, argue that it is linear.</span>
+### Additional Thoughts
+Note that we can derive the expression for the score function's estimate by recognizing the that distribution of the noisy data is a mixture of Gaussians. Also, note that this is equivalent to estimating the score as 
+$$
+\frac{\hat{\mathbf{n}}}{\sigma^2}
+$$
+Where $\hat{\mathbf{n}}$ estimates the added noise. We argued that this estimates the score function in [Score Based Generative Models](Score-Based-Generative-Models.md)
 
-$D$ may not be a neural network itself. It may have some pre and post-processing steps. For instance, in DDPM, we predict the noise instead of the denoised image.
 
 ## Scale functions
 Some versions have $\mathbf{x} = s(t) \hat{\mathbf{x}}$, where $\hat{\mathbf{x}}$ is the unscaled variable (which can still be noisy). Let us try to derive the ODE when there is a scale function.
