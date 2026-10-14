@@ -171,7 +171,7 @@ $$
 $$
 
 
-### Lemma 1 - Express Marginal Distribution as an expectation of the conditional 
+### 1. Lemma - Express Marginal Distribution as an expectation of the conditional 
 
 We first show that we can estimate the marginal distribution as an expecation of the conditionals:
 
@@ -221,7 +221,7 @@ $$
 $$
 
 
-### Lemma 2 - Bias Variance Decomposition
+### 2. Bias Variance Decomposition
 By the law of total variance, we have:
 
 $$
@@ -231,7 +231,7 @@ $$
 
 For any random variable $Z$.
 
-### Another Equality
+### 3. Applying Bias-Variance Decomposition and Lemma 1 to show the two objectives are equal given $\mathbf{x}_t$
 Consider the new expression
 
 $$
@@ -255,7 +255,7 @@ $$
 \right] - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
 $$
 
-Where we are use $C$ to denote the variance expression, which is constant given the forward process and does not depend on model parameters $\theta$. By the Lemma, this is equal to
+Where we are use $C$ to denote the variance expression, which is constant given the forward process and does not depend on model parameters $\theta$. By Lemma, this is equal to
 
 $$
 \tag{**}
@@ -265,7 +265,7 @@ $$
 
 Which is our score matching objective for a single timestep, plus a constant.
 
-### Wrapping in expectation
+### 4. Wrapping in expectation
 Let us wrap both starred expressions (which we have proven to be equal) in an expectation over $\mathbf{x}_t$:
 
 $$
