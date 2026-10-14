@@ -124,21 +124,21 @@ $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x_0} \sim p_0(\mathbf{x})}
-\mathbb{E}_{\mathbf{x_t} \sim p_t(\mathbf{x_t} \mid \mathbf{x_0})}
+\mathbb{E}_{\mathbf{x}_0 \sim p_0(\mathbf{x})}
+\mathbb{E}_{\mathbf{x}_t \sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \lVert
-\nabla_\mathbf{x} \log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0) -
-\mathbf{s}_\theta(\mathbf{x_t}, t)  \rVert^2_2
+\nabla_\mathbf{x} \log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0) -
+\mathbf{s}_\theta(\mathbf{x}_t, t)  \rVert^2_2
 \right]
 \right]
 $$
 
 ### Additional Thoughts
-- We would like the score function to fit $\nabla_\mathbf{x_t} \log p_{t} (\mathbf{x_t})$, but this distribution may be complex and multimodal. However, $\log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0)$ is just Gaussian.
+- We would like the score function to fit $\nabla_{\mathbf{x}_t} \log p_{t} (\mathbf{x}_t)$, but this distribution may be complex and multimodal. However, $\log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0)$ is just Gaussian.
 
-- Since the score function we are fitting does not see $\mathbf{x_0}$, it will fit an expectation over all possible $\mathbf{x_0}$, which will approximate the score function of $p_t(\mathbf{x_t})$.
-- The probability distribution of $p_t(\mathbf{x_t})$ is a mixture of Gaussians, which means that the conditional distribution $\log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0)$ locally approximates $\log p_{t} (\mathbf{x_t})$ at the point $\mathbf{x_t}$, at least at low noise levels where the Gaussians do not overlap too much.
+- Since the score function we are fitting does not see $\mathbf{x}_0$, it will fit an expectation over all possible $\mathbf{x}_0$, which will approximate the score function of $p_t(\mathbf{x}_t)$.
+- The probability distribution of $p_t(\mathbf{x}_t)$ is a mixture of Gaussians, which means that the conditional distribution $\log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0)$ locally approximates $\log p_{t} (\mathbf{x}_t)$ at the point $\mathbf{x}_t$, at least at low noise levels where the Gaussians do not overlap too much.
 
 ## c - Equivalence between Ideal Optimization Objective and Conditional-Score Objective.
 Our intended objective is:
@@ -160,12 +160,12 @@ $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x_0} \sim p_0(\mathbf{x})}
-\mathbb{E}_{\mathbf{x_t} \sim p_t(\mathbf{x_t} \mid \mathbf{x_0})}
+\mathbb{E}_{\mathbf{x}_0 \sim p_0(\mathbf{x})}
+\mathbb{E}_{\mathbf{x}_t \sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \lVert
-\nabla_\mathbf{x} \log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0) -
-\mathbf{s}_\theta(\mathbf{x_t}, t)  \rVert^2_2
+\nabla_\mathbf{x} \log p_{t} (\mathbf{x}_t \mid \mathbf{x}_0) -
+\mathbf{s}_\theta(\mathbf{x}_t, t)  \rVert^2_2
 \right]
 \right]
 $$
@@ -176,8 +176,8 @@ $$
 We first show that we can estimate the marginal distribution as an expecation of the conditionals:
 
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x_t})} \left[
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x_0})
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
 \right]
 $$
 
@@ -186,31 +186,31 @@ In other words, we can approximate the marginal score function by sampling from 
 #### Proof of Lemma
 
 $$
-p_t(\mathbf{x}_t) = \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x_0}) d\mathbf{x}_0
+p_t(\mathbf{x}_t) = \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x}_0) d\mathbf{x}_0
 $$
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t)}{p_t(\mathbf{x_t})}
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t)}{p_t(\mathbf{x}_t)}
 $$
 Which comes from the chain rule.
 
 Substituting the RHS of the first equation into the RHS of the second,
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x_0}) d\mathbf{x}_0 \right]}{p_t(\mathbf{x}_t)}
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x}_0) d\mathbf{x}_0 \right]}{p_t(\mathbf{x}_t)}
 $$
 The gradient can be moved inside the integral, only applies to the one term depending on $\mathbf{x}_t$
 $$
-= \frac{ \int \nabla_{\mathbf{x}_t} \left[ p_t(\mathbf{x}_t | \mathbf{x}_0) \right] p_t(\mathbf{x_0}) d\mathbf{x}_0 }{p_t(\mathbf{x_t})}
+= \frac{ \int \nabla_{\mathbf{x}_t} \left[ p_t(\mathbf{x}_t | \mathbf{x}_0) \right] p_t(\mathbf{x}_0) d\mathbf{x}_0 }{p_t(\mathbf{x}_t)}
 $$
 Note that 
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) = \frac{\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0)}{p_t(\mathbf{x_t}  | \mathbf{x}_0 )} \Rightarrow \nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0) = \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0)
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) = \frac{\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0)}{p_t(\mathbf{x}_t  | \mathbf{x}_0 )} \Rightarrow \nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0) = \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0)
 $$
 Substituting the expression for $\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0)$ in:
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{ \int \left[ \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) \right] p_t(\mathbf{x_0}) d\mathbf{x}_0 }{p_t(\mathbf{x_t})}
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{ \int \left[ \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) \right] p_t(\mathbf{x}_0) d\mathbf{x}_0 }{p_t(\mathbf{x}_t)}
 $$
 $$
-= \int \frac{  \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x_0}) }{p_t(\mathbf{x_t})}d\mathbf{x}_0 
+= \int \frac{  \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_0) }{p_t(\mathbf{x}_t)}d\mathbf{x}_0 
 $$
 Using Bayes' Rule:
 $$
@@ -236,22 +236,22 @@ Consider the new expression
 
 $$
 \tag{*}
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x_t})} \left[
+\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]
 $$
 
 By the bias-variance decomposition, this is equal to
 
 $$
 \left\lVert
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x_t})} \left[
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0})
+\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
 \right] - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 +
-\operatorname{Var}\left[\nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0})\right] = \\[10pt]
+\operatorname{Var}\left[\nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)\right] = \\[10pt]
 \left\lVert
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x_t})} \left[
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0})
+\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
 \right] - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
 $$
 
@@ -260,7 +260,7 @@ Where we are use $C$ to denote the variance expression, which is constant given 
 $$
 \tag{**}
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x_t}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C 
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C 
 $$
 
 Which is our score matching objective for a single timestep, plus a constant.
@@ -270,12 +270,12 @@ Let us wrap both starred expressions (which we have proven to be equal) in an ex
 
 $$
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x_t})} \left[
+\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x_t}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
 $$
 
 By using the chain rule:
@@ -285,10 +285,10 @@ $$
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x_t}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
 $$
 
 If we wrap both in another expectation over $t$, and multiply by $\lambda(t)$, we get
@@ -301,13 +301,13 @@ $$
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x_t}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right] \right]
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right] \right]
 $$
 
 The $C$ term can be taken out of the inner expectation, and remains constant with repsect to $\theta$ when it is taken outside of the outer expecation:
@@ -320,13 +320,13 @@ $$
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x_t}) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] \right] + C_2
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] \right] + C_2
 $$
 
 The left hand side is the objective that we train with, and the right hand side is the optimization objective. Thus, we have that the two optimization objectives are equivalent - they differ by a constant that does not depend on our parameters $\theta$.
@@ -363,7 +363,7 @@ $$
 We can express our SDE in integral form:
 
 $$
-\mathbf{x_t} = \mathbf{x}_{t_0} + \int_{t_0}^t \left[\mathbf{f}(\mathbf{x},s) - g^2(s)\nabla_\mathbf{x} \log(p_s(\mathbf{x}))\right] ds + \int_{t_0}^t g(s)d\mathbf{\bar{w}}(s)
+\mathbf{x}_t = \mathbf{x}_{t_0} + \int_{t_0}^t \left[\mathbf{f}(\mathbf{x},s) - g^2(s)\nabla_\mathbf{x} \log(p_s(\mathbf{x}))\right] ds + \int_{t_0}^t g(s)d\mathbf{\bar{w}}(s)
 $$
 
 Where
