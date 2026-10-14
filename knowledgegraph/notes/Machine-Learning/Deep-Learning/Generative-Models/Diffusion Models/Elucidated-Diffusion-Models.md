@@ -1,6 +1,4 @@
-# Elucidated Diffusion Models
-
-## Noisy Data Distributions
+# 1. Noisy Data Distributions
 Let $p(\mathbf{y})$ denote the distribution of data examples $\mathbf{y}$. Consider the family of distributions obtained by adding Gaussian noise of standard deviation $\sigma$ to the data distribution. Note that $\sigma$ is not restricted to being between $0$ and $1$, and it can actually be very large.
 
 We can denote the distribution of noisy data $\mathbf{x}$ at a noise level $\sigma$ to be
@@ -9,7 +7,7 @@ $$
 p(\mathbf{x} ; \sigma)
 $$
 
-## ODE
+# 2. ODE
 Let us continue by writing an ODE, which can be used to transform data into noise (forward process) or noise into data (backward process) deterministically. The ODE will represent both of these processes. We introduce a time variable $t$, and imagine a datapoint $\mathbf{x}$ evolving as time changes. As $t$ increases, $\mathbf{x}$ gets noiser, and as $t$ decreases, $\mathbf{x}$ gets less noisy.
 
 We can choose a function $\sigma(t)$ that is monotonically increasing. Then, formulate the ODE below:
@@ -24,7 +22,7 @@ Note that there is no randomness introduced into the forward or backwards proces
 
 TODO: Derive this ODE.
 
-## Score Function
+# 3. Score Function
 Suppose we have optimized a denoising function $D$ to our data at a certain noise level $\sigma$. The denoising function minimizes this objective:
 
 $$
@@ -47,13 +45,13 @@ $$
 Where $\hat{\mathbf{n}}$ estimates the added noise. We argued that this estimates the score function in [Score Based Generative Models](Score-Based-Generative-Models.md)
 
 
-## Scale functions
+# 4. Scale functions
 Some versions have $\mathbf{x} = s(t) \hat{\mathbf{x}}$, where $\hat{\mathbf{x}}$ is the unscaled variable (which can still be noisy), and $s(t)$ is its scaling factor over time. Let us try to derive the ODE when there is a scale function.
 
-### Derivation of the ODE, if there is scaling
+## a. Derivation of the ODE, if there is scaling
 In this proof, observe that there are equations governing the change in $\mathbf{x}$ over time. There are parallel equations governing the change in the unscaled variable $\hat{\mathbf{x}}$ over time, and it is useful to correspond these differential equations.
 
-#### 1. Product Rule, Initial Steps
+### I. Product Rule, Initial Steps
 Start with the expression:
 $$
 \mathbf{x} = s(t) \hat{\mathbf{x}}
@@ -71,7 +69,7 @@ $$\frac{d\mathbf{x}}{dt} = \frac{\dot s(t)}{s(t)} \mathbf{x} + s(t) \frac{d\hat{
 
 $$d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} + s(t) d\hat{\mathbf{x}} \right]dt$$
 
-#### 2. Substituting the unscaled ODE into the equation
+### II. Substituting the unscaled ODE into the equation
 
 Substituting our unscaled ODE for $d\hat{\mathbf{x}}$:
 
@@ -81,7 +79,7 @@ $$d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} + s(t) \left[ - \dot \s
 $$d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} - s(t) \left[\dot \sigma(t) \sigma(t)\nabla_{ \hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right) \right] \right]dt$$
 
 
-#### 3. Expressing the score function for $\hat{\mathbf{x}}$ in terms of $\mathbf{x}$. Change of Variables
+### III. Expressing the score function for $\hat{\mathbf{x}}$ in terms of $\mathbf{x}$. Change of Variables
 Now we make a change of variables. First, observe that the rate of change in $\mathbf{x}$ is the same as the rate of change in $\hat{\mathbf{x}}$, but multiplied by $s(t)$:
 $$
 d\mathbf{x} =  s(t) d\hat{\mathbf{x}}
@@ -111,7 +109,7 @@ $$
 $$
 This tells us the relationship between the score function of the unscaled, and the score function of the scaled.
 
-#### 4. Substituting in the score function expressed in terms of $\mathbf{x}$
+### IV. Substituting in the score function expressed in terms of $\mathbf{x}$
 $$
 d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} - s(t) \left[\dot \sigma(t) \sigma(t)\nabla_{ \hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right) \right] \right]dt
 $$
@@ -127,7 +125,7 @@ $$
 
 The formula above is our ODE when we have a scaling function.
 
-### Estimating the score function after scaling
+## b. Estimating the score function after scaling
 We would like to use our denoiser for the unscaled variable $\hat{\mathbf{x}}$ to estimate the score function, even when there is scaling. Supposing we have a denoiser $D(\hat{\mathbf{x}} ; \sigma(t))$ for the unscaled variable $\hat{\mathbf{x}}$, then we have that 
 
 $$
@@ -153,7 +151,7 @@ $$
 We can use this function to estimate the score function from the denoiser.
 
 
-### Computing the Time-Derivative of x
+## c. Computing the Time-Derivative of x
 In order to sample, we should compute the derivative $\frac{d\mathbf{x}}{dt}$. This can be used to estimate the denoising trajectory. 
 
 Using the scaled ODE to get an expression for $\frac{d\mathbf{x}}{dt}$:
