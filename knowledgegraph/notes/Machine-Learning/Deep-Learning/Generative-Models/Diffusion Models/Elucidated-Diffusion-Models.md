@@ -173,7 +173,7 @@ $$
 
 We can use this derivative for sampling.
 
-## Sampling
+# 5. Sampling
 
 Set a maximum noise level. The distribution of noisy data at the maximum noise level is:
 
@@ -209,19 +209,19 @@ Then, $\mathbf{x}_N$ will be distributed like the data.
 
 
 
-### Truncation Error
+## Truncation Error
 Truncation error accumulates by discretizing time during sampling, but total truncation error decreases when the number of steps increases. In other words, local error scales super-linearly with respect to step size, so increasing step size by a factor of 2 increases per-step error by a factor of more than 2, and thus increases error overall.
 
 The Euler Method has error $O(h^2)$ with respect to the step size $h$. Huen's method has error $O(h^3)$.
 
 
-### Huen's Method
+## Huen's Method
 - Use a second-order Huen sampler.
 - This measures the derivative $\frac{d\mathbf{x}}{dt}$ at $\mathbf{x}$, and after taking one step.
 - The actual derivative used is the average between these two derivatives.
 - When stepping to $\sigma = 0$, we revert to Euler to avoid dividing by zero.
 
-### Spacing the Time Steps
+## Spacing the Time Steps
 Step size should decrease monotonically as noise level decreases, and does not need to depend on the content of the sample.
 
 The step sizes decrease as we get closer to no noise. In the paper we have $\rho = 7$, and that the step sizes are 
@@ -236,18 +236,18 @@ In other words, we are doing linear interpolation in the $x^{1/\rho}$ domain.
 While $\rho = 3$ apparently nearly equalizes truncation error between steps, $\rho = 7$ works better, meaning that we want to make the disparity even more severe, or that the steps at lower noise levels matter more.
 
 
-### Specific Scale and Variance Schedule
-Also, in the EDM formulation, we have:
+# 6. Specific Scale and Variance Schedule
+In the EDM formulation, we have:
 - Set $s(t) = 1 $
 - Set $\sigma(t) = t$
 
 This means that $t$ and $\sigma$ become interchangeable. Also, since the noise trajectories are linear, we have that a single step to $t = 0$ will give you the denoised image. The tangent line to the trajectory points towards the denoiser output. The plots show you that we only have slight curvature at some intermediate time steps, but at the first and last time steps, we are linear.
 
 
-![Trajectories](image-1.png)
+![Trajectories](EDM-ODEs.png)
 
-
-It should make sense that since the derivative is a linear approximation to the noise trajectory, the noise trajectory should be as linear as possible.
+Linear noise trajectories make sense.
+The score function is the derivative of the noise trajectory, and thus a *linear* approximation to it. Thus, for this approximation to be maximally accurate, we should have maximally *linear* noise trajectories.
 
 In addition, the formula for the derivative becomes much simpler:
 
@@ -256,10 +256,9 @@ $$
 $$
 
 ### Additional Thoughts
-In fact, imposing the constraint that the largest noise level has variance 1 requires a curvature to the noise trajectory, which we do not want. This is because the score function is the derivative of the noise trajectory, which is a *linear* approximation. Thus, for this approximation to be maximally accurate, we should have *linear* noise trajectories.
+Observe that imposing the constraint that the largest noise level has variance 1 requires a curvature to the noise trajectory, which may be undesireable.
 
-
-## Stochastic Differential Equation
+# 7. Stochastic Differential Equation
 We can generalize our ODE to an SDE. Let's assume the parameters in the EDM formulation, $s(t) = 1$ and $\sigma(t) = t$.
 
 $$
