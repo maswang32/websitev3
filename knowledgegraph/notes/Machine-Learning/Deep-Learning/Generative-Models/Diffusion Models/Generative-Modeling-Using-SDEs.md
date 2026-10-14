@@ -15,7 +15,7 @@ $$
 
 - $\mathbf{f}$ is a vector-valued function representing the *drift coefficient* and $g(t)$ is a scalar-valued function called the *diffusion coefficient*.
   - The drift coefficient determines how $\mathbf{x}$ evolves over time deterministically
-  - Observe that the diffusion coefficient is stochastic, but also does not depend on $\mathbf{x}$. it does depend on $t$, however.
+  - Observe that the diffusion coefficient is stochastic, but also does not depend on $\mathbf{x}$. It does depend on $t$, however.
 
 We can imagine applying this diffusion process to our data. As $t$ changes, the distribution of our data changes. We can use $p_t(\mathbf{x})$ to denote the probability distribution of our data at diffusion time $t$, where $t \in [0,T]$. The data distribution (with no diffusion) is $p_0(\mathbf{x})$.
 
@@ -25,7 +25,7 @@ We choose our diffusion process so that $p_T$ does not depend on $p_0$. Typicall
 
 ### Additional Thoughts
 - In DDPMs, the *drift coefficient* $\mathbf{f}(\mathbf{x}, t)$ would be analogous to $\sqrt{1-\beta_t}$ when defining the forward process. In the SDE model, the drift coefficient tells you the deterministic part of $\mathbf{x}$'s change over time. In DDPMs, this deterministic part is the $\mathbf{x}_0$ component, which diminishes over time as we add more and more noise. Thus, the drift coefficient is kind of like the time-derivative of the coefficient on $\mathbf{x}_0$ in DDPMs.
-- In DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the time-derivative of $\sigma_i$ or the time-derivative of the coefficent on the noise term in DDPMs. It represents the variance of the noise added at each step.
+- In DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the time-derivative of $\sigma_i$ or the time-derivative of the coefficient on the noise term in DDPMs. It represents the variance of the noise added at each step.
 
 
 ## Choices of $\mathbf{f}(\mathbf{x},t), g(t)$
@@ -47,11 +47,11 @@ $$
 
 If we know the drift and diffusion coefficients (which are from the forward process), and can approximate the score function (the gradient of the data distributions at time $t$), then we can compute the reverse-time SDE.
 
-We can sample from any marginal distribution $p_t$ (determined by the forward process) by sampling from $p_T$ (which should be doable, since this should approximate an easy-to-sample from distribution), then by integrating from $T$ to $t$. By integrating all the way to $t=0$, we should be able to generate a data sample.
+We can sample from any marginal distribution $p_t$ (determined by the forward process) by sampling from $p_T$ (which should be doable, since this should approximate an easy-to-sample-from distribution), then by integrating from $T$ to $t$. By integrating all the way to $t=0$, we should be able to generate a data sample.
 
 ### Additional Thoughts
 - Note that $dt$ represents an infinitesimal *negative* time step, since we are integrating from higher $t$ to lower $t$.
-- $\mathbf{\bar{w}}$ is described as 'reverse-time brownian motion'. In practice, $d\mathbf{\bar{w}}$ is Gaussian Noise, just like $d\mathbf{w}$ in the forward process.
+- $\mathbf{\bar{w}}$ is described as 'reverse-time Brownian motion'. In practice, $d\mathbf{\bar{w}}$ is Gaussian noise, just like $d\mathbf{w}$ in the forward process.
 
 
 
@@ -64,7 +64,7 @@ $$
 \mathbf{s}_\theta(\mathbf{x}, t) \approx \nabla_\mathbf{x} \log p_{t} (\mathbf{x})
 $$
 
-Thus, we minimize the distance between these two functions, arcoss a continuous weighted sum:
+Thus, we minimize the distance between these two functions, across a continuous weighted sum:
 
 $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
@@ -98,7 +98,7 @@ Often, these weights are proportional to $\sigma^2$, just like they were in NCSN
 To implement this weighting, we rescale the outputs of the network, so its outputs are on the same scale across time-steps.
 
 
-### Additional Thoughts:
+### Additional Thoughts
 - The weights are proportional to the amount of noise added: Recall in our NCSN notes that smaller noise levels have larger score magnitudes. The expectation in the denominator is actually inversely proportional to the variance of the noise added.
 - Note that in DDPM, the network is always predicting samples from $\mathcal{N}(0, I)$ no matter the timestep, which is similar to rescaling the outputs of the network in score-based models.
 
@@ -173,7 +173,7 @@ $$
 
 ### I. Lemma - Express Marginal Distribution as an expectation of the conditional 
 
-We first show that we can estimate the marginal distribution as an expecation of the conditionals:
+We first show that we can estimate the marginal distribution as an expectation of the conditionals:
 
 $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
@@ -181,7 +181,7 @@ $$
 \right]
 $$
 
-In other words, we can approximate the marginal score function by sampling from the posterior, and aggregating the score estimates that we can from single samples.
+In other words, we can approximate the marginal score function by sampling from the posterior, and aggregating the score estimates that we can compute from single samples.
 
 #### Additional Note: Proof of Lemma
 
@@ -197,7 +197,7 @@ Substituting the RHS of the first equation into the RHS of the second,
 $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_0(\mathbf{x}_0) d\mathbf{x}_0 \right]}{p_t(\mathbf{x}_t)}
 $$
-The gradient can be moved inside the integral, only applies to the one term depending on $\mathbf{x}_t$
+The gradient can be moved inside the integral, and only applies to the one term depending on $\mathbf{x}_t$:
 $$
 = \frac{ \int \nabla_{\mathbf{x}_t} \left[ p_t(\mathbf{x}_t | \mathbf{x}_0) \right] p_0(\mathbf{x}_0) d\mathbf{x}_0 }{p_t(\mathbf{x}_t)}
 $$
@@ -231,7 +231,7 @@ $$
 
 For any random variable $Z$.
 
-### III. Applying Bias-Variance Decomposition and Lemma 1 to show the two objectives are equal given $\mathbf{x}_t$
+### III. Applying Bias-Variance Decomposition and the Lemma to show the two objectives are equal given $\mathbf{x}_t$
 Consider the new expression
 
 $$
@@ -255,7 +255,7 @@ $$
 \right] - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
 $$
 
-Where we are use $C$ to denote the variance expression, which is constant given the forward process and does not depend on model parameters $\theta$. By Lemma, this is equal to
+Where we use $C$ to denote the variance expression, which is constant given the forward process and does not depend on model parameters $\theta$. By the Lemma, this is equal to
 
 $$
 \tag{**}
@@ -309,7 +309,7 @@ $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right] \right]
 $$
 
-The $C$ term can be taken out of the inner expectation, and remains constant with respect to $\theta$ when it is taken outside of the outer expecation:
+The $C$ term can be taken out of the inner expectation, and remains constant with respect to $\theta$ when it is taken outside of the outer expectation:
 
 $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
@@ -363,7 +363,7 @@ $$
 
 Since we can sample $\mathbf{x}_T$ in closed form.
 
-Finally, to generate a sample from the data distribution, we are interested in $\mathbf{x}_0$. This be obtained by setting $t=0$ in the above equation.
+Finally, to generate a sample from the data distribution, we are interested in $\mathbf{x}_0$. This can be obtained by setting $t=0$ in the above equation.
 
 ## Numerical Integration
 Choose a small $\Delta t < 0$.
@@ -379,9 +379,9 @@ $
 Where $\mathbf{z}_t \sim \mathcal{N}(0, I)$, and $\pi$ approximates $p(\mathbf{x}_T)$, and is easy to sample from. 
 
 #### Additional Notes
--Note that the last term on the right side is a way to sample from $\mathcal{N}(0, | \Delta t |)$.
+- Note that the last term on the right side is a way to sample from $\mathcal{N}(0, | \Delta t |)$.
 
--This is similar to Langevin Sampling or "noisy gradient descent" for when time was not continuous.
+- This is similar to Langevin Sampling or "noisy gradient descent" for when time was not continuous.
 
 # 5. ODE Version
 
@@ -398,7 +398,7 @@ This is a special case of a continuous time neural ODE and a normalizing flow, a
 
 
 # 6. Connection to DDPM
-Once I finish my page on DDPM, you will be able to see that the ELBO objective that DDPM uses is the same as a the score-matching objective.
+Once I finish my page on DDPM, you will be able to see that the ELBO objective that DDPM uses is the same as the score-matching objective.
 
 # 7. Extra Stuff
 ## 'Likelihood' Weighting
@@ -416,7 +416,7 @@ D_{\text{KL}}\left(p_0(\mathbf{x}) \right) \| p_\theta(\mathbf{x})) = \frac{T}{2
 \right] + \\ D_{\text{KL}}\left(p_T\left(\mathbf{x}_t\right) \| \pi \left(\mathbf{x}_T\right) \right)
 $$
 
-Where $p_\theta(\mathbf{x})$ is the distribution we get for $\mathbf{x}_0$ we get using our estimated score function, and $\pi$ is a simple distribution that it is easy to sample from.
+Where $p_\theta(\mathbf{x})$ is the distribution of $\mathbf{x}_0$ we get by running the reverse SDE with our estimated score function, and $\pi$ is a simple distribution that is easy to sample from.
 
 
 ## Predictor-Corrector Methods
@@ -444,7 +444,7 @@ $$
 \nabla_\mathbf{x} \log p(\mathbf{x} \mid \mathbf{y}) = \nabla_\mathbf{x} \log p(\mathbf{y} \mid \mathbf{x}) + \nabla_\mathbf{x} \log p(\mathbf{x})
 $$
 
-Note that the denominator disappears since it does not depend on $\mathbf{x}$. Both terms in the right side of the above expression can be found, the first is given by the known forward process, and the second is the score function of our unconditional distribution (a diffusion model that we have fit to the distribution of images). This will let us sample from $p(\mathbf{x} \mid \mathbf{y})$.
+Note that the denominator disappears since it does not depend on $\mathbf{x}$. Both terms on the right side of the above expression can be found: the first is given by the known forward process, and the second is the score function of our unconditional distribution (a diffusion model that we have fit to the distribution of images). This will let us sample from $p(\mathbf{x} \mid \mathbf{y})$.
 
 ### Additional Note
 I am pretty sure $\nabla_\mathbf{x} \log p(\mathbf{y} \mid \mathbf{x})$ is zero everywhere, but I suppose maximizing that will just be ensuring that the non-masked region stays the same.
