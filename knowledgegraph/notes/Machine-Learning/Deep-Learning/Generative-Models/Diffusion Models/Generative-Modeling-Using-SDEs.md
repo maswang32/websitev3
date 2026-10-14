@@ -183,7 +183,7 @@ $$
 
 In other words, we can approximate the marginal score function by sampling from the posterior, and aggregating the score estimates that we can from single samples.
 
-#### Proof of Lemma
+#### Additional Note: Proof of Lemma
 
 $$
 p_t(\mathbf{x}_t) = \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_0(\mathbf{x}_0) d\mathbf{x}_0
@@ -330,9 +330,9 @@ $$
 
 The left hand side is the objective that we train with, and the right hand side is the optimization objective. Thus, we have that the two optimization objectives are equivalent - they differ by a constant that does not depend on our parameters $\theta$.
 
-# Solving the Reverse-Time SDE
+# 4. Solving the Reverse-Time SDE (Integration/Sampling)
 
-## The Integral
+## Reverse Time SDE Integral
 To generate samples, we can evaluate the reverse-time SDE. This is as simple as coming up with a numerical approximation to the integral of the reverse-time SDE process:
 
 $$
@@ -350,12 +350,12 @@ $$
 Where
 
 $$
-d\mathbf{\bar{w}}(s) = \mathcal{N}(0, ds) ds
+d\mathbf{\bar{w}}(s) \sim \mathcal{N}(0, ds) ds
 $$
 
-<span style="color:blue">Question - can we get here by intergrating both sides of the SDE? If so, how?</span>.
+This results from integrating both sides of the differential equation from $t_0$ to $t$.
 
-Particularly, to get a sample from the marginal distribution, we can evaluate
+Particularly, to get a sample from a marginal distribution, we can evaluate this integral with $t_0 = T$:
 
 $$
 \mathbf{x}_t = \mathbf{x}_T + \int_{T}^t \left[\mathbf{f}(\mathbf{x},s) - g^2(s)\nabla_\mathbf{x} \log(p_s(\mathbf{x}))\right] ds + \int_{T}^t g(s)d\mathbf{\bar{w}}(s)
@@ -365,7 +365,7 @@ Since we can sample $\mathbf{x}_T$ in closed form.
 
 Finally, to generate a sample from the data distribution, we are interested in $\mathbf{x}_0$. This be obtained by setting $t=0$ in the above equation.
 
-## Numerical Methods
+## Numerical Integration
 Choose a small $\Delta t < 0$.
 
 Then perform this process:
