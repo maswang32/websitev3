@@ -48,9 +48,18 @@ Where $\hat{\mathbf{n}}$ estimates the added noise. We argued that this estimate
 
 
 ## Scale functions
-Some versions have $\mathbf{x} = s(t) \hat{\mathbf{x}}$, where $\hat{\mathbf{x}}$ is the unscaled variable (which can still be noisy). Let us try to derive the ODE when there is a scale function.
+Some versions have $\mathbf{x} = s(t) \hat{\mathbf{x}}$, where $\hat{\mathbf{x}}$ is the unscaled variable (which can still be noisy), and $s(t)$ is its scaling factor over time. Let us try to derive the ODE when there is a scale function.
 
-Differentiating both sides and using the product rule, we get
+### Derivation of the ODE, if there is scaling
+In this proof, observe that there are equations governing the change in $\mathbf{x}$ over time. There are parallel equations governing the change in the unscaled variable $\hat{\mathbf{x}}$ over time, and it is useful to correspond these differential equations.
+
+#### 1. Product Rule, Initial Steps
+Start with the expression:
+$$
+\mathbf{x} = s(t) \hat{\mathbf{x}}
+$$
+
+Differentiating both sides with respect to time and using the product rule, we get
 
 $$\frac{d\mathbf{x}}{dt} = \dot s(t) \hat{\mathbf{x}} +  s(t) \frac{d\hat{\mathbf{x}}}{dt}$$
 
@@ -62,39 +71,36 @@ $$\frac{d\mathbf{x}}{dt} = \frac{\dot s(t)}{s(t)} \mathbf{x} + s(t) \frac{d\hat{
 
 $$d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} + s(t) d\hat{\mathbf{x}} \right]dt$$
 
-Substituting our unscaled ODE for $\hat{\mathbf{x}}$:
+#### 2. Substituting the unscaled ODE into the equation
+
+Substituting our unscaled ODE for $d\hat{\mathbf{x}}$:
 
 $$d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} + s(t) \left[ - \dot \sigma(t) \sigma(t)\nabla_{ \hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right) \right] \right]dt$$
 
 
 $$d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} - s(t) \left[\dot \sigma(t) \sigma(t)\nabla_{ \hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right) \right] \right]dt$$
 
-Now we make a change of variables:
 
+#### 3. Expressing the score function for $\hat{\mathbf{x}}$ in terms of $\mathbf{x}$. Change of Variables
+Now we make a change of variables. First, observe that the rate of change in $\mathbf{x}$ is the same as the rate of change in $\hat{\mathbf{x}}$, but multiplied by $s(t)$:
 $$
 d\mathbf{x} =  s(t) d\hat{\mathbf{x}}
 $$
-
+Equivalently,
 $$
-\frac{d\mathbf{x}}{s(t)} =   d\hat{\mathbf{x}}
-$$
-
-$$
+\frac{d\mathbf{x}}{s(t)} = d\hat{\mathbf{x}}
+\Rightarrow
 d\hat{\mathbf{x}} = \frac{d\mathbf{x}}{s(t)}
 $$
-
-
+Flipping both expressions:
 $$
 \frac{d}{d\hat{\mathbf{x}}} =   s(t) \frac{d}{d\mathbf{x}}
 $$
-
-
 $$
 \nabla_{\hat{\mathbf{x}}} \log p(\hat{\mathbf{x}} ; \sigma(t)) =
 \frac{d}{d\hat{\mathbf{x}}} \log p(\hat{\mathbf{x}}, \sigma(t)) = 
 s(t) \frac{d}{d\mathbf{x}} \log p(\hat{\mathbf{x}}, \sigma(t))
 $$
-
 $$
 = s(t) \frac{d}{d\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right)
 $$
@@ -103,8 +109,7 @@ $$
 = s(t) \nabla_{\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right)
 $$
 
-After substituting:
-
+#### 4. Substituting in the score function expressed in terms of $\mathbf{x}$
 $$
 d\mathbf{x} = \left[ \frac{\dot s(t)}{s(t)} \mathbf{x} - s(t) \left[\dot \sigma(t) \sigma(t)\nabla_{ \hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right) \right] \right]dt
 $$
@@ -172,7 +177,6 @@ $$
 
 This should be indistinguishable from pure Gaussian Noise, assuming $\sigma_{max} >> \sigma_{data}$. However, the values here may be quite large, which is to say that they are not samples from a *standard* Gaussian distribution, like they are in DDPM. 
 
-**Side Note**: In fact, imposing the constraint that the largest noise level has variance 1 requires a curvature to the noise trajectory, which we do not want. This is because the score function is the derivative of the noise trajectory, which is a *linear* approximation. Thus, for this approximation to be maximally accurate, we should have *linear* noise trajectories.
 
 During the sampling process, we should start with a sample from $$\mathbf{x}_{0} \sim \mathcal{N} ( \mathbf{0}, \sigma_{max}^2 \mathbf{I} )$$, and denoise images sequentially such that we get $\mathbf{x}_1, \mathbf{x}_1, \ldots \mathbf{x}_N$, where
 
@@ -186,7 +190,7 @@ $$
 
 Then, $\mathbf{x}_N$ will be distributed like the data.
 
-**Notes:**
+**Observe:**
 - In the ODE formulation, the only source of randomness in backwards sampling is the initial noise $\mathbf{x_0}$.
 - Theorectically, sampling should be independent from fitting $D$. $D$ is simply a black box.
 
@@ -206,11 +210,6 @@ The Euler Method has error $O(h^2)$ with respect to the step size $h$. Huen's me
 - This measures the derivative $\frac{d\mathbf{x}}{dt}$ at $\mathbf{x}$, and after taking one step.
 - The actual derivative used is the average between these two derivatives.
 - When stepping to $\sigma = 0$, we revert to Euler to avoid dividing by zero.
-
-
-
-
-<span style="color:blue">To Do: Show the actual algorithm</span>.
 
 ### Spacing the Time Steps
 Step size should decrease monotonically as noise level decreases, and does not need to depend on the content of the sample.
@@ -250,6 +249,8 @@ $$
 \frac{d\mathbf{x}}{dt} = \frac{\mathbf{x} - D(\mathbf{x}; t)}{t}
 $$
 
+### Additional Thoughts
+In fact, imposing the constraint that the largest noise level has variance 1 requires a curvature to the noise trajectory, which we do not want. This is because the score function is the derivative of the noise trajectory, which is a *linear* approximation. Thus, for this approximation to be maximally accurate, we should have *linear* noise trajectories.
 
 
 ## Stochastic Differential Equation
