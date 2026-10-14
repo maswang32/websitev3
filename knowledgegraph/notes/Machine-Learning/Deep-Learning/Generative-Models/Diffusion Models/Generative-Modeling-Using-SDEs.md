@@ -56,14 +56,14 @@ We can sample from any marginal distribution $p_t$ (determined by the forward pr
 
 
 
-# Learning the Score Function
+# 3. Learning the Score Function
 We would like to fit the score function such that
 
 $$
 \mathbf{s}_\theta(\mathbf{x}, t) \approx \nabla_\mathbf{x} \log p_{t} (\mathbf{x})
 $$
 
-This should be a continuous weighted sum of:
+Thus, we minimize the distance between these two functions, arcoss a continuous weighted sum:
 
 $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
