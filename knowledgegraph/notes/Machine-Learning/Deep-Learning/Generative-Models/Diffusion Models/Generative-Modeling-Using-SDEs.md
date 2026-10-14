@@ -57,6 +57,7 @@ We can sample from any marginal distribution $p_t$ (determined by the forward pr
 
 
 # 3. Learning the Score Function
+## a - Ideal Optimization Objective
 We would like to fit the score function such that
 
 $$
@@ -99,21 +100,20 @@ To implement this weighting, we rescale the outputs of the network, so its outpu
 
 ### Additional Thoughts:
 - The weights are proportional to the amount of noise added: Recall in our NCSN notes that smaller noise levels have larger score magnitudes. The expectation in the denominator is actually inversely proportional to the variance of the noise added.
-
 - Note that in DDPM, the network is always predicting samples from $\mathcal{N}(0, I)$ no matter the timestep, which is similar to rescaling the outputs of the network in score-based models.
 
 
 
-## Actual Optimization
+## b - Equivalent Optimization Objective, using the Conditional Score
 We have
 
 $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
-\mathbb{E}_{p_t(\mathbf{x})}
+\mathbb{E}_{\mathbf{x} \sim p_t(\mathbf{x})}
 \left[
 \lambda(t)
 \lVert
-\nabla_\mathbf{x} \log p_{\sigma_t} (\mathbf{x}) -
+\nabla_\mathbf{x} \log p_t (\mathbf{x}) -
 \mathbf{s}_\theta(\mathbf{x}, t)  \rVert^2_2
 \right]
 $$
@@ -138,9 +138,9 @@ $$
 - We would like the score function to fit $\nabla_\mathbf{x_t} \log p_{t} (\mathbf{x_t})$, but this distribution may be complex and multimodal. However, $\log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0)$ is just Gaussian.
 
 - Since the score function we are fitting does not see $\mathbf{x_0}$, it will fit an expectation over all possible $\mathbf{x_0}$, which will approximate the score function of $p_t(\mathbf{x_t})$.
-- The probability distribution of $p_t(\mathbf{x_t})$ is a mixture of Gaussians, which means that the conditional distribution $\log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0)$ locally approximates $\log p_{t} (\mathbf{x_t})$ at the point $\mathbf{x_t}$.
+- The probability distribution of $p_t(\mathbf{x_t})$ is a mixture of Gaussians, which means that the conditional distribution $\log p_{t} (\mathbf{x_t} \mid \mathbf{x}_0)$ locally approximates $\log p_{t} (\mathbf{x_t})$ at the point $\mathbf{x_t}$, at least at low noise levels where the Gaussians do not overlap too much.
 
-## A derivation that both objectives are equivalent
+## c - Equivalence between Ideal Optimization Objective and Conditional-Score Objective.
 Our intended objective is:
 
 $$
@@ -171,21 +171,42 @@ $$
 $$
 
 
-### Lemma
+### Lemma 1 - Express Marginal Distribution as an expectation of the conditional 
 
 We first show that we can estimate the marginal distribution as an expecation of the conditionals:
 
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x_t}) = \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x_t})} \left[
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x_t} \mid \mathbf{x_0})
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x_t})} \left[
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x_0})
 \right]
 $$
 
-<span style="color:blue">To Do: Prove this Lemma</span>.
-
 In other words, we can approximate the marginal score function by sampling from the posterior, and aggregating the score estimates that we can from single samples.
 
-### Bias Variance Decomposition
+#### Proof of Lemma
+
+$$
+p_t(\mathbf{x}_t) = \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x_0}) d\mathbf{x}_0
+$$
+$$
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t)}{p_t(\mathbf{x_t})}
+$$
+Which comes from the chain rule.
+
+Substituting the RHS of the first equation into the RHS of the second,
+$$
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x_0}) d\mathbf{x}_0 \right]}{p_t(\mathbf{x_t})}
+$$
+The gradient can be moved inside the integral, and only applies to one term:
+$$
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{ \int \nabla_{\mathbf{x}_t} \left[ p_t(\mathbf{x}_t | \mathbf{x}_0) \right] p_t(\mathbf{x_0}) d\mathbf{x}_0 }{p_t(\mathbf{x_t})}
+$$
+
+
+
+
+
+### Lemma 2 - Bias Variance Decomposition
 By the law of total variance, we have:
 
 $$
