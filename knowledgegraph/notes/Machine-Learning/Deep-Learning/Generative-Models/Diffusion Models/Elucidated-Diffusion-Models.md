@@ -128,19 +128,19 @@ The formula above is our ODE when we have a scaling function.
 We would like to use our denoiser for the unscaled variable $\hat{\mathbf{x}}$ to estimate the score function, even when there is scaling. Supposing we have a denoiser $D(\hat{\mathbf{x}} ; \sigma(t))$ for the unscaled variable $\hat{\mathbf{x}}$, then we have that 
 
 $$
-\nabla \log_{\hat{\mathbf{x}}} p \left( \hat{\mathbf{x}}; \sigma(t) \right) = \frac{ D(\hat{\mathbf{x}};\sigma) - \hat{\mathbf{x}} }{ \sigma(t)^2}
+\nabla_{\hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right) = \frac{ D(\hat{\mathbf{x}};\sigma) - \hat{\mathbf{x}} }{ \sigma(t)^2}
 $$
 
 We also have from above that
 
 $$
-\nabla \log_{\hat{\mathbf{x}}} p \left( \hat{\mathbf{x}}; \sigma(t) \right) = s(t) \nabla_{\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right)
+\nabla_{\hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right) = s(t) \nabla_{\mathbf{x}} \log p\left(\frac{\mathbf{x}}{s(t)}, \sigma(t)\right)
 $$
-
 Thus, 
 
 $$
-\nabla_{\mathbf{x}} \log p \left( \frac{ \mathbf{x} }{ s(t) }, \sigma(t)\right) = \frac{ D( \hat{\mathbf{x} } ; \sigma) - \hat{ \mathbf{x} } }{\sigma(t)^2 s(t)}
+\nabla_{\mathbf{x}} \log p \left( \frac{ \mathbf{x} }{ s(t) }, \sigma(t)\right) = 
+\frac{\nabla_{\hat{\mathbf{x}}} \log p \left( \hat{\mathbf{x}}; \sigma(t) \right)}{s(t)} = \frac{ D( \hat{\mathbf{x} } ; \sigma) - \hat{ \mathbf{x} } }{\sigma(t)^2 s(t)}
 = \frac{ D( \frac{ \mathbf{x} }{ s(t) } ; \sigma) - \frac{ \mathbf{x} }{s(t)} }{ \sigma(t)^2 s(t)}
 $$
 
@@ -148,7 +148,7 @@ We can use this function to estimate the score function from the denoiser.
 
 
 ### Computing the Time-Derivative of x
-In order to sample, we should compute the derivative $\frac{d\mathbf{x}}{dt}$. This can be used to estimate the denoising trajectory.
+In order to sample, we should compute the derivative $\frac{d\mathbf{x}}{dt}$. This can be used to estimate the denoising trajectory. From the scaled ODE:
 
 
 $$
@@ -156,7 +156,7 @@ $$
 $$
 
 $$
-\frac{d \mathbf{x} }{ dt } = \frac{\dot{s}(t)}{s(t)} \mathbf{x} - s(t)^2 \left[ \dot{\sigma}(t) \sigma(t) \frac{ D\left( \frac{\mathbf{x}}{s(t)} , \sigma \right) - \frac{\mathbf{x}}{s(t)} }{\sigma(t)^2 s(t)}
+\frac{d \mathbf{x} }{ dt } = \frac{\dot{s}(t)}{s(t)} \mathbf{x} - s(t)^2 \left[ \dot{\sigma}(t) \sigma(t) \frac{ D\left( \frac{\mathbf{x}}{s(t)} ; \sigma(t) \right) - \frac{\mathbf{x}}{s(t)} }{\sigma(t)^2 s(t)}
  \right]
 $$
 
