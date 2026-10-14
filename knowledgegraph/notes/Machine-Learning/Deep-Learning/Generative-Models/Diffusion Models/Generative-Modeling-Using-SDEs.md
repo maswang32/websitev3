@@ -15,7 +15,7 @@ $$
 
 - $\mathbf{f}$ is a vector-valued function representing the *drift coefficient* and $g(t)$ is a scalar-valued function called the *diffusion coefficient*.
   - The drift coefficient determines how $\mathbf{x}$ evolves over time deterministically
-  - Observe that the diffusion coefficient is stochastic, but also does not depend on $\mathbf{x}$. It does depend on $t$, however.
+  - Observe that the diffusion term is stochastic, but the coefficient $g$ does not depend on $\mathbf{x}$. It does depend on $t$, however.
 
 We can imagine applying this diffusion process to our data. As $t$ changes, the distribution of our data changes. We can use $p_t(\mathbf{x})$ to denote the probability distribution of our data at diffusion time $t$, where $t \in [0,T]$. The data distribution (with no diffusion) is $p_0(\mathbf{x})$.
 
@@ -25,8 +25,7 @@ We choose our diffusion process so that $p_T$ does not depend on $p_0$. Typicall
 
 ### Additional Thoughts
 - In DDPMs, the *drift coefficient* $\mathbf{f}(\mathbf{x}, t)$ would be analogous to $\sqrt{1-\beta_t}$ when defining the forward process. In the SDE model, the drift coefficient tells you the deterministic part of $\mathbf{x}$'s change over time. In DDPMs, this deterministic part is the $\mathbf{x}_0$ component, which diminishes over time as we add more and more noise. Thus, the drift coefficient is kind of like the time-derivative of the coefficient on $\mathbf{x}_0$ in DDPMs.
-- In DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the time-derivative of $\sigma_i$ or the time-derivative of the coefficient on the noise term in DDPMs. It represents the variance of the noise added at each step.
-
+- In DDPMs, the diffusion coefficient is analogous to $\sqrt{\beta_t}$. It is kind of like the time-derivative of $\sigma_i$ or the time-derivative of the coefficient on the noise term in DDPMs. $g^2(t)$ is the rate at which noise variance is added.
 
 ## Choices of $\mathbf{f}(\mathbf{x},t), g(t)$
 
@@ -100,7 +99,7 @@ To implement this weighting, we rescale the outputs of the network, so its outpu
 
 ### Additional Thoughts
 - The weights are proportional to the amount of noise added: Recall in our NCSN notes that smaller noise levels have larger score magnitudes. The expectation in the denominator is actually inversely proportional to the variance of the noise added.
-- Note that in DDPM, the network is always predicting samples from $\mathcal{N}(0, I)$ no matter the timestep, which is similar to rescaling the outputs of the network in score-based models.
+- Note that in DDPM, the network is always predicting samples from $\mathcal{N}(\mathbf{0}, \mathbf{I})$ no matter the timestep, which is similar to rescaling the outputs of the network in score-based models.
 
 
 
@@ -149,7 +148,7 @@ $$
 \left[
 \lambda(t)
 \lVert
-\nabla_\mathbf{x} \log p_{\sigma_t} (\mathbf{x}) -
+\nabla_\mathbf{x} \log p_t (\mathbf{x}) -
 \mathbf{s}_\theta(\mathbf{x}, t)  \rVert^2_2
 \right]
 $$
@@ -222,7 +221,7 @@ $$
 
 
 ### II. Bias Variance Decomposition
-By the law of total variance, we have:
+By the bias-variance decomposition, we have:
 
 $$
 \mathbb{E} \| Z - a \|^2_2 =  \| \mathbb{E}[Z] - a \|^2_2 + \mathbb{E} \left[ \| Z - \mathbb{E}[Z] \|^2_2 \right] \\[10pt]
@@ -238,7 +237,7 @@ $$
 \tag{*}
 \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]
 $$
 
 By the bias-variance decomposition, this is equal to
@@ -247,12 +246,12 @@ $$
 \left\lVert
 \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
     \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
-\right] - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 +
+\right] - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 +
 \operatorname{Var}\left[\nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)\right] = \\[10pt]
 \left\lVert
 \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
     \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
-\right] - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
+\right] - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
 $$
 
 Where we use $C$ to denote the variance expression, which is constant given the forward process and does not depend on model parameters $\theta$. By the Lemma, this is equal to
@@ -260,7 +259,7 @@ Where we use $C$ to denote the variance expression, which is constant given the 
 $$
 \tag{**}
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C 
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C 
 $$
 
 Which is our score matching objective for a single timestep, plus a constant.
@@ -269,13 +268,13 @@ Which is our score matching objective for a single timestep, plus a constant.
 Let us wrap both starred expressions (which we have proven to be equal) in an expectation over $\mathbf{x}_t$:
 
 $$
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}
 \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
 $$
 
 We can change how we express the order of the two expectations on the RHS:
@@ -284,10 +283,10 @@ $$
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
 $$
 
 If we wrap both in another expectation over $t$, and multiply by $\lambda(t)$, we get
@@ -300,13 +299,13 @@ $$
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right] \right]
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right] \right]
 $$
 
 The $C$ term can be taken out of the inner expectation, and remains constant with respect to $\theta$ when it is taken outside of the outer expectation:
@@ -319,13 +318,13 @@ $$
 \mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t)}\left[
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}\left[
 \left\lVert
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - s_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] \right] + C_2
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] \right] + C_2
 $$
 
 The left hand side is the objective that we train with, and the right hand side is the optimization objective. Thus, we have that the two optimization objectives are equivalent - they differ by a constant that does not depend on our parameters $\theta$.
@@ -344,13 +343,13 @@ $$
 We can express our SDE in integral form:
 
 $$
-\mathbf{x}_t = \mathbf{x}_{t_0} + \int_{t_0}^t \left[\mathbf{f}(\mathbf{x},s) - g^2(s)\nabla_\mathbf{x} \log(p_s(\mathbf{x}))\right] ds + \int_{t_0}^t g(s)d\mathbf{\bar{w}}(s)
+\mathbf{x}_t = \mathbf{x}_{t_0} + \int_{t_0}^t \left[\mathbf{f}(\mathbf{x}_s,s) - g^2(s)\nabla_\mathbf{x} \log(p_s(\mathbf{x}_s))\right] ds + \int_{t_0}^t g(s)d\mathbf{\bar{w}}(s)
 $$
 
 Where
 
 $$
-d\mathbf{\bar{w}}(s) \sim \mathcal{N}(0, ds) ds
+d\mathbf{\bar{w}}(s) \sim \mathcal{N}(\mathbf{0}, ds\,\mathbf{I})
 $$
 
 This results from integrating both sides of the differential equation from $t_0$ to $t$.
@@ -358,7 +357,7 @@ This results from integrating both sides of the differential equation from $t_0$
 Particularly, to get a sample from a marginal distribution, we can evaluate this integral with $t_0 = T$:
 
 $$
-\mathbf{x}_t = \mathbf{x}_T + \int_{T}^t \left[\mathbf{f}(\mathbf{x},s) - g^2(s)\nabla_\mathbf{x} \log(p_s(\mathbf{x}))\right] ds + \int_{T}^t g(s)d\mathbf{\bar{w}}(s)
+\mathbf{x}_t = \mathbf{x}_T + \int_{T}^t \left[\mathbf{f}(\mathbf{x}_s,s) - g^2(s)\nabla_\mathbf{x} \log(p_s(\mathbf{x}_s))\right] ds + \int_{T}^t g(s)d\mathbf{\bar{w}}(s)
 $$
 
 Since we can sample $\mathbf{x}_T$ in closed form.
@@ -373,13 +372,13 @@ Then perform this process:
 1. $\mathbf{x}_T \sim \pi$
 
 2. $
-\mathbf{x}_{t + \Delta t} = \mathbf{x}_t + \left[ f(\mathbf{x}_t,t) - g^2(t) s_\theta(\mathbf{x}_t, t) \right] \Delta t + g(t)\mathbf{z}_t\sqrt{| \Delta t |}
+\mathbf{x}_{t + \Delta t} = \mathbf{x}_t + \left[ \mathbf{f}(\mathbf{x}_t,t) - g^2(t) \mathbf{s}_\theta(\mathbf{x}_t, t) \right] \Delta t + g(t)\mathbf{z}_t\sqrt{| \Delta t |}
 $
 
-Where $\mathbf{z}_t \sim \mathcal{N}(0, I)$, and $\pi$ approximates $p(\mathbf{x}_T)$, and is easy to sample from. 
+Where $\mathbf{z}_t \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$, and $\pi$ approximates $p(\mathbf{x}_T)$, and is easy to sample from. 
 
 #### Additional Notes
-- Note that the last term on the right side is a way to sample from $\mathcal{N}(0, | \Delta t |)$.
+- Note that the last term on the right side is a way to sample from $\mathcal{N}(\mathbf{0}, g^2(t) | \Delta t | \mathbf{I})$.
 
 - This is similar to Langevin Sampling or "noisy gradient descent" for when time was not continuous.
 
@@ -388,7 +387,7 @@ Where $\mathbf{z}_t \sim \mathcal{N}(0, I)$, and $\pi$ approximates $p(\mathbf{x
 We can change the SDE into an ODE without changing its marginal distributions $p_t(\mathbf{x}_t)$. The formula is this:
 
 $$
-d\mathbf{x} = \left[f(\mathbf{x}, t) - \frac{1}{2} g^2(t)\nabla_\mathbf{x} \log p_t(\mathbf{x}_t) \right] dt
+d\mathbf{x} = \left[\mathbf{f}(\mathbf{x}, t) - \frac{1}{2} g^2(t)\nabla_\mathbf{x} \log p_t(\mathbf{x}) \right] dt
 $$
 
 ODE trajectories are actually smoother, and this process is invertible. We can directly convert $\mathbf{x}_0$ to $\mathbf{x}_T$ and convert it back. 
@@ -403,17 +402,17 @@ Once I finish my page on DDPM, you will be able to see that the ELBO objective t
 # 7. Extra Stuff
 ## 'Likelihood' Weighting
 
-If $\lambda(t)$ = $g^2(t)$, we have that
+If $\lambda(t) = g^2(t)$, we have that
 
 $$
-D_{\text{KL}}\left(p_0(\mathbf{x}) \right) \| p_\theta(\mathbf{x})) = \frac{T}{2} \mathbb{E}_{t \sim \mathcal{U}(0,T)}
+D_{\text{KL}}\left(p_0(\mathbf{x}) \| p_\theta(\mathbf{x})\right) \leq \frac{T}{2} \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \mathbb{E}_{\mathbf{x} \sim p_t(\mathbf{x})}
 \left[
 \lambda(t)
 \lVert
-\nabla_\mathbf{x} \log p_{\sigma_t} (\mathbf{x}) - 
+\nabla_\mathbf{x} \log p_t (\mathbf{x}) - 
 \mathbf{s}_\theta(\mathbf{x}, t)  \rVert^2_2
-\right] + \\ D_{\text{KL}}\left(p_T\left(\mathbf{x}_t\right) \| \pi \left(\mathbf{x}_T\right) \right)
+\right] + \\ D_{\text{KL}}\left(p_T\left(\mathbf{x}_T\right) \| \pi \left(\mathbf{x}_T\right) \right)
 $$
 
 Where $p_\theta(\mathbf{x})$ is the distribution of $\mathbf{x}_0$ we get by running the reverse SDE with our estimated score function, and $\pi$ is a simple distribution that is easy to sample from.
