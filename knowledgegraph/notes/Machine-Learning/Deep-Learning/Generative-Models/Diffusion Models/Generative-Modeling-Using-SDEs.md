@@ -330,24 +330,6 @@ $$
 
 The left hand side is the objective that we train with, and the right hand side is the optimization objective. Thus, we have that the two optimization objectives are equivalent - they differ by a constant that does not depend on our parameters $\theta$.
 
-## 'Likelihood' Weighting
-
-If $\lambda(t)$ = $g^2(t)$, we have that
-
-$$
-D_{\text{KL}}\left(p_0(\mathbf{x}) \right) \| p_\theta(\mathbf{x})) = \frac{T}{2} \mathbb{E}_{t \sim \mathcal{U}(0,T)}
-\mathbb{E}_{\mathbf{x} \sim p_t(\mathbf{x})}
-\left[
-\lambda(t)
-\lVert
-\nabla_\mathbf{x} \log p_{\sigma_t} (\mathbf{x}) - 
-\mathbf{s}_\theta(\mathbf{x}, t)  \rVert^2_2
-\right] + \\ D_{\text{KL}}\left(p_T\left(\mathbf{x}_t\right) \| \pi \left(\mathbf{x}_T\right) \right)
-$$
-
-Where $p_\theta(\mathbf{x})$ is the distribution we get for $\mathbf{x}_0$ we get using our estimated score function, and $\pi$ is a simple distribution that it is easy to sample from.
-
-
 # Solving the Reverse-Time SDE
 
 ## The Integral
@@ -401,11 +383,6 @@ Where $\mathbf{z}_t \sim \mathcal{N}(0, I)$.
 
 -This is similar to Langevin Sampling or "noisy gradient descent" for when time was not continuous.
 
-### Predictor-Corrector Methods
-The predictor chooses a step size $\Delta t$, then predicts $\mathbf{x}_{t + \Delta t}$ based on $\mathbf{x}_{t}$. Then, we run several 'corrector' steps to improve our sample from $p_{t + \Delta t}$, using our estimate of its score function $\mathbf{s}_\theta(\mathbf{x}_{t + \Delta t}, t + \Delta t)$. We do this before moving on to the next time step.
-
-This is similar to the discrete-time case, where we optimize the score at each noise level before moving to the next noise level.
-
 # ODE Version
 
 We can change the SDE into an ODE without changing its marginal distributions $p_t(\mathbf{x}_t)$. The formula is this:
@@ -418,7 +395,38 @@ ODE trajectories are actually smoother, and this process is invertible. We can d
 
 This is a special case of a continuous time neural ODE and a normalizing flow, and allows for exact likelihood computation.
 
-# Inverse Problems
+
+
+# Connection to DDPM
+Once I finish my page on DDPM, you will be able to see that the ELBO objective that DDPM uses is the same as a the score-matching objective.
+
+# Extra Stuff
+## 'Likelihood' Weighting
+
+If $\lambda(t)$ = $g^2(t)$, we have that
+
+$$
+D_{\text{KL}}\left(p_0(\mathbf{x}) \right) \| p_\theta(\mathbf{x})) = \frac{T}{2} \mathbb{E}_{t \sim \mathcal{U}(0,T)}
+\mathbb{E}_{\mathbf{x} \sim p_t(\mathbf{x})}
+\left[
+\lambda(t)
+\lVert
+\nabla_\mathbf{x} \log p_{\sigma_t} (\mathbf{x}) - 
+\mathbf{s}_\theta(\mathbf{x}, t)  \rVert^2_2
+\right] + \\ D_{\text{KL}}\left(p_T\left(\mathbf{x}_t\right) \| \pi \left(\mathbf{x}_T\right) \right)
+$$
+
+Where $p_\theta(\mathbf{x})$ is the distribution we get for $\mathbf{x}_0$ we get using our estimated score function, and $\pi$ is a simple distribution that it is easy to sample from.
+
+
+## Predictor-Corrector Methods
+The predictor chooses a step size $\Delta t$, then predicts $\mathbf{x}_{t + \Delta t}$ based on $\mathbf{x}_{t}$. Then, we run several 'corrector' steps to improve our sample from $p_{t + \Delta t}$, using our estimate of its score function $\mathbf{s}_\theta(\mathbf{x}_{t + \Delta t}, t + \Delta t)$. We do this before moving on to the next time step.
+
+This is similar to the discrete-time case, where we optimize the score at each noise level before moving to the next noise level.
+
+
+
+## Inverse Problems
 Suppose we have a known forward process $p(\mathbf{y} \mid \mathbf{x})$, and we would like to know $p(\mathbf{x} \mid \mathbf{y})$.
 
 Bayes' rule tells us
@@ -439,8 +447,5 @@ For instance, we can apply score-based models to the task of image inpainting. T
 
 ### Additional Note
 I am pretty sure $\nabla_\mathbf{x} \log p(\mathbf{y} \mid \mathbf{x})$ is zero everywhere, but I suppose maximizing that will just be ensuring that the non-masked region stays the same.
-
-# Connection to DDPM
-Once I finish my page on DDPM, you will be able to see that the ELBO objective that DDPM uses is the same as a the score-matching objective.
 
 Last Reviewed: 2/4/2025
