@@ -376,14 +376,14 @@ Then perform this process:
 \mathbf{x}_{t + \Delta t} = \mathbf{x}_t + \left[ f(\mathbf{x}_t,t) - g^2(t) s_\theta(\mathbf{x}_t, t) \right] \Delta t + g(t)\mathbf{z}_t\sqrt{| \Delta t |}
 $
 
-Where $\mathbf{z}_t \sim \mathcal{N}(0, I)$. 
+Where $\mathbf{z}_t \sim \mathcal{N}(0, I)$, and $\pi$ approximates $p(\mathbf{x}_T)$, and is easy to sample from. 
 
 #### Additional Notes
 -Note that the last term on the right side is a way to sample from $\mathcal{N}(0, | \Delta t |)$.
 
 -This is similar to Langevin Sampling or "noisy gradient descent" for when time was not continuous.
 
-# ODE Version
+# 5. ODE Version
 
 We can change the SDE into an ODE without changing its marginal distributions $p_t(\mathbf{x}_t)$. The formula is this:
 
@@ -397,10 +397,10 @@ This is a special case of a continuous time neural ODE and a normalizing flow, a
 
 
 
-# Connection to DDPM
+# 6. Connection to DDPM
 Once I finish my page on DDPM, you will be able to see that the ELBO objective that DDPM uses is the same as a the score-matching objective.
 
-# Extra Stuff
+# 7. Extra Stuff
 ## 'Likelihood' Weighting
 
 If $\lambda(t)$ = $g^2(t)$, we have that
@@ -429,6 +429,9 @@ This is similar to the discrete-time case, where we optimize the score at each n
 ## Inverse Problems
 Suppose we have a known forward process $p(\mathbf{y} \mid \mathbf{x})$, and we would like to know $p(\mathbf{x} \mid \mathbf{y})$.
 
+
+For instance, $\mathbf{y}$ may be a masked image, and $\mathbf{x}$ can be the full image, unmasked. The known forward process is masking the image. Can we sample from $p(\mathbf{x} | \mathbf{y})$, thus infilling the image's masked regions?
+
 Bayes' rule tells us
 
 $$
@@ -441,11 +444,9 @@ $$
 \nabla_\mathbf{x} \log p(\mathbf{x} \mid \mathbf{y}) = \nabla_\mathbf{x} \log p(\mathbf{y} \mid \mathbf{x}) + \nabla_\mathbf{x} \log p(\mathbf{x})
 $$
 
-Note that the denominator disappears since it does not depend on $\mathbf{x}$. Both terms in the right side of the above expression can be found, the first is given by the known forward process, and the second is the score function of our unconditional distribution. This will let us sample from $p(\mathbf{x} \mid \mathbf{y})$.
-
-For instance, we can apply score-based models to the task of image inpainting. The masked image is given, as $p(\mathbf{y})$, and the forward process is also given (how to mask the image).
+Note that the denominator disappears since it does not depend on $\mathbf{x}$. Both terms in the right side of the above expression can be found, the first is given by the known forward process, and the second is the score function of our unconditional distribution (a diffusion model that we have fit to the distribution of images). This will let us sample from $p(\mathbf{x} \mid \mathbf{y})$.
 
 ### Additional Note
 I am pretty sure $\nabla_\mathbf{x} \log p(\mathbf{y} \mid \mathbf{x})$ is zero everywhere, but I suppose maximizing that will just be ensuring that the non-masked region stays the same.
 
-Last Reviewed: 2/4/2025
+Last Reviewed: 10/13/2026
