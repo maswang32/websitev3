@@ -265,9 +265,9 @@ $$
 d\mathbf{x}_{\pm} = - \dot \sigma(t) \sigma(t) \nabla_{\mathbf{x}} \log p(\mathbf{x} ; \sigma(t)) dt \pm \beta(t) \sigma(t)^2 \nabla_{\mathbf{x}} \log p(\mathbf{x} ; \sigma(t)) dt + \sqrt{2 \beta(t)}\sigma(t) d \omega_t
 $$
 
-Note that we get Song's formulation when we have $\beta(t) = \dot \sigma(t)/\sigma(t)$, where the first two terms cancel out and there is no score in the forward process.
-
-Also note that if $\beta(t)$ is zero, we have the non-stochastic ODE.
+Familiar cases of this SDE:
+1. We get Song's formulation when we have $\beta(t) = \dot \sigma(t)/\sigma(t)$, where the first two terms cancel out and there is no score in the forward process.
+2. If $\beta(t)$ is zero, we have the non-stochastic ODE.
 
 The three terms are, respectively:
 1. Probability Flow ODE.
@@ -275,62 +275,60 @@ The three terms are, respectively:
 3. Noise Injection.
 
 **Notes**:
-- Note that $dt$ is negative during the backwards process, meaning the second term goes towards the data distribution during denoising.
-- During the denoising process, we can see term 2 as adding "more score" to the distribution, while the third time simultaneously adds "more noise".
-- When we add these two terms together, the net contribution to the noise level cancels out.
-- We can also think of the second term as removing more 'existing noise' and the third term as adding 'new noise'. $\beta$ (which scales up both the second and third terms) actually represents the degree to which new noise is replaced by existing noise.
-- The second two terms help drive the sample towards the marginal distribution $p(\mathbf{x} ; \sigma(t))$, I suppose this is accomplished by adding more noise to keep the noise level the same, while also adding in some score.
+1. Note that $dt$ is negative during the backwards process, meaning the second term goes towards the data distribution during denoising.
+2. Terms 2 and 3 kind of have counteracting effects:
+    1. During the denoising process, we can see term 2 as adding "more score" to the distribution, while the third time simultaneously adds "more noise".
+    2. When we add these two terms together, the net contribution to the noise level cancels out.
+    3. **Churn**: We can also think of the second term as removing more 'existing noise' and the third term as adding 'new noise'. $\beta$ (which scales up both the second and third terms) actually represents the degree to which new noise is replaced by existing noise.
+3. The second two terms help drive the sample towards the marginal distribution $p(\mathbf{x} ; \sigma(t))$, I suppose this is accomplished by adding more noise to keep the noise level the same, while also adding in some score. To do: why is this the case, that it goes toward marginal distribution?
 
-<span style="color:blue">To Do: Think more about the last bullet point.</span>
-
-### EDM's Sampler
+### Discretization: EDM's Sampler
 This sampler includes churn, which adds and removes noise during the sampling process. At each step, we 
-- Add noise to go from current noise level $t_i$ to a higher noise level $\hat{t}_i$
-- Perform a single step from the higher noise level $$ \hat{t}_{i} $$ to the a new, even lower noise level $t_{i+1}$.
+1. Add noise to go from current noise level $t_i$ to a higher noise level $\hat{t}_i$
+2. Perform a single step from the higher noise level $\hat{t}_{i}$ to the a new, even lower noise level $t_{i+1}$.
 
-
-This is actually slightly different than approximating the SDE above. In the SDE above, we add noise, but we attempt to correct for it using the score function from the noise level $t_i$ *before* adding noiss. This is incorrect because the noise level that is input to the score fucntion is different than the actual noise level of the data. The EDM sampler uses the noise level $\hat{t}_i$ *after* adding noise. This is more accurate, and works better with larger step sizes.
+This is actually slightly different than approximating the SDE above. In the SDE above, we add noise, but we attempt to correct for it using the score function from the noise level $t_i$ *before* adding noise. This is incorrect because the noise level that is input to the score fucntion is different than the actual noise level of the data. The EDM sampler uses the noise level $\hat{t}_i$ *after* adding noise. This is more accurate, and works better with larger step sizes.
 
 We still can combine this with the second order Huen method.
 
-#### Problems with Too Much Churn
+### Problems with Too Much Churn
 - Too much churn can actually cause a loss of detail and drift towards oversaturated colors at low and high noise levels, possibly due to the fact that the score estimated by the denoiser network is a slightly non-conservative vector field.
 - The true score function should ideally be conservative, meaning that integrating across a trajectory should be path-independent. However, adding noise might put you in a region of the vector field such that getting back to the same denoising trajectory isn't easy.
 - This non-conservativity could be explained by the denoiser trying to remove too much noise, due to regression towards the mean.
-- <span style="color:blue">To Do: Think more about conservative vector fields.</span>
-- <span style="color:blue">To Do: Think more about why denoisers remove too much noise, and regression toward the mean.</span>
+- To Do: Think more about conservative vector fields.
+- To Do: Think more about why denoisers remove too much noise, and regression toward the mean.
 
+### EDM-Specific Modifications
 As a result, EDM does these modifications:
 - We only churn within a range in the middle of the noise schedule. 
 - When we choose the "churning noise", we should theoretically choose  $\epsilon \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$, and then add $\sqrt{\hat{t}_i^2 - t_i^2} \epsilon$ to the sample.
-- However, in practice we do $$\epsilon \sim \mathcal{N}(\mathbf{0}, S^2_{noise} \mathbf{I}) $$ , where $$S^2_{noise} > 1$$. This means we sample add a little more noise than we should, to counteract the bias in the denoiser to denoise too much.
-- We define $S_{churn}$ as the "total" amount of churning, and choose $$ \hat{t}_{i} = \gamma t_{i} $$, where $$ \gamma = \min (\frac{S_{churn}}{N}, \sqrt{2} -1)$$.
+- However, in practice we do $\epsilon \sim \mathcal{N}(\mathbf{0}, S^2_{\text{noise}} \mathbf{I})$ , where $S^2_{\text{noise}} > 1$. This means we sample add a little more noise than we should, to counteract the bias in the denoiser to denoise too much.
+- We define $S_{\text{churn}}$ as the "total" amount of churning, and choose $\hat{t}_{i} = \gamma t_{i}$, where $ \gamma = \min (\frac{S_{churn}}{N}, \sqrt{2} -1)$. Note that the min keeps $\gamma$ above one, which is necessay, since $\hat{t}_i > t_i$.
 
 
 
-## EDM's Preconditioning
-- Learning $D$ directly is difficult - the inputs vary greatly in terms of magnitude.
-- Many works predict $\mathbf{n}$ scaled to unit variance - this keeps the output magnitudes consistent.
-- However, for very high noise levels, this is difficult. The scale of the input is huge, and the denoised output is very small compared to it. We are basically relying on the noise estimate to cancel out with the input precisely such that their difference is on the same scale of the denoised data. If it does not do this at any index, the error will be huge
-- Perhaps at high noise levels, it is actually easier to predict the denoised signal, so that we can consistently predict at the correct scale.
-- Actually, our network predicts a mix of data and noise.
-- At high noise levels, an $\epsilon$ prediction network behaves like an identity mapping, and predicting the clean data behaves like a zero mapping. Preconditioning means we have it behave like a zero mapping.
-- At low noise levels, an $\epsilon$ prediction network behaves like zero mapping, while predicting clean data behaves like identity mapping. EDM's Preconditioning means we also have it behave like a zero mapping.
+# 8. EDM's Preconditioning
+1. Learning $D$ directly is difficult - the inputs vary greatly in terms of magnitude.
+2. Many works predict $\mathbf{n}$ scaled to unit variance - this keeps the output magnitudes consistent.
+3. However, for very high noise levels, this is difficult. The scale of the input is huge, and the denoised output is very small compared to it. We are basically relying on the noise estimate to cancel out with the noisy input precisely such that their difference is on the same scale of the denoised data. If it does not do this at any index, the error will be huge
+4. Perhaps at high noise levels, it is actually easier to predict the denoised signal, so that we can consistently predict at the correct scale.
+5. Similarly, at low noise levels, predicting the noise may be better, otherwise the network has to learn something that is close to the identity function of simply passing the denoised output through.
+6. The EDM network predicts a mix of data and noise, and the mixture ratios change depending on $t$. At high noise levels, we predict the denoised, and at low noise levels, we predict the noise.
+7. At high noise levels, an $\epsilon$ prediction network behaves like an identity mapping, and predicting the clean data behaves like a zero mapping. Preconditioning means we have it behave like a zero mapping.
+8. At low noise levels, an $\epsilon$ prediction network behaves like zero mapping, while predicting clean data behaves like identity mapping. EDM's Preconditioning means we also have it behave like a zero mapping.
 
-## Other Notes
+# 9. More Notes on EDM
 ### More Improvements
 - Adjust Hyperparameters from previous work.
 - Redistribute model capacity - remove lowest-resolution layers, double capacity of higher-resolution layers.
+- Use non-leaking augmentation - which is augmentation that does not change the data distribution.
 - Use their preconditioning.
 - Use their loss function.
-- Use non-leaking augmentation - which is augmentation that does not change the data distribution.
-
-### Important Other Notes
 - Using their preconditioning doesn't improve performance, but does make training more robust.
-- For the best models on CIFAR-10, any amount of stochasticity is bad. But, for more diverse datasets, we benefit.
+- For the best models on CIFAR-10, any amount of stochasticity (churn) is bad. But, for more diverse datasets, we benefit.
 - Maybe the effect of changing the preconditioning is dubious, it seems to give worse results in many cases.
 
-# Implementation
+# 10. Implementation Details
 ## Datasets
 They implement their modifications on 4 different datasets:
 - 32 x 32 CIFAR 10
@@ -341,27 +339,27 @@ They implement their modifications on 4 different datasets:
 
 
 ### Config A
-| Hyperparameter    | 32 x 32          | 64 x 64          |
-| --------------    | -------          | --------------   |
-| Training Examples | 200 Million      | Same             |
-| Batch Size        | 128              | Same             |
-| NFE               | 35               | 79               |
-| LR                | 2e-4             | 2e-4               |
+| Hyperparameter    | 32 x 32     | 64 x 64 |
+| -------------------| -------------| ---------|
+| Training Examples | 200 Million | Same    |
+| Batch Size        | 128         | Same    |
+| NFE               | 35          | 79      |
+| LR                | 2e-4        | 2e-4    |
 
-- It would be 400k training iterations at batch size 512.
-- Learning rate
+This would be 400k training iterations at batch size 512.
+
 ### Config B
-| Hyperparameter    | 32 x 32          | 64 x 64          |
-| --------------    | -------          | --------------   |
-| Training Examples | 200 Million      | Same             |
-| Batch Size        | 512              | 256              |
-| NFE               | 35               | 79               |
-| LR (Max)          | 1e-3             | 2e-4             |
-| EMA half-life     | 0.5              | Same             |
-| Dropout           | 13%              | 5/25%, FFHQ/AFHQ |
+| Hyperparameter    | 32 x 32     | 64 x 64          |
+| -------------------| -------------| ------------------|
+| Training Examples | 200 Million | Same             |
+| Batch Size        | 512         | 256              |
+| NFE               | 35          | 79               |
+| LR (Max)          | 1e-3        | 2e-4             |
+| EMA half-life     | 0.5         | Same             |
+| Dropout           | 13%         | 5/25%, FFHQ/AFHQ |
 
 Other Notes:
-- 4 -> 8 GPUs
+- This config increases from 4 -> 8 GPUs
 - No gradient clipping
 - Learning rate ramp up to 1e-3 for 10 million images (instead of 0.64 million images)
 
@@ -370,13 +368,13 @@ Adjust Config A:
 - remove 4x4 layers (these overfit), double 16x16 layer capacity
 
 
-| Resolution     | # Chan. - Conf. B | # Chan. Conf. C |
-| -------------- | -------           |  -------------- |
-| 64 x 64        | 128/None          | 128/None        |
-| 32 x 32        | 128               | 256             |
-| 16 x 16        | 256               | 256             |
-| 8 x 8          | 256               | 256             |
-| 4 x 4          | 256               | None            |
+| Resolution | # Chan. - Conf. B | # Chan. Conf. C |
+| ------------| -------------------| -----------------|
+| 64 x 64    | 128/None          | 128/None        |
+| 32 x 32    | 128               | 256             |
+| 16 x 16    | 256               | 256             |
+| 8 x 8      | 256               | 256             |
+| 4 x 4      | 256               | None            |
 
 Reduces trainable parameters:
  - 32 x 32 - 56 million
