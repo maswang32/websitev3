@@ -154,7 +154,9 @@ We can use this function to estimate the score function from the denoiser.
 
 
 ### Computing the Time-Derivative of x
-In order to sample, we should compute the derivative $\frac{d\mathbf{x}}{dt}$. This can be used to estimate the denoising trajectory. From the scaled ODE:
+In order to sample, we should compute the derivative $\frac{d\mathbf{x}}{dt}$. This can be used to estimate the denoising trajectory. 
+
+Using the scaled ODE to get an expression for $\frac{d\mathbf{x}}{dt}$:
 
 
 $$
@@ -168,7 +170,7 @@ $$
 
 
 $$
-\frac{d \mathbf{x} }{ dt } =  \mathbf{x} \left( \frac{\dot s(t)}{s(t)}  + \frac{\dot \sigma(t)}{\sigma(t)} \right) - \frac{\dot \sigma(t) s(t)}{\sigma(t)}  D\left(\frac{\mathbf{x}}{s(t)} ; \sigma(t) \right)
+\boxed{\frac{d \mathbf{x} }{ dt } =  \mathbf{x} \left( \frac{\dot s(t)}{s(t)}  + \frac{\dot \sigma(t)}{\sigma(t)} \right) - \frac{\dot \sigma(t) s(t)}{\sigma(t)}  D\left(\frac{\mathbf{x}}{s(t)} ; \sigma(t) \right)}
 $$
 
 We can use this derivative for sampling.
