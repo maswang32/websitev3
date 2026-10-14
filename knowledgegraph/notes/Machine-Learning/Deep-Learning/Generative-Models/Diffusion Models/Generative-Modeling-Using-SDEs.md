@@ -186,7 +186,7 @@ In other words, we can approximate the marginal score function by sampling from 
 #### Proof of Lemma
 
 $$
-p_t(\mathbf{x}_t) = \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x}_0) d\mathbf{x}_0
+p_t(\mathbf{x}_t) = \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_0(\mathbf{x}_0) d\mathbf{x}_0
 $$
 $$
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t)}{p_t(\mathbf{x}_t)}
@@ -195,11 +195,11 @@ Which comes from the chain rule.
 
 Substituting the RHS of the first equation into the RHS of the second,
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_t(\mathbf{x}_0) d\mathbf{x}_0 \right]}{p_t(\mathbf{x}_t)}
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{\nabla_{\mathbf{x}_t} \left[ \int p_t(\mathbf{x}_t | \mathbf{x}_0) p_0(\mathbf{x}_0) d\mathbf{x}_0 \right]}{p_t(\mathbf{x}_t)}
 $$
 The gradient can be moved inside the integral, only applies to the one term depending on $\mathbf{x}_t$
 $$
-= \frac{ \int \nabla_{\mathbf{x}_t} \left[ p_t(\mathbf{x}_t | \mathbf{x}_0) \right] p_t(\mathbf{x}_0) d\mathbf{x}_0 }{p_t(\mathbf{x}_t)}
+= \frac{ \int \nabla_{\mathbf{x}_t} \left[ p_t(\mathbf{x}_t | \mathbf{x}_0) \right] p_0(\mathbf{x}_0) d\mathbf{x}_0 }{p_t(\mathbf{x}_t)}
 $$
 Note that 
 $$
@@ -207,10 +207,10 @@ $$
 $$
 Substituting the expression for $\nabla_{\mathbf{x}_t} p_t(\mathbf{x}_t  | \mathbf{x}_0)$ in:
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{ \int \left[ \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) \right] p_t(\mathbf{x}_0) d\mathbf{x}_0 }{p_t(\mathbf{x}_t)}
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \frac{ \int \left[ \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) \right] p_0(\mathbf{x}_0) d\mathbf{x}_0 }{p_t(\mathbf{x}_t)}
 $$
 $$
-= \int \frac{  \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_0) }{p_t(\mathbf{x}_t)}d\mathbf{x}_0 
+= \int \frac{  \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t  | \mathbf{x}_0) p_t(\mathbf{x}_t  | \mathbf{x}_0) p_0(\mathbf{x}_0) }{p_t(\mathbf{x}_t)}d\mathbf{x}_0 
 $$
 Using Bayes' Rule:
 $$
