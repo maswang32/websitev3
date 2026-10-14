@@ -254,7 +254,7 @@ $$
 \right] - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
 $$
 
-Where we use $C$ to denote the variance expression, which depends on $\mathbf{x}_t$ and the forward process, but not on the model parameters $\theta$. By the Lemma, this is equal to
+Where we use $C$ to denote the variance expression, which does not depend on the model parameters $\theta$. By the Lemma, this is equal to
 
 $$
 \tag{**}
