@@ -175,8 +175,8 @@ $$
 We first show that we can estimate the marginal distribution as an expectation of the conditionals:
 
 $$
-\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
+\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) = \mathbb{E}_{\mathbf{x}_0\sim p_t(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0)
 \right]
 $$
 
@@ -235,22 +235,22 @@ Consider the new expression
 
 $$
 \tag{*}
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+\mathbb{E}_{\mathbf{x}_0\sim p_t(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]
 $$
 
 By the bias-variance decomposition, this is equal to
 
 $$
 \left\lVert
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
+\mathbb{E}_{\mathbf{x}_0\sim p_t(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0)
 \right] - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 +
-\operatorname{Var}\left[\nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)\right] = \\[10pt]
+\operatorname{Var}\left[\nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0)\right] = \\[10pt]
 \left\lVert
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0)
+\mathbb{E}_{\mathbf{x}_0\sim p_t(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0)
 \right] - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C
 $$
 
@@ -269,9 +269,9 @@ Let us wrap both starred expressions (which we have proven to be equal) in an ex
 
 $$
 \mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
+\mathbb{E}_{\mathbf{x}_0\sim p_t(\mathbf{x}_0 \mid \mathbf{x}_t)} \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
 \mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}\left[
 \left\lVert
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
@@ -279,11 +279,11 @@ $$
 
 We can change how we express the order of the two expectations on the RHS:
 $$
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0)}
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
+\mathbb{E}_{\mathbf{x}_0\sim p_0(\mathbf{x}_0)}
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right] = \\[10pt]
 \mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t)}\left[
 \left\lVert
 \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 + C \right]
@@ -295,11 +295,11 @@ $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0)}
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
+\mathbb{E}_{\mathbf{x}_0\sim p_0(\mathbf{x}_0)}
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
@@ -314,11 +314,11 @@ $$
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
-\mathbb{E}_{\mathbf{x}_0\sim p(\mathbf{x}_0)}
-\mathbb{E}_{\mathbf{x}_t\sim p(\mathbf{x}_t \mid \mathbf{x}_0)}
+\mathbb{E}_{\mathbf{x}_0\sim p_0(\mathbf{x}_0)}
+\mathbb{E}_{\mathbf{x}_t\sim p_t(\mathbf{x}_t \mid \mathbf{x}_0)}
 \left[
 \left\lVert
-    \nabla_{\mathbf{x}_t} \log p(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
+    \nabla_{\mathbf{x}_t} \log p_t(\mathbf{x}_t \mid \mathbf{x}_0) - \mathbf{s}_\theta(\mathbf{x}_t, t) \right\rVert^2_2 \right]\right] = \\[10pt]
 \mathbb{E}_{t \sim \mathcal{U}(0,T)}
 \lambda(t)
 \left[
@@ -375,7 +375,7 @@ Then perform this process:
 \mathbf{x}_{t + \Delta t} = \mathbf{x}_t + \left[ \mathbf{f}(\mathbf{x}_t,t) - g^2(t) \mathbf{s}_\theta(\mathbf{x}_t, t) \right] \Delta t + g(t)\mathbf{z}_t\sqrt{| \Delta t |}
 $
 
-Where $\mathbf{z}_t \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$, and $\pi$ approximates $p(\mathbf{x}_T)$, and is easy to sample from. 
+Where $\mathbf{z}_t \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$, and $\pi$ approximates $p_T(\mathbf{x}_T)$, and is easy to sample from. 
 
 #### Additional Notes
 - Note that the last term on the right side is a way to sample from $\mathcal{N}(\mathbf{0}, g^2(t) | \Delta t | \mathbf{I})$.
