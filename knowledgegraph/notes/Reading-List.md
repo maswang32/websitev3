@@ -1,4 +1,12 @@
 # Dump
+- [ ] back to basics - kaiming paper about x-prediction and Diffusion Transformers
+- [ ] MAI base
+- [ ] Deepseek 4.1 Flash
+- [ ] joint attention
+- [ ] QK norm
+- [ ] interpretability post - neural networks are clean
+- [ ] group query attentoin
+- [ ] elie post - "wow, amazing techincal blog post about microsofts..."
 - [ ] why does gradient descent work https://x.com/0xeronn/status/2106531272981930287/video/1?s=46
 - [ ] Looped DiT https://x.com/askalphaxiv/status/2106284078077202738?s=46
 - [ ] Gaussian splatting - past the intro
