@@ -434,7 +434,7 @@ Conclusion: For smaller datasets, use DDPM++.
 
 
 ## Test Encoder
-We use channel_mult = [2, 3, 4, 5] for clarity. In reality, it is [1, 2, 2, 2]
+We use channel_mult = [2, 3, 4, 5] for clarity on how the UNet is structured. In reality, it is [1, 2, 2, 2]
 | Name           | In Channels | Out Channels | In Resolutions | Out Resolutions |
 |----------------|-------------|--------------|----------------|-----------------|
 | 64x64_conv     | 3           | 128          | 64             | 64              |
@@ -491,12 +491,11 @@ We use channel_mult = [2, 3, 4, 5] for clarity. In reality, it is [1, 2, 2, 2]
 
 
 ## More details
----All linear and conv have bias 0
----All conv1s (second conv in block) have weight 1e-6
----the output projection from attention also have weight 1e-6
----also aux conv
-First thing:
-- 64x64 Conv
+- All linear and conv have bias 0
+- All conv1s (second conv in block) have weight 1e-6
+- the output projection from attention also have weight 1e-6
+- also aux conv
+- First thing is a 64x64 Conv
 
 
 
@@ -528,17 +527,17 @@ UNet Block
 - x + linear(embedding)
 - silu(norm2(x))
 - dropout x
-- conv1 x, conv2 has out, out, kernel size 3, 1e-5 initial weight
--  
+- conv1 x, conv2 has out, out, kernel size 3, 1e-5 initial weight  
 
 
 
 ### Positional Encoding
 
-    Notes:
-        - log(sigma) lyings 6 stds outside the mean has prob. 1.973e-9,
-        - This is 1 in 506 Million.
-        With P_mean=-1.2, range is [-8.4, 6]
-        c_noise ranges from -2.1 to 1.5
+Notes:
+- log(sigma) lyings 6 stds outside the mean has prob. 1.973e-9,
+- This is 1 in 506 Million.
+With P_mean=-1.2, range is [-8.4, 6]
+c_noise ranges from -2.1 to 1.5
 
-Last Reviewed: 2/11/25    
+Last Reviewed: 10/19/2026
+    
