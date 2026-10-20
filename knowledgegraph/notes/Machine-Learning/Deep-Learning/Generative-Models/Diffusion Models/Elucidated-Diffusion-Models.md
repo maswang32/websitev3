@@ -346,7 +346,7 @@ They implement their modifications on 4 different datasets:
 | NFE               | 35          | 79      |
 | LR                | 2e-4        | 2e-4    |
 
-This would be 400k training iterations at batch size 512.
+This is 1.6M training iterations at batch size 128, and would be 400k training iterations at batch size 512.
 
 ### Config B
 | Hyperparameter    | 32 x 32     | 64 x 64          |
@@ -355,7 +355,7 @@ This would be 400k training iterations at batch size 512.
 | Batch Size        | 512         | 256              |
 | NFE               | 35          | 79               |
 | LR (Max)          | 1e-3        | 2e-4             |
-| EMA half-life     | 0.5         | Same             |
+| EMA half-life     | 500k images         | Same             |
 | Dropout           | 13%         | 5/25%, FFHQ/AFHQ |
 
 Other Notes:
@@ -396,16 +396,15 @@ Reduces trainable parameters:
 - EMA of 50 million images
 - lr 1e-4
 - I believe it is 296 million parameters, for the 64x64 model in the diffusion beats GANs paper. It is 554M for 256 x 256.
-<!-- - For a 1D UNet for audio, you probably increase the capacity of the model to account for the channel and frequency axis being the same.
-- You also multiplyg these 65 million parameters 3x since the kernels are smaller. 
+- For a 1D UNet for audio, you probably increase the capacity of the model to account for the channel and frequency axis being the same.
+- The kernels would also be 3x smaller for 1D conv.
 - 188 M for a 256 x 80 model seems reasonable.
-- [1,1,2,2,4,4] for the 256 x -->
 
 ## Architectures
 In Config A, we start with:
 - VP uses DDPM++
 - VE uses NSCN++
-And use two different formulations. However, after all changes, they are the same except for the architecture.
+And use two different formulations. However, after all EDM's changes, both formulations are the same except for the architecture.
 - DDPM++ seems to perform better according to the table.
 - Differences:
     - DDPM++ uses Box filter [1, 1], while NSCN++ uses bilinear [1 3 3 1]
@@ -414,7 +413,7 @@ And use two different formulations. However, after all changes, they are the sam
     - NSCN++ has extra residual skip connnections
 
 - For ImageNet, Use ADM architecture, no changes.
-- Compared to DDPM: 
+- Compared to DDPM++: 
     - Shallower model: 3 residual blocks per resolution
     - More self attention layers (22 instead of 6) interspersed throughout model
     - More attention heads (12 in lowest res.)
