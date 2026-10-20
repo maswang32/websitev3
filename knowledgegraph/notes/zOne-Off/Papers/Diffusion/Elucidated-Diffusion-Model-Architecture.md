@@ -6,7 +6,7 @@ They implement their modifications on 4 different datasets:
 - 64 x 64 ImageNet
 
 
-
+# Configs
 ## Config A
 | Hyperparameter    | 32 x 32     | 64 x 64 |
 | -------------------| -------------| ---------|
@@ -54,7 +54,7 @@ Reduces trainable parameters:
 - E uses new noise distribution/loss weighting
 - F uses non-leaking augmentation (helps with overfitting)
 
-## ImageNet
+## ImageNet Config
 - 32 GPUs, batch size 4096 (128 per GPU)
 - Mixed Precision
     - Weights stored at fp32, cast to fp16 during training
@@ -70,6 +70,7 @@ Reduces trainable parameters:
 - 188 M for a 256 x 80 model seems reasonable.
 
 # Architectures
+## For different configs
 In Config A, we start with:
 - VP uses DDPM++
 - VE uses NSCN++
@@ -90,18 +91,13 @@ And use two different formulations. However, after all EDM's changes, both formu
 
 Conclusion: For smaller datasets, use DDPM++.
 
-# Single-Level
-
-# Architectural Notes
-
-
 ## Block Level
 - There is 1 more decoder block than encoder block per level.
 - There are skip connections for EVERY Encoder UNet block (20 of them). 
 - There are skip connections connecting the beginning of the block to the end.
 
-
-## Test Encoder
+## Examples from instantiating their UNet
+### Test Encoder
 We use channel_mult = [2, 3, 4, 5] for clarity on how the UNet is structured. In reality, it is [1, 2, 2, 2]
 | Name           | In Channels | Out Channels | In Resolutions | Out Resolutions |
 |----------------|-------------|--------------|----------------|-----------------|
@@ -126,7 +122,7 @@ We use channel_mult = [2, 3, 4, 5] for clarity on how the UNet is structured. In
 | 8x8_block2     | 640         | 640          | 8              | 8               |
 | 8x8_block3     | 640         | 640          | 8              | 8               |
 
-## Decoder
+### Decoder
 | Name           | In Channels | Out Channels | In Resolutions | Out Resolutions | Skip From  |
 |----------------|-------------|--------------|----------------|-----------------|------------|
 | 8x8_in0        | 640         | 640          | 8              | 8               |            |
