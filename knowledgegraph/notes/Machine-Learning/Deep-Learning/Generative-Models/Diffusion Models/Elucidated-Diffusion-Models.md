@@ -395,7 +395,7 @@ Reduces trainable parameters:
 - No augmentation
 - EMA of 50 million images
 - lr 1e-4
-- I believe it is 296 million parameters, for the 64x64 model in the diffusion beats GANs paper. It is 554M for 256 x 256.
+- In the diffusion beats GANs paper, it is 296 million parameters for the 64x64 model, and 554M for 256 x 256.
 - For a 1D UNet for audio, you probably increase the capacity of the model to account for the channel and frequency axis being the same.
 - The kernels would also be 3x smaller for 1D conv.
 - 188 M for a 256 x 80 model seems reasonable.
