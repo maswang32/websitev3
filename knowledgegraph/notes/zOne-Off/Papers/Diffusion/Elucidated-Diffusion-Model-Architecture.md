@@ -1,6 +1,4 @@
-
-# 10. Implementation Details
-## Datasets
+# Datasets
 They implement their modifications on 4 different datasets:
 - 32 x 32 CIFAR 10
 - 64 x 64 FFHQ
@@ -9,7 +7,7 @@ They implement their modifications on 4 different datasets:
 
 
 
-### Config A
+## Config A
 | Hyperparameter    | 32 x 32     | 64 x 64 |
 | -------------------| -------------| ---------|
 | Training Examples | 200 Million | Same    |
@@ -19,7 +17,7 @@ They implement their modifications on 4 different datasets:
 
 This is 1.6M training iterations at batch size 128, and would be 400k training iterations at batch size 512.
 
-### Config B
+## Config B
 | Hyperparameter    | 32 x 32     | 64 x 64          |
 | -------------------| -------------| ------------------|
 | Training Examples | 200 Million | Same             |
@@ -34,7 +32,7 @@ Other Notes:
 - No gradient clipping
 - Learning rate ramp up to 1e-3 for 10 million images (instead of 0.64 million images)
 
-### Config C
+## Config C
 Adjust Config A:
 - Remove bottleneck 4x4 layers (these overfit), double 16x16 layer capacity
 
@@ -51,12 +49,12 @@ Reduces trainable parameters:
  - 32 x 32 - 56 million
  - 64 x 64 - 62 million
 
-### Configs D, E, F
+## Configs D, E, F
 - D uses new preconditioning
 - E uses new noise distribution/loss weighting
 - F uses non-leaking augmentation (helps with overfitting)
 
-### ImageNet
+## ImageNet
 - 32 GPUs, batch size 4096 (128 per GPU)
 - Mixed Precision
     - Weights stored at fp32, cast to fp16 during training
@@ -71,7 +69,7 @@ Reduces trainable parameters:
 - The kernels would also be 3x smaller for 1D conv.
 - 188 M for a 256 x 80 model seems reasonable.
 
-## Architectures
+# Architectures
 In Config A, we start with:
 - VP uses DDPM++
 - VE uses NSCN++
@@ -92,13 +90,12 @@ And use two different formulations. However, after all EDM's changes, both formu
 
 Conclusion: For smaller datasets, use DDPM++.
 
-## Single-Level
+# Single-Level
 
-## Architectural Notes
-- To do: write these down in website
+# Architectural Notes
 
 
-### Block Level
+## Block Level
 - There is 1 more decoder block than encoder block per level.
 - There are skip connections for EVERY Encoder UNet block (20 of them). 
 - There are skip connections connecting the beginning of the block to the end.
@@ -173,7 +170,7 @@ We use channel_mult = [2, 3, 4, 5] for clarity on how the UNet is structured. In
 
 
 
-Block kwargs
+## Block kwargs
 - 512 embedding channels
 - 1 head
 - 0.1 dropout
@@ -190,7 +187,7 @@ Block kwargs
 - skip scale is 1/sqrt(2)
 
 
-UNet Block
+## UNet Block
 - x = conv0(silu(norm0(x)))
 - first norm is group norm with in_channels, 1e-6
 - first conv has kernel size 3, potential upsampling/downsampling, xavier uniform initialization
@@ -202,9 +199,7 @@ UNet Block
 
 
 
-### Positional Encoding
-
-Notes:
+## Positional Encoding
 - log(sigma) lyings 6 stds outside the mean has prob. 1.973e-9,
 - This is 1 in 506 Million.
 With P_mean=-1.2, range is [-8.4, 6]
