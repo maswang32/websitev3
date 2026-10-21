@@ -1,4 +1,5 @@
 # Dump
+- [ ] Flow Matching - conservation of mass, divergence, nonunique (e.g. swirl, least kinetic energy velocity field, curl), optimal transport. flow matchign learns a velocity field that produces certain marginals, which is produced by taking the expectation of straight line paths.
 - [ ] back to basics - kaiming paper about x-prediction and Diffusion Transformers
 - [ ] MAI base
 - [ ] Deepseek 4.1 Flash
