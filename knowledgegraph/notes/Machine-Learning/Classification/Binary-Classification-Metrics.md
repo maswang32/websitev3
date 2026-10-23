@@ -10,7 +10,7 @@
 - False Negatives = "Not actually negative, algorithm says it is"
 - False Positives = "Not actually positive, algorithm says it is"
 - On-diagonal = Correct
-- Off-diagonal = incorrect
+- Off-diagonal = Incorrect
 - To compare two models on the same dataset, you can compare them across the two numbers on the diagonal (TP and TN counts)
     - Or, you can compare them on the two numbers off the diagonal (FP and FN rate)
     - These two numbers can disagree though.

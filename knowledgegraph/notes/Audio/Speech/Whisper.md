@@ -1,10 +1,10 @@
 # Sept 2022 Version
 ## Tasks
 - Multilingual transcription
-- Speech trasnlation to english
-- language ID
-- voice activity detection
-- alignment
+- Speech translation to English
+- Language ID
+- Voice Activity Detection
+- Alignment
 
 ## Data
 - 680k hours

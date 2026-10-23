@@ -1,4 +1,3 @@
-## What is dMel?
 - Compute log mel spectrogram
 - Quantize the values linearly
 - Each time frame becomes 80 tokens
@@ -6,4 +5,4 @@
 - Works for ASR and TTS
 - 16-bin vocab (one for each intensity value)
 
-Last Reviewed: 8/31/2026
+Last Reviewed: 10/22/2026

@@ -1,6 +1,6 @@
 # Multiplication in time is convolution in frequency
 
-Think of representing your signal as a sum of complex sinusoids of diffferent frequencies:
+Think of representing your signal as a sum of complex sinusoids of different frequencies:
 
 $$
 x[n] = X_1w_1 + \cdots + X_nw_n 

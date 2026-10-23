@@ -2,11 +2,14 @@
 - [ ] Flow Matching - conservation of mass, divergence, nonunique (e.g. swirl, least kinetic energy velocity field, curl), optimal transport. flow matchign learns a velocity field that produces certain marginals, which is produced by taking the expectation of straight line paths.
 - gradient points in the direction of steepest increase, its length is the rate of increases
 - divergence - not always where the arrows are pointing, also need to look at length - example is 1/r vector field.
-
+- curl - the amount of speed you get from going around the box
+- integral of the loop divided by the loop's area
 
 
 
 # Dump
+- calc 3
+- mechanics
 - [ ] back to basics - kaiming paper about x-prediction and Diffusion Transformers
 - [ ] MAI base
 - [ ] Deepseek 4.1 Flash
